@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>首页</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+
+    <!-- 引入头部文件 -->
+    <#include "header.html" />
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:void(0);" type="1">1、心中无股</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:void(0);" type="2">2、安全第一</a>
+                </li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="3">3、选股如选妻</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="4">4、知己知彼</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="5">5、一流业务</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="6">6、一流管理</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="7">7、一流业绩</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="8">8、价值评估</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="9">9、集中投资</a></li>
+                <li class="layui-nav-item"><a class="" href="javascript:void(0);" type="10">10、长期持有</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;"></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function () {
+        $('a').each(function() {
+            $(this).click(function() {
+                var type = $(this).attr('type').valueOf();
+                // 等于号需转义为%3D
+                window.open('${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/getSchoolContent?type%3D' + type);
+            });
+        });
+    })
+</script>
