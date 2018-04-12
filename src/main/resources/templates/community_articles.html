@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>选股社区</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='pretty-photo-css-css'  href='${request.contextPath}/community/js/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='${request.contextPath}/community/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='custom-css-css'  href='${request.contextPath}/community/css/custom5152.html?ver=1.0' type='text/css' media='all' />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="${request.contextPath}/community/js/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">好途369选股</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="${request.contextPath}/school/1">选股学堂</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">新闻事件</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="${request.contextPath}/news/immediate">即时新闻</a></dd>
+                    <dd><a href="${request.contextPath}/news/mines">信息地雷</a></dd>
+                    <dd><a href="${request.contextPath}/news/sina">新浪股吧</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">精选牛股</a></li>
+            <li class="layui-nav-item"><a href="${request.contextPath}/community">选股社区</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>
+            <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="search-area-wrapper">
+    <div class="search-area container"  style="height: 60px">
+
+        <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+            <input class="search-term required" type="text" id="s" name="s" placeholder="搜索关键字" title="* Please enter a search term!" />
+            <input class="search-btn" type="submit" value="查询" />
+            <div id="search-error-container"></div>
+        </form>
+    </div>
+</div>
+
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- start of page content -->
+            <div class="span8 page-content">
+
+                <article class="type-page hentry clearfix">
+                    <h1 class="post-title">
+                        <a href="#">联系我们</a>
+                    </h1>
+                    <hr>
+                    <p>好途369选股系统，因为有你，所以年轻朝气，所以前途大好</p>
+                </article>
+
+
+                <form id="contact-form" class="row" action="http://inspirythemes.com/templates/knowledgebase-html/contact_form_handler.php" method="post">
+
+                    <div class="span1">
+                        <label for="name">姓&nbsp;&nbsp;&nbsp;&nbsp;名 <span>*</span> </label>
+                    </div>
+                    <div class="span7">
+                        <input type="text" name="name" id="name" class="required input-xlarge" value="" title="* 请输入您的姓名">
+                    </div>
+
+                    <div class="span1">
+                        <label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;箱 <span>*</span></label>
+                    </div>
+                    <div class="span7">
+                        <input type="text" name="email" id="email" class="email required input-xlarge" value="" title="* 请输入您在用的邮箱，以便我们及时回复">
+                    </div>
+
+                    <div class="span1">
+                        <label for="reason">主&nbsp;&nbsp;&nbsp;&nbsp;题 </label>
+                    </div>
+                    <div class="span7">
+                        <input type="text" name="reason" id="reason" class="input-xlarge" value="">
+                    </div>
+
+                    <div class="span1">
+                        <label for="message">内&nbsp;&nbsp;&nbsp;&nbsp;容 <span>*</span> </label>
+                    </div>
+                    <div class="span6">
+                        <textarea name="message" id="message" class="required span5" rows="6" title="* 请输入您的反馈内容"></textarea>
+                    </div>
+
+                    <div class="span4 offset1 bm30">
+                        <input type="submit" name="submit" value="立即发送" class="btn btn-inverse">
+                        <img src="images/loading.gif" id="contact-loader" alt="加载中...">
+                    </div>
+
+                    <div class="span6 offset2 error-container"></div>
+                    <div class="span8 offset2" id="message-sent"></div>
+
+                </form>
+            </div>
+            <!-- end of page content -->
+
+
+            <!-- start of sidebar -->
+            <aside class="span4 page-sidebar">
+
+                <section class="widget">
+                    <div class="quick-links-widget">
+                        <h3 class="title">快速访问</h3>
+                        <ul id="menu-quick-links" class="menu clearfix">
+                            <li><a href="${request.contextPath}/community/index">社区首页</a></li>
+                            <li><a href="articles-list.html">内容列表</a></li>
+                            <li><a href="faq.html">常见问题</a></li>
+                            <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">最新内容</h3>
+                    <ul class="articles">
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
+                            <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                            <span class="like-count">66</span>
+                        </li>
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">WordPress Site Maintenance</a></h4>
+                            <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                            <span class="like-count">15</span>
+                        </li>
+                        <li class="article-entry video">
+                            <h4><a href="single.html">Meta Tags in WordPress</a></h4>
+                            <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                            <span class="like-count">8</span>
+                        </li>
+                        <li class="article-entry image">
+                            <h4><a href="single.html">WordPress in Your Language</a></h4>
+                            <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
+                            <span class="like-count">6</span>
+                        </li>
+                    </ul>
+                </section>
+
+
+            </aside>
+            <!-- end of sidebar -->
+        </div>
+    </div>
+</div>
+
+<script src="${request.contextPath}/layui/layui.all.js"/>
+
+<script>
+    $(function() {
+
+    })
+</script>
+</body>
+</html>

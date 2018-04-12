@@ -11,10 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Des : 选股社区
  */
 @Controller
+@RequestMapping("/community")
 public class Community {
 
-    @RequestMapping("/community")
+    // 社区首页
+    @RequestMapping("/index")
     public String community() {
-        return "community";
+        return "community_index";
     }
+
+    // 联系我们
+    @RequestMapping("/contact")
+    public String contact() {
+        return "community_contact";
+    }
+
 }
