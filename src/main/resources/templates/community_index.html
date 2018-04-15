@@ -22,27 +22,8 @@
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">好途369选股</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="${request.contextPath}/school/1">选股学堂</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">新闻事件</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="${request.contextPath}/news/immediate">即时新闻</a></dd>
-                    <dd><a href="${request.contextPath}/news/mines">信息地雷</a></dd>
-                    <dd><a href="${request.contextPath}/news/sina">新浪股吧</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">精选牛股</a></li>
-            <li class="layui-nav-item"><a href="${request.contextPath}/community">选股社区</a></li>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>
-            <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>
-        </ul>
-    </div>
+
+    <#include "header.html" />
 </div>
 
 <div class="search-area-wrapper">
@@ -69,33 +50,33 @@
                         <h3>精选内容</h3>
                         <ul class="articles">
                             <li class="article-entry standard">
-                                <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                                <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                                <h4><a href="single.html">顶点软件 涨停</a></h4>
+                                <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">66</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                                <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                                <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
+                                <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">15</span>
                             </li>
                             <li class="article-entry video">
-                                <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-                                <span class="article-meta">23 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                                <h4><a href="single.html">顶点软件 涨停</a></h4>
+                                <span class="article-meta">2018-04-11<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">8</span>
                             </li>
                             <li class="article-entry image">
-                                <h4><a href="single.html">WordPress in Your Language</a></h4>
-                                <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
+                                <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
+                                <span class="article-meta">2018-04-10<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">6</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">Know Your Sources</a></h4>
-                                <span class="article-meta">22 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                                <h4><a href="single.html">顶点软件 涨停</a></h4>
+                                <span class="article-meta">2018-04-10<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">2</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">Validating a Website</a></h4>
-                                <span class="article-meta">21 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                                <h4><a href="single.html">顶点软件 涨停</a></h4>
+                                <span class="article-meta">2018-04-09<a href="#" title="查看更多重要事件">重要事件</a></span>
                                 <span class="like-count">3</span>
                             </li>
                         </ul>
@@ -106,33 +87,33 @@
                         <h3>最新内容</h3>
                         <ul class="articles">
                             <li class="article-entry standard">
-                                <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                                <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
                                 <span class="like-count">66</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">Using Javascript</a></h4>
-                                <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
                                 <span class="like-count">18</span>
                             </li>
-                            <li class="article-entry image">
-                                <h4><a href="single.html">Using Images</a></h4>
-                                <span class="article-meta">25 Feb, 2013 in <a href="#" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                <span class="like-count">7</span>
-                            </li>
-                            <li class="article-entry video">
-                                <h4><a href="single.html">Using Video</a></h4>
-                                <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
+                            <li class="article-entry standard">
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
                                 <span class="like-count">7</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                                <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Website Dev">Website Dev</a></span>
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
+                                <span class="like-count">7</span>
+                            </li>
+                            <li class="article-entry standard">
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
                                 <span class="like-count">15</span>
                             </li>
                             <li class="article-entry standard">
-                                <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-                                <span class="article-meta">24 Feb, 2013 in <a href="#" title="View all posts in Theme Development">Theme Development</a></span>
+                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
                                 <span class="like-count">1</span>
                             </li>
                         </ul>
@@ -157,8 +138,8 @@
                         <h3 class="title">快速访问</h3>
                         <ul id="menu-quick-links" class="menu clearfix">
                             <li><a href="${request.contextPath}/community/index">社区首页</a></li>
-                            <li><a href="articles-list.html">内容列表</a></li>
-                            <li><a href="faq.html">常见问题</a></li>
+                            <li><a href="${request.contextPath}/community/articles">内容列表</a></li>
+                            <li><a href="${request.contextPath}/community/faqs">常见问题</a></li>
                             <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
                         </ul>
                     </div>
@@ -167,25 +148,25 @@
                 <section class="widget">
                     <h3 class="title">分类</h3>
                     <div class="tagcloud">
-                        <a href="#" class="btn btn-mini">basic</a>
-                        <a href="#" class="btn btn-mini">beginner</a>
-                        <a href="#" class="btn btn-mini">blogging</a>
-                        <a href="#" class="btn btn-mini">colour</a>
-                        <a href="#" class="btn btn-mini">css</a>
-                        <a href="#" class="btn btn-mini">date</a>
-                        <a href="#" class="btn btn-mini">design</a>
-                        <a href="#" class="btn btn-mini">files</a>
-                        <a href="#" class="btn btn-mini">format</a>
-                        <a href="#" class="btn btn-mini">header</a>
-                        <a href="#" class="btn btn-mini">images</a>
-                        <a href="#" class="btn btn-mini">plugins</a>
-                        <a href="#" class="btn btn-mini">setting</a>
-                        <a href="#" class="btn btn-mini">templates</a>
-                        <a href="#" class="btn btn-mini">theme</a>
-                        <a href="#" class="btn btn-mini">time</a>
-                        <a href="#" class="btn btn-mini">videos</a>
-                        <a href="#" class="btn btn-mini">website</a>
-                        <a href="#" class="btn btn-mini">wordpress</a>
+                        <a href="#" class="btn btn-mini">公告</a>
+                        <a href="#" class="btn btn-mini">讨论</a>
+                        <a href="#" class="btn btn-mini">科普文章</a>
+                        <a href="#" class="btn btn-mini">策略</a>
+                        <a href="#" class="btn btn-mini">研究</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <a href="#" class="btn btn-mini">公告</a>
+                        <a href="#" class="btn btn-mini">讨论</a>
+                        <a href="#" class="btn btn-mini">科普文章</a>
+                        <a href="#" class="btn btn-mini">策略</a>
+                        <a href="#" class="btn btn-mini">研究</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
                     </div>
                 </section>
 

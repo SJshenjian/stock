@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>选股社区</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='pretty-photo-css-css'  href='${request.contextPath}/community/js/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='${request.contextPath}/community/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='custom-css-css'  href='${request.contextPath}/community/css/custom5152.html?ver=1.0' type='text/css' media='all' />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="${request.contextPath}/community/js/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <!-- 导航栏 -->
+    <#include "header.html" />
+</div>
+
+<div class="search-area-wrapper">
+    <div class="search-area container"  style="height: 60px">
+
+        <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+            <input class="search-term required" type="text" id="s" name="s" placeholder="搜索关键字" title="* Please enter a search term!" />
+            <input class="search-btn" type="submit" value="查询" />
+            <div id="search-error-container"></div>
+        </form>
+    </div>
+</div>
+
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- start of page content -->
+            <div class="span8 page-content">
+
+                <article class=" page type-page hentry clearfix">
+                    <h1 class="post-title"><a href="#">常见问题</a></h1>
+                    <hr>
+                    <p></p>
+                </article>
+
+                <div class="faqs clearfix">
+
+                    <article class="faq-item active">
+                        <span class="faq-icon"></span>
+                        <h3 class="faq-question">
+                            <a href="#">好途369选股系统提供选股功能吗?</a>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>WordPress was primarily inspired by&nbsp;<a title="http://www.noahgrey.com/" href="http://www.noahgrey.com/">Noah Grey</a>‘s&nbsp;<a title="http://www.noahgrey.com/greysoft/" href="http://www.noahgrey.com/greysoft/">Greymatter</a>&nbsp;open-source web log and journal software. It is related to&nbsp;<a title="http://cafelog.com/" href="http://cafelog.com/">b2</a>, sort of a second cousin twice removed. You can use WordPress to post your own stories, ideas, rants, reviews, links, and pictures of your toothless Uncle Ernie at the wedding reception, if you choose. In addition, you can customize the look and feel of your site. Numerous themes are available and may be modified in many different ways. Through the use of&nbsp;<a title="Using Themes" href="http://codex.wordpress.org/Using_Themes">WordPress Themes</a>, you can quickly change the look and style of your site. You can also extend WordPress’ functionality through the use of&nbsp;<a title="Plugins" href="http://codex.wordpress.org/Plugins">Plugins</a>. Plugins let you create the website or blog that suits your needs. As you can see, its functionality exceeds or at least is similar to what is available in most blogging tools today.</p>
+                            <p>For more information:</p>
+                            <ul>
+                                <li><a title="WordPress" href="http://codex.wordpress.org/WordPress">WordPress</a></li>
+                                <li><a title="WordPress Semantics" href="http://codex.wordpress.org/WordPress_Semantics">WordPress Semantics</a></li>
+                                <li><a title="About WordPress" href="http://codex.wordpress.org/About_WordPress">About WordPress</a></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <span class="faq-icon"></span>
+                        <h3 class="faq-question">
+                            <a href="#">好途369选股系统与其他选股系统的不同点在哪里？</a>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>WordPress.com is a blog network run by Automattic. It uses WordPress software, but individual blogs are hosted and managed by WordPress.com. This is a free service with premium addons and upgrades.</p>
+                            <p>Here at WordPress.org, you can download WordPress, the web software that WordPress.com runs on. Once you’ve downloaded it, you can upload it to a web server and run your own WordPress website.</p>
+                            <p>There is useful information about this distinction on the&nbsp;<a title="http://en.support.wordpress.com/com-vs-org/" href="http://en.support.wordpress.com/com-vs-org/">WordPress.com website</a>.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <span class="faq-icon"></span>
+                        <h3 class="faq-question">
+                            <a href="#">好途369选股系统的会员制收费为啥这么高?</a>
+                        </h3>
+                        <div class="faq-answer" style="display: none;">
+                            <p>WordPress is licensed under the&nbsp;<a title="http://www.gnu.org/licenses/gpl.html" href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>&nbsp;(GPL).</p>
+                            <p>The GPL is an open source license. This means you are free to modify and redistribute the source code under certain conditions. You can read more about why we chose the GPL on&nbsp;<a title="http://codex.wordpress.org/License" href="http://codex.wordpress.org/License">the License Page.</a></p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <span class="faq-icon"></span>
+                        <h3 class="faq-question">
+                            <a href="#">是否完全听取好途369的选股建议就可以稳收益?</a>
+                        </h3>
+                        <div class="faq-answer">
+                            <p>WordPress started out life as a fork of b2/cafelog by Matt Mullenweg and Mike Little. The first version was&nbsp;<a title="http://wordpress.org/news/2003/05/wordpress-now-available/" href="http://wordpress.org/news/2003/05/wordpress-now-available/">released in 2003</a></p>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+            <!-- end of page content -->
+
+            <!-- start of sidebar -->
+            <aside class="span4 page-sidebar">
+
+                <section class="widget">
+                    <div class="support-widget">
+                        <h3 class="title">联系我们</h3>
+                        <p class="intro">需要更多支持？ 如果您没有找到答案，请联系我们获取进一步帮助。</p>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <div class="quick-links-widget">
+                        <h3 class="title">快速访问</h3>
+                        <ul id="menu-quick-links" class="menu clearfix">
+                            <li><a href="${request.contextPath}/community/index">社区首页</a></li>
+                            <li><a href="${request.contextPath}/community/articles">内容列表</a></li>
+                            <li><a href="${request.contextPath}/community/faqs">常见问题</a></li>
+                            <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">最新内容</h3>
+                    <ul class="articles">
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
+                            <span class="like-count">66</span>
+                        </li>
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
+                            <span class="like-count">66</span>
+                        </li>
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
+                            <span class="like-count">66</span>
+                        </li>
+                        <li class="article-entry standard">
+                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
+                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
+                            <span class="like-count">66</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">分类</h3>
+                    <div class="tagcloud">
+                        <a href="#" class="btn btn-mini">公告</a>
+                        <a href="#" class="btn btn-mini">讨论</a>
+                        <a href="#" class="btn btn-mini">科普文章</a>
+                        <a href="#" class="btn btn-mini">策略</a>
+                        <a href="#" class="btn btn-mini">研究</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <a href="#" class="btn btn-mini">公告</a>
+                        <a href="#" class="btn btn-mini">讨论</a>
+                        <a href="#" class="btn btn-mini">科普文章</a>
+                        <a href="#" class="btn btn-mini">策略</a>
+                        <a href="#" class="btn btn-mini">研究</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <a href="#" class="btn btn-mini">有赏竞答</a>
+                        <a href="#" class="btn btn-mini">求助</a>
+                        <a href="#" class="btn btn-mini">重要事件</a>
+                    </div>
+                </section>
+
+            </aside>
+            <!-- end of sidebar -->
+        </div>
+    </div>
+</div>
+
+<script src="${request.contextPath}/layui/layui.all.js"/>
+<!-- script -->
+<script type='text/javascript' src='${request.contextPath}/community/js/jquery-1.8.3.min.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/jquery.easing.1.3.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/prettyphoto/jquery.prettyPhoto.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/jflickrfeed.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/jquery.liveSearch.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/jquery.form.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/jquery.validate.min.js'></script>
+<script type='text/javascript' src='${request.contextPath}/community/js/custom.js'></script>
+
+<script>
+    $(function() {
+
+    })
+</script>
+</body>
+</html>

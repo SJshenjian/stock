@@ -26,4 +26,15 @@ public class Community {
         return "community_contact";
     }
 
+    // 常见问题
+    @RequestMapping("/faqs")
+    public String faqs() {
+        return "community_faqs";
+    }
+
+    // 内容列表
+    @RequestMapping("/articles")
+    public String articles() {
+        return "community_articles";
+    }
 }
