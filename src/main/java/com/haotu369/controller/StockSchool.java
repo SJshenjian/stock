@@ -21,11 +21,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * @author : shenjian
- * @PackageName : com.haotu369.controller
- * @Created : 2018/4/6
- * @Version : V1.0
- * @Des :
+ * 选股学堂
+ *
+ * @author : Jian Shen
+ * @version : V1.0
+ * @date : 2018/4/6
  */
 @Controller
 public class StockSchool {

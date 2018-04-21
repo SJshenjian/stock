@@ -3,12 +3,14 @@ package com.haotu369.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Properties;
+
 /**
- * @author : shenjian
- * @PackageName : com.haotu369.controller
- * @Created : 2018/4/11
- * @Version : V1.0
- * @Des : 选股社区
+ * 选股社区
+ *
+ * @author : Jian Shen
+ * @version : V1.0
+ * @date : 2018/4/11
  */
 @Controller
 @RequestMapping("/community")

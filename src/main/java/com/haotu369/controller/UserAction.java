@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author : shenjian
- * @PackageName : com.haotu369.controller
- * @Created : 2018/4/2
- * @Version : V1.0
- * @Des :
+ * 用户相关操作
+ *
+ * @author : Jian Shen
+ * @version : V1.0
+ * @date : 2018/4/2
  */
 @Controller
 public class UserAction {
