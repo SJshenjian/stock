@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @date : 2018/4/21
  */
 @Document(collection="news.sina")
-public class News {
+public class SinaNews {
 
     @Field("_id")
     private String id;

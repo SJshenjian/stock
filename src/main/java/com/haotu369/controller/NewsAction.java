@@ -3,8 +3,11 @@ package com.haotu369.controller;
 import com.haotu369.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * 新闻事件
@@ -20,8 +23,9 @@ public class NewsAction {
     private NewsService newsService;
 
     @RequestMapping("/news/{type}")
-    public String news(@PathVariable("type") String type) {
-        newsService.listNews();
+    public String news(@PathVariable("type") String type, ModelMap modelMap) {
+        List news = newsService.listNews(type);
+        modelMap.put("news", news);
         return "news_" + type;
     }
 }

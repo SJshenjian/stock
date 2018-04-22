@@ -1,7 +1,8 @@
 package com.haotu369.service.impl;
 
 import com.haotu369.dao.NewsDao;
-import com.haotu369.model.News;
+import com.haotu369.model.ImmediateNews;
+import com.haotu369.model.SinaNews;
 import com.haotu369.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,13 @@ public class NewsServiceImpl implements NewsService{
     private NewsDao newsDao;
 
     @Override
-    public List<News> listNews() {
-        List<News> news = newsDao.listNews();
-        return news;
+    public List listNews(String type) {
+        if ("sina".equals(type)) {
+            return newsDao.listSinaNews();
+        }
+        if ("immediate".equals(type)) {
+            return newsDao.listImmediateNews();
+        }
+        return null;
     }
 }

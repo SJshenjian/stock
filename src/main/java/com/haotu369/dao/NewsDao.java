@@ -1,9 +1,7 @@
 package com.haotu369.dao;
 
-import com.haotu369.model.News;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import com.haotu369.model.ImmediateNews;
+import com.haotu369.model.SinaNews;
 
 import java.util.List;
 
@@ -14,5 +12,7 @@ import java.util.List;
  */
 public interface NewsDao{
 
-    public List<News> listNews();
+    public List<SinaNews> listSinaNews();
+
+    public List<ImmediateNews> listImmediateNews();
 }

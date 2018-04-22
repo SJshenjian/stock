@@ -1,7 +1,7 @@
 package com.haotu369.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.haotu369.model.News;
+import com.haotu369.model.ImmediateNews;
+import com.haotu369.model.SinaNews;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface NewsService {
 
-    public List<News> listNews();
+    public List listNews(String type);
 }
