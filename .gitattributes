@@ -1,0 +1,2 @@
+### github linguist ignore static resource, so the language is java not javascript ###
+static/* linguist-vendored
