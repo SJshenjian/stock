@@ -1,7 +1,14 @@
 package com.haotu369.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.haotu369.model.ContactUs;
+import com.haotu369.service.CommunityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Properties;
 
@@ -14,7 +21,10 @@ import java.util.Properties;
  */
 @Controller
 @RequestMapping("/community")
-public class Community {
+public class CommunityAction {
+
+    @Autowired
+    private CommunityService communityService;
 
     // 社区首页
     @RequestMapping("/index")
@@ -26,6 +36,13 @@ public class Community {
     @RequestMapping("/contact")
     public String contact() {
         return "community_contact";
+    }
+
+    // 保存联系我们消息内容
+    @RequestMapping("/saveContact")
+    @ResponseBody
+    public JSONObject saveContact(ContactUs contactUs) {
+        return communityService.saveContactUs(contactUs);
     }
 
     // 常见问题

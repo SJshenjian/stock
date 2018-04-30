@@ -1,9 +1,10 @@
-package com.haotu369.dao.impl;
+package com.haotu369.mapper.impl;
 
-import com.haotu369.dao.NewsDao;
+import com.haotu369.mapper.NewsMapper;
 import com.haotu369.model.ImmediateNews;
 import com.haotu369.model.SinaNews;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -17,7 +18,8 @@ import java.util.List;
  * @date : 2018/4/21
  */
 @Repository
-public class NewsDaoImpl implements NewsDao{
+@Primary // 带有具体实现的加该注解，防止mybatis报错
+public class NewsMapperImpl implements NewsMapper {
 
     @Autowired
     private MongoTemplate mongoTemplate;

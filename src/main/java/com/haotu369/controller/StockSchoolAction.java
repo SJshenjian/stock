@@ -28,8 +28,8 @@ import java.net.URISyntaxException;
  * @date : 2018/4/6
  */
 @Controller
-public class StockSchool {
-    private static final Logger LOG = LoggerFactory.getLogger(StockSchool.class);
+public class StockSchoolAction {
+    private static final Logger LOG = LoggerFactory.getLogger(StockSchoolAction.class);
 
     @RequestMapping("/school/{type}")
     public String stockSchool(@PathVariable("type") String type) {

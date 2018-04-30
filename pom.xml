@@ -87,6 +87,12 @@
 			<version>${redis.version}</version>
 		</dependency>
 
+		<!-- 邮件配置 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 		<!-- freemarker模板引擎 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
