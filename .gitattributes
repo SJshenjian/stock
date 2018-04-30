@@ -1,2 +1,2 @@
 ### github linguist ignore static resource, so the language is java not javascript ###
-resources/* linguist-vendored
+*.js linguist-language=java
