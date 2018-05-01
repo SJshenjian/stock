@@ -1,12 +1,14 @@
 package com.haotu369.model;
 
+import java.util.UUID;
+
 /**
  * @author : Jian Shen
  * @version : V1.0
  * @date : 2018/4/22
  */
 public class ContactUs {
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -16,11 +18,11 @@ public class ContactUs {
 
     private String content;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

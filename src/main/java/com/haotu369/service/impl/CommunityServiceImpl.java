@@ -22,24 +22,33 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
 
+    @Value("${spring.mail.host}")
+    private String host;
+
     @Value("${spring.mail.username}")
-    private String from;
+    private String username;
+
+    @Value("${spring.mail.password}")
+    private String password;
 
     @Override
     public JSONObject saveContactUs(ContactUs contactUs) {
         communityMapper.saveContactUs(contactUs);
-        sendSimpleEmail("SJshenjian@outlook.com", contactUs.getSubject(), contactUs.getContent());
+        sendSimpleEmail("haotu369@sina.com", contactUs, host, username, password);
         return message(1, "已收到您的消息，敬请等待工作人员回复");
     }
 
-    private void sendSimpleEmail(String to, String subject, String content) {
+    private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(from);
+        simpleMailMessage.setFrom(username);
         simpleMailMessage.setTo(to);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(content);
+        simpleMailMessage.setSubject(contactUs.getSubject());
+        simpleMailMessage.setText("发送者:" + contactUs.getName() + "\n邮箱号:" + contactUs.getEmail() + "\n文本内容:" + contactUs.getContent());
 
-        JavaMailSender javaMailSender = new JavaMailSenderImpl();
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost(host);
+        javaMailSender.setUsername(username);
+        javaMailSender.setPassword(password);
         javaMailSender.send(simpleMailMessage);
     }
 

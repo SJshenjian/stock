@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<link>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>选股社区</title>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
 
+    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css" type="text/css">
     <!-- Style Sheet-->
     <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
     <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
@@ -14,11 +13,12 @@
     <link rel='stylesheet' id='main-css-css'  href='${request.contextPath}/community/css/main5152.css?ver=1.0' type='text/css' media='all' />
     <link rel='stylesheet' id='custom-css-css'  href='${request.contextPath}/community/css/custom5152.html?ver=1.0' type='text/css' media='all' />
 
+    <!-- freemarker js引入写成 <script src="..."/> 这种形式无效 -->
+    <script src="${request.contextPath}/js/jquery-3.3.1.min.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="${request.contextPath}/community/js/html5.js"></script>
     <![endif]-->
-
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
@@ -54,44 +54,45 @@
                 </article>
 
 
-                <form id="contact-form" class="row" action="${request.contextPath}/community/saveContact" method="post">
+                <form id="contact-form" class="row">
 
                     <div class="span1">
                         <label for="name">姓&nbsp;&nbsp;&nbsp;&nbsp;名 <span>*</span> </label>
                     </div>
                     <div class="span7">
-                        <input type="text" name="name" id="name" class="required input-xlarge" value="" title="* 请输入您的姓名">
+                        <input type="text" name="name" id="name" class="input-xlarge check" title="请输入您的姓名"/>
+                        <span class="nameError" style="color: red;margin-left: 4px" ></span>
+                        <i class="layui-icon nameRight" style="font-size: 25px; color: green"></i>
                     </div>
 
                     <div class="span1">
                         <label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;箱 <span>*</span></label>
                     </div>
                     <div class="span7">
-                        <input type="text" name="email" id="email" class="email required input-xlarge" value="" title="* 请输入您在用的邮箱，以便我们及时回复">
+                        <input type="text" name="email" id="email" class="input-xlarge check" value="" title="请输入您在用的邮箱，以便我们及时回复">
+                        <span class="emailError" style="color: red;margin-left: 4px" ></span>
+                        <i class="layui-icon emailRight" style="font-size: 25px; color: green"></i>
                     </div>
 
                     <div class="span1">
-                        <label for="reason">主&nbsp;&nbsp;&nbsp;&nbsp;题 </label>
+                        <label for="subject">主&nbsp;&nbsp;&nbsp;&nbsp;题 </label>
                     </div>
                     <div class="span7">
-                        <input type="text" name="reason" id="reason" class="input-xlarge" value="">
+                        <input type="text" name="subject" id="subject" id="subject" class="input-xlarge">
                     </div>
 
                     <div class="span1">
-                        <label for="message">内&nbsp;&nbsp;&nbsp;&nbsp;容 <span>*</span> </label>
+                        <label for="content">内&nbsp;&nbsp;&nbsp;&nbsp;容 <span>*</span> </label>
                     </div>
                     <div class="span6">
-                        <textarea name="message" id="message" class="required span5" rows="6" title="* 请输入您的反馈内容"></textarea>
+                        <textarea name="content" id="content" class="span5 check" rows="6" title="请输入内容"></textarea>
+                        <span class="contentError" style="color: red;margin-left: 4px" ></span>
+                        <i class="layui-icon contentRight" style="font-size: 25px; color: green"></i>
                     </div>
 
                     <div class="span4 offset1 bm30">
-                        <input type="submit" name="submit" value="立即发送" class="btn btn-inverse">
-                        <img src="images/loading.gif" id="contact-loader" alt="加载中...">
+                        <input type="button" name="submit" id="contactUs" value="立即发送" class="btn btn-inverse">
                     </div>
-
-                    <div class="span6 offset2 error-container"></div>
-                    <div class="span8 offset2" id="message-sent"></div>
-
                 </form>
             </div>
             <!-- end of page content -->
@@ -151,13 +152,70 @@
         </div>
     </div>
 </div>
-
-<script src="${request.contextPath}/layui/layui.all.js"/>
-
+<script src="${request.contextPath}/layui/layui.all.js"></script>
 <script>
-    $(function() {
+  $(function () {
+      var name, email, subject, content;
 
-    })
+      // 参数判断
+      $('#contact-form .check').each(function() {
+          $(this).blur(function () {
+              var name = $(this).attr('id');
+              check(name);
+          });
+      });
+
+      var check = function (name) {
+          var value = $('#' + name).val();
+          var temp = value.replace(/\n/g, ""); // 剔除所有换行
+          temp = temp.replace(/\s/g, ""); // 提出所有空格
+          if (value == null || temp.length <= 0) {
+              $('.' + name + 'Error').html($('#' + name).attr('title'));
+              $('.' + name + 'Right').html('');
+              $('#contactUs').attr('disabled', true);
+
+          } else if('email' == name && !value.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
+              $('.' + name + 'Error').html('邮箱格式不正确');
+              $('.' + name + 'Right').html('');
+              $('#contactUs').attr('disabled', true);
+          } else{
+              $('.' + name + 'Error').html('');
+              $('.' + name + 'Right').html('&#xe618;');
+              if ($('.nameRight').text() != '' && $('.emailRight').text() != '' && $('.contentRight').text() != '') {
+                  $('#contactUs').attr('disabled', false);
+              }
+          }
+      };
+
+      // 联系我们
+      $('#contactUs').click(function () {
+          name = $('#name').val();
+          email =$('#email').val();
+          subject = $('#subject').val();
+          content = $('#content').val();
+
+          var contactUs = {
+              name: name,
+              email:email,
+              subject: subject,
+              content: content
+          };
+
+          $.ajax({
+              url: '/community/saveContact',
+              data: contactUs,
+              type: 'POST',
+              dataType: 'JSON',
+              success: function(ret) {
+                  if (ret && ret.O_CODE > 0) {
+                      layer.msg(ret.O_NOTE);
+                  } else {
+                      layper.msg('系统繁忙，请稍后重试');
+                  }
+              }
+          });
+      });
+  });
 </script>
 </body>
 </html>
