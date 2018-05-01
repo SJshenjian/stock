@@ -1,6 +1,6 @@
 package com.haotu369.model;
 
-import java.util.UUID;
+import java.sql.Timestamp;
 
 /**
  * @author : Jian Shen
@@ -17,6 +17,8 @@ public class ContactUs {
     private String subject;
 
     private String content;
+
+    private Timestamp date;
 
     public Integer getId() {
         return id;
@@ -56,5 +58,13 @@ public class ContactUs {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 }
