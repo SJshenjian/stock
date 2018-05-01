@@ -3,6 +3,7 @@ package com.haotu369.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.ContactUs;
+import com.haotu369.model.FAQ;
 import com.haotu369.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -48,14 +52,16 @@ public class CommunityAction {
     }
 
     // 常见问题
-    @RequestMapping("/faqs")
-    public String faqs() {
-        return "community_faqs";
+    @RequestMapping("/faq")
+    public String listFaq(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        List<FAQ> faqs = communityService.listFaq();
+        modelMap.put("faqs", faqs);
+        return "community_faq";
     }
 
     // 内容列表
-    @RequestMapping("/articles")
+    @RequestMapping("/article")
     public String articles() {
-        return "community_articles";
+        return "community_article";
     }
 }

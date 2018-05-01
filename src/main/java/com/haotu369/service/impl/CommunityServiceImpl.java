@@ -3,6 +3,7 @@ package com.haotu369.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.mapper.CommunityMapper;
 import com.haotu369.model.ContactUs;
+import com.haotu369.model.FAQ;
 import com.haotu369.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author : Jian Shen
@@ -36,6 +39,11 @@ public class CommunityServiceImpl implements CommunityService {
         communityMapper.saveContactUs(contactUs);
         sendSimpleEmail("haotu369@sina.com", contactUs, host, username, password);
         return message(1, "已收到您的消息，敬请等待工作人员回复");
+    }
+
+    @Override
+    public List<FAQ> listFaq() {
+        return communityMapper.listFaq();
     }
 
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {
