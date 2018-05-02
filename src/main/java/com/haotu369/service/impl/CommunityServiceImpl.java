@@ -63,6 +63,18 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.listTag();
     }
 
+    @Override
+    public JSONObject updateLike(int id) {
+        communityMapper.updateLike(id);
+        return message(1, "点赞成功");
+    }
+
+    @Override
+    public JSONObject removeLike(int id) {
+        communityMapper.removeLike(id);
+        return message(1, "取消点赞成功");
+    }
+
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(username);

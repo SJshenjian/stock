@@ -89,4 +89,18 @@ public class CommunityAction {
         modelMap.put("choiceArticle", choiceArticle);
         return "community_article";
     }
+
+    // 点赞
+    @RequestMapping("/updateLike")
+    @ResponseBody
+    public JSONObject updateLike(int id) {
+        return communityService.updateLike(id);
+    }
+
+    // 取消点赞
+    @RequestMapping("/removeLike")
+    @ResponseBody
+    public JSONObject removeLike(int id) {
+        return communityService.removeLike(id);
+    }
 }

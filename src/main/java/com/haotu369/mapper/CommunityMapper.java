@@ -33,4 +33,10 @@ public interface CommunityMapper {
 
     @Select("SELECT * FROM tag WHERE id = #{id}")
     public Tag getTag(int id);
+
+    @Select("UPDATE article SET like_count = like_count - 1 WHERE id = #{id};")
+    public void removeLike(int id);
+
+    @Select("UPDATE article SET like_count = like_count + 1 WHERE id = #{id};")
+    public void updateLike(int id);
 }

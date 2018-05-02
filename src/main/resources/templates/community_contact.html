@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="span4 offset1 bm30">
-                        <input type="button" name="submit" id="contactUs" value="立即发送" class="btn btn-inverse">
+                        <input type="button" name="submit" id="contactUs" disabled value="立即发送" class="btn btn-inverse">
                     </div>
                 </form>
             </div>
@@ -128,9 +128,10 @@
                             <ul class="articles">
                                 <#list recentArticle as recentArticle>
                                     <li class="article-entry standard">
+                                        <input type="hidden" value="${recentArticle.id}"/>
                                         <h4><a href="#">${recentArticle.name}</a></h4>
                                         <span class="article-meta">${recentArticle.date?split(" ")[0]}<a href="#">${recentArticle.tag[0].name}</a></span>
-                                        <span class="like-count">${recentArticle.likeCount}</span>
+                                        <span class="like-count" code="0">${recentArticle.likeCount}</span>
                                     </li>
                                 </#list>
                             </ul>
@@ -204,6 +205,40 @@
                   } else {
                       layper.msg('系统繁忙，请稍后重试');
                   }
+              }
+          });
+      });
+
+      // 点赞
+      $('.like-count').each(function () {
+          $(this).click(function () {
+              var id = $(this).siblings().eq(0).val();
+              var code = $(this).attr('code');
+              var likeCount = $(this).html();
+              if (code == 0) { // 点赞
+                  $.ajax({
+                      url: "/community/updateLike",
+                      data: {id: id},
+                      type: 'GET',
+                      dataType: 'JSON',
+                      success: function(ret) {
+                      }
+                  });
+                  $(this).html(parseInt(likeCount) + 1);
+                  $(this).attr('code', "1");
+                  $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px -22px;");
+              } else { // 取消点赞
+                  $.ajax({
+                      url: "/community/removeLike",
+                      data: {id: id},
+                      type: 'GET',
+                      dataType: 'JSON',
+                      success: function(ret) {
+                      }
+                  });
+                  $(this).html(parseInt(likeCount) - 1);
+                  $(this).attr('code', "0");
+                  $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px 8px;");
               }
           });
       });

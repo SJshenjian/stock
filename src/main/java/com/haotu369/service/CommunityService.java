@@ -28,4 +28,8 @@ public interface CommunityService {
     public List<Article> listChoiceArticle(int pageNo, int pageSize);
 
     public List<Tag> listTag();
+
+    public JSONObject updateLike(int id);
+
+    public JSONObject removeLike(int id);
 }

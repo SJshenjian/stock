@@ -52,7 +52,7 @@
                                 <article class=" type-post  format-standard hentry clearfix">
 
                                 <header class="clearfix">
-
+                                    <input type="hidden" value="${article.id}"/>
                                     <h3 class="post-title">
                                         <a href="#">${article.name}</a>
                                     </h3>
@@ -63,16 +63,16 @@
 
                                         <span class="comments"><a href="#">${article.readCount} 阅读</a></span>
 
-                                        <span class="like-count">${article.likeCount}</span>
+                                        <span class="like-count" code="0">${article.likeCount}</span>
                                     </div><!-- end of post meta -->
 
                                 </header>
 
                                 <p>
-                                    <#if article.content?length &gt; 40>
-                                        ${article.content[0..40]}...
+                                    <#if article.content?length &gt; 80>
+                                        ${article.content[0..80]}...
                                     </#if>
-                                    <#if article.content?length &lt; 41>
+                                    <#if article.content?length &lt; 81>
                                         ${article.content}
                                     </#if>
                                 </p>
@@ -117,9 +117,10 @@
                                 <ul class="articles">
                                     <#list choiceArticle as choiceArticle>
                                         <li class="article-entry standard">
+                                            <input type="hidden" value="${choiceArticle.id}"/>
                                             <h4><a href="#">${choiceArticle.name}</a></h4>
                                             <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
-                                            <span class="like-count">${choiceArticle.likeCount}</span>
+                                            <span class="like-count" code="0">${choiceArticle.likeCount}</span>
                                         </li>
                                     </#list>
                                 </ul>
@@ -145,11 +146,43 @@
     </div>
 </div>
 
-<script src="${request.contextPath}/layui/layui.all.js"/>
+<script src="${request.contextPath}/layui/layui.all.js"></script>
 
 <script>
     $(function() {
-
+        // 点赞
+        $('.like-count').each(function () {
+            $(this).click(function () {
+                var id = $(this).parent().siblings().eq(0).val();
+                var code = $(this).attr('code');
+                var likeCount = $(this).html();
+                if (code == 0) { // 点赞
+                    $.ajax({
+                        url: "/community/updateLike",
+                        data: {id: id},
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(ret) {
+                        }
+                    });
+                    $(this).html(parseInt(likeCount) + 1);
+                    $(this).attr('code', "1");
+                    $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px -22px;");
+                } else { // 取消点赞
+                    $.ajax({
+                        url: "/community/removeLike",
+                        data: {id: id},
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(ret) {
+                        }
+                    });
+                    $(this).html(parseInt(likeCount) - 1);
+                    $(this).attr('code', "0");
+                    $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px 8px;");
+                }
+            });
+        });
     })
 </script>
 </body>

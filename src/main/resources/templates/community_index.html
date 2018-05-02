@@ -18,7 +18,19 @@
     <!--[if lt IE 9]>
     <script src="${request.contextPath}/community/js/html5.js"></script>
     <![endif]-->
-
+    <style type="text/css">
+        .article-entry .like-count {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            line-height: 18px;
+            font-weight: 600;
+            padding: 3px 5px 3px 20px;
+            border: 1px solid #f2f2f2;
+            border-bottom: none;
+            background: url(${request.contextPath}/community/images/like.png) no-repeat 6px 8px;
+        }
+    </style>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
@@ -51,9 +63,10 @@
                         <ul class="articles">
                             <#list choiceArticle as choiceArticle>
                                 <li class="article-entry standard">
+                                    <input class="id" type="hidden" value="${choiceArticle.id}"/>
                                     <h4><a href="#">${choiceArticle.name}</a></h4>
                                     <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
-                                    <span class="like-count">${choiceArticle.likeCount}</span>
+                                    <span class="like-count" code="0">${choiceArticle.likeCount}</span>
                                 </li>
                             </#list>
                         </ul>
@@ -65,9 +78,10 @@
                         <ul class="articles">
                             <#list recentArticle as recentArticle>
                                 <li class="article-entry standard">
+                                    <input class="id" type="hidden" value="${recentArticle.id}"/>
                                     <h4><a href="#">${recentArticle.name}</a></h4>
                                     <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="#">${recentArticle.tag[0].name}</a></span>
-                                    <span class="like-count">${recentArticle.likeCount}</span>
+                                    <span class="like-count" code="0">${recentArticle.likeCount}</span>
                                 </li>
                             </#list>
                         </ul>
@@ -114,11 +128,43 @@
     </div>
 </div>
 
-<script src="${request.contextPath}/layui/layui.all.js"/>
+<script src="${request.contextPath}/layui/layui.all.js"></script>
 
 <script>
     $(function() {
-
+        // 点赞
+        $('.like-count').each(function () {
+            $(this).click(function () {
+                var id = $(this).siblings().eq(0).val();
+                var code = $(this).attr('code');
+                var likeCount = $(this).html();
+                if (code == 0) { // 点赞
+                    $.ajax({
+                        url: "/community/updateLike",
+                        data: {id: id},
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(ret) {
+                        }
+                    });
+                    $(this).html(parseInt(likeCount) + 1);
+                    $(this).attr('code', "1");
+                    $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px -22px;");
+                } else { // 取消点赞
+                    $.ajax({
+                        url: "/community/removeLike",
+                        data: {id: id},
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(ret) {
+                        }
+                    });
+                    $(this).html(parseInt(likeCount) - 1);
+                    $(this).attr('code', "0");
+                    $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px 8px;");
+                }
+            });
+        });
     })
 </script>
 </body>
