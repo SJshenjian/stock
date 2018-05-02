@@ -49,36 +49,13 @@
                     <section class="span4 articles-list">
                         <h3>精选内容</h3>
                         <ul class="articles">
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">66</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
-                                <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">15</span>
-                            </li>
-                            <li class="article-entry video">
-                                <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                <span class="article-meta">2018-04-11<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">8</span>
-                            </li>
-                            <li class="article-entry image">
-                                <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
-                                <span class="article-meta">2018-04-10<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">6</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                <span class="article-meta">2018-04-10<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">2</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                <span class="article-meta">2018-04-09<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                <span class="like-count">3</span>
-                            </li>
+                            <#list choiceArticle as choiceArticle>
+                                <li class="article-entry standard">
+                                    <h4><a href="#">${choiceArticle.name}</a></h4>
+                                    <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                    <span class="like-count">${choiceArticle.likeCount}</span>
+                                </li>
+                            </#list>
                         </ul>
                     </section>
 
@@ -86,36 +63,13 @@
                     <section class="span4 articles-list">
                         <h3>最新内容</h3>
                         <ul class="articles">
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">66</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">18</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">7</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">7</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">15</span>
-                            </li>
-                            <li class="article-entry standard">
-                                <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                                <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                                <span class="like-count">1</span>
-                            </li>
+                            <#list recentArticle as recentArticle>
+                                <li class="article-entry standard">
+                                    <h4><a href="#">${recentArticle.name}</a></h4>
+                                    <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="#">${recentArticle.tag[0].name}</a></span>
+                                    <span class="like-count">${recentArticle.likeCount}</span>
+                                </li>
+                            </#list>
                         </ul>
                     </section>
                 </div>
@@ -148,25 +102,9 @@
                 <section class="widget">
                     <h3 class="title">分类</h3>
                     <div class="tagcloud">
-                        <a href="#" class="btn btn-mini">公告</a>
-                        <a href="#" class="btn btn-mini">讨论</a>
-                        <a href="#" class="btn btn-mini">科普文章</a>
-                        <a href="#" class="btn btn-mini">策略</a>
-                        <a href="#" class="btn btn-mini">研究</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
-                        <a href="#" class="btn btn-mini">公告</a>
-                        <a href="#" class="btn btn-mini">讨论</a>
-                        <a href="#" class="btn btn-mini">科普文章</a>
-                        <a href="#" class="btn btn-mini">策略</a>
-                        <a href="#" class="btn btn-mini">研究</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <#list tag as tag>
+                            <a href="#" class="btn btn-mini">${tag.name}</a>
+                        </#list>
                     </div>
                 </section>
 

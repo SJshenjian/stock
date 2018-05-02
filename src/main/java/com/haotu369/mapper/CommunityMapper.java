@@ -1,9 +1,10 @@
 package com.haotu369.mapper;
 
+import com.haotu369.model.Article;
 import com.haotu369.model.ContactUs;
 import com.haotu369.model.FAQ;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
+import com.haotu369.model.Tag;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,15 @@ public interface CommunityMapper {
 
     @Select("SELECT * FROM faq")
     public List<FAQ> listFaq();
+    @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "listArticle")
+    @Results({
+            @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
+    })
+    public List<Article> listArticle(String type, int pageNo, int pageSize);
+
+    @Select("SELECT * FROM tag")
+    public List<Tag> listTag();
+
+    @Select("SELECT * FROM tag WHERE id = #{id}")
+    public Tag getTag(int id);
 }

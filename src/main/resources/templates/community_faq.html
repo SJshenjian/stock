@@ -51,7 +51,7 @@
                 </article>
 
                 <div class="faqs clearfix">
-                    <#list faqs as faq>
+                    <#list faq as faq>
                         <article class="faq-item">
                             <span class="faq-icon"></span>
                             <h3 class="faq-question">
@@ -92,51 +92,22 @@
                 <section class="widget">
                     <h3 class="title">最新内容</h3>
                     <ul class="articles">
-                        <li class="article-entry standard">
-                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                            <span class="like-count">66</span>
-                        </li>
-                        <li class="article-entry standard">
-                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                            <span class="like-count">66</span>
-                        </li>
-                        <li class="article-entry standard">
-                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                            <span class="like-count">66</span>
-                        </li>
-                        <li class="article-entry standard">
-                            <h4><a href="single.html">深挖护城河初篇 怎样看股票的基本面？</a></h4>
-                            <span class="article-meta">2018-04-15<a href="#" title=查看更多科普文章"">科普文章</a></span>
-                            <span class="like-count">66</span>
-                        </li>
+                        <#list recentArticle as recentArticle>
+                            <li class="article-entry standard">
+                                <h4><a href="#">${recentArticle.name}</a></h4>
+                                <span class="article-meta">${recentArticle.date?split(" ")[0]}<a href="#">${recentArticle.tag[0].name}</a></span>
+                                <span class="like-count">${recentArticle.likeCount}</span>
+                            </li>
+                        </#list>
                     </ul>
                 </section>
 
                 <section class="widget">
                     <h3 class="title">分类</h3>
                     <div class="tagcloud">
-                        <a href="#" class="btn btn-mini">公告</a>
-                        <a href="#" class="btn btn-mini">讨论</a>
-                        <a href="#" class="btn btn-mini">科普文章</a>
-                        <a href="#" class="btn btn-mini">策略</a>
-                        <a href="#" class="btn btn-mini">研究</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
-                        <a href="#" class="btn btn-mini">公告</a>
-                        <a href="#" class="btn btn-mini">讨论</a>
-                        <a href="#" class="btn btn-mini">科普文章</a>
-                        <a href="#" class="btn btn-mini">策略</a>
-                        <a href="#" class="btn btn-mini">研究</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
-                        <a href="#" class="btn btn-mini">有赏竞答</a>
-                        <a href="#" class="btn btn-mini">求助</a>
-                        <a href="#" class="btn btn-mini">重要事件</a>
+                        <#list tag as tag>
+                            <a href="#" class="btn btn-mini">${tag.name}</a>
+                        </#list>
                     </div>
                 </section>
 

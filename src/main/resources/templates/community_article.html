@@ -48,115 +48,37 @@
                         <!-- start of page content -->
                         <div class="span8 main-listing">
 
-                            <article class=" type-post  format-standard hentry clearfix">
+                            <#list article as article>
+                                <article class=" type-post  format-standard hentry clearfix">
 
                                 <header class="clearfix">
 
                                     <h3 class="post-title">
-                                        <a href="single.html">顶点软件 涨停</a>
+                                        <a href="#">${article.name}</a>
                                     </h3>
 
                                     <div class="post-meta clearfix">
-                                        <span class="date">2018-04-11</span>
-                                        <span class="category"><a href="#">重要事件</a></span>
+                                        <span class="date">${article.date?split(" ")[0]}</span>
+                                        <span class="category"><a href="#">${article.tag[0].name}</a></span>
 
-                                        <span class="comments"><a href="#">0 评论</a></span>
+                                        <span class="comments"><a href="#">${article.readCount} 阅读</a></span>
 
-                                        <span class="like-count">15</span>
+                                        <span class="like-count">${article.likeCount}</span>
                                     </div><!-- end of post meta -->
 
                                 </header>
 
-                                <p>2018年04月11日 09时32分45秒涨停，涨停原因：业绩增长+高送转。</p>
+                                <p>
+                                    <#if article.content?length &gt; 40>
+                                        ${article.content[0..40]}...
+                                    </#if>
+                                    <#if article.content?length &lt; 41>
+                                        ${article.content}
+                                    </#if>
+                                </p>
                             </article>
+                            </#list>
 
-                            <article class=" type-post  format-standard hentry clearfix">
-
-                                <header class="clearfix">
-
-                                    <h3 class="post-title">
-                                        <a href="single.html">顶点软件 龙虎榜</a>
-                                    </h3>
-
-                                    <div class="post-meta clearfix">
-                                        <span class="date">2018-04-11</span>
-                                        <span class="category"><a href="#">重要事件</a></span>
-
-                                        <span class="comments"><a href="#">0 评论</a></span>
-
-                                        <span class="like-count">15</span>
-                                    </div><!-- end of post meta -->
-
-                                </header>
-
-                                <p>上榜原因：连续三个交易日内,涨幅偏离值累计达20%的证券，营业部净额合计-171.48万元。</p>
-                            </article>
-
-                            <article class=" type-post  format-standard hentry clearfix">
-
-                                <header class="clearfix">
-
-                                    <h3 class="post-title">
-                                        <a href="single.html">顶点软件 涨停</a>
-                                    </h3>
-
-                                    <div class="post-meta clearfix">
-                                        <span class="date">2017-04-10</span>
-                                        <span class="category"><a href="#">重要事件</a></span>
-
-                                        <span class="comments"><a href="#">0 评论</a></span>
-
-                                        <span class="like-count">15</span>
-                                    </div><!-- end of post meta -->
-
-                                </header>
-
-                                <p>2018年04月10日 09时39分00秒涨停，涨停原因：业绩增长+高送转。</p>
-                            </article>
-
-                            <article class=" type-post  format-standard hentry clearfix">
-
-                                <header class="clearfix">
-
-                                    <h3 class="post-title">
-                                        <a href="single.html">顶点软件 涨停</a>
-                                    </h3>
-
-                                    <div class="post-meta clearfix">
-                                        <span class="date">2017-04-09</span>
-                                        <span class="category"><a href="#">重要事件</a></span>
-
-                                        <span class="comments"><a href="#">0 评论</a></span>
-
-                                        <span class="like-count">15</span>
-                                    </div><!-- end of post meta -->
-
-                                </header>
-
-                               <p>2018年04月09日 13时19分23秒涨停，涨停原因：业绩增长+高送转。</p>
-                            </article>
-
-                            <article class=" type-post  format-standard hentry clearfix">
-
-                                <header class="clearfix">
-
-                                    <h3 class="post-title">
-                                        <a href="single.html">顶点软件 资产变动</a>
-                                    </h3>
-
-                                    <div class="post-meta clearfix">
-                                        <span class="date">2017-12-13</span>
-                                        <span class="category"><a href="#">重要事件</a></span>
-
-                                        <span class="comments"><a href="#">0 评论</a></span>
-
-                                        <span class="like-count">15</span>
-                                    </div><!-- end of post meta -->
-
-                                </header>
-
-                                <p>福州软件园产业基地开发有限公司卖出福州软件园动漫游戏产业基地二期 D1、 D2 楼给福建顶点软件股份有限公司，涉及金额0.56亿元，进度：进行中。</p>
-                            </article>
 
                             <div id="pagination">
                                 <a href="#" class="btn active">1</a>
@@ -193,26 +115,13 @@
                             <section class="span4 articles-list">
                                 <h3>精选内容</h3>
                                 <ul class="articles">
-                                    <li class="article-entry standard">
-                                        <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                        <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                        <span class="like-count">66</span>
-                                    </li>
-                                    <li class="article-entry standard">
-                                        <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
-                                        <span class="article-meta">2018-04-12<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                        <span class="like-count">15</span>
-                                    </li>
-                                    <li class="article-entry video">
-                                        <h4><a href="single.html">顶点软件 涨停</a></h4>
-                                        <span class="article-meta">2018-04-11<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                        <span class="like-count">8</span>
-                                    </li>
-                                    <li class="article-entry image">
-                                        <h4><a href="single.html">顶点软件 龙虎榜</a></h4>
-                                        <span class="article-meta">2018-04-10<a href="#" title="查看更多重要事件">重要事件</a></span>
-                                        <span class="like-count">6</span>
-                                    </li>
+                                    <#list choiceArticle as choiceArticle>
+                                        <li class="article-entry standard">
+                                            <h4><a href="#">${choiceArticle.name}</a></h4>
+                                            <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                            <span class="like-count">${choiceArticle.likeCount}</span>
+                                        </li>
+                                    </#list>
                                 </ul>
                             </section>
 

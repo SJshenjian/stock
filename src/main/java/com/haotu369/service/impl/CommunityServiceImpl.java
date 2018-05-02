@@ -2,8 +2,10 @@ package com.haotu369.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.mapper.CommunityMapper;
+import com.haotu369.model.Article;
 import com.haotu369.model.ContactUs;
 import com.haotu369.model.FAQ;
+import com.haotu369.model.Tag;
 import com.haotu369.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +46,21 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<FAQ> listFaq() {
         return communityMapper.listFaq();
+    }
+
+    @Override
+    public List<Article> listRecentArticle(int pageNo, int pageSize) {
+        return communityMapper.listArticle("recent", pageNo, pageSize);
+    }
+
+    @Override
+    public List<Article> listChoiceArticle(int pageNo, int pageSize) {
+        return communityMapper.listArticle("choice", pageNo, pageSize);
+    }
+
+    @Override
+    public List<Tag> listTag() {
+        return communityMapper.listTag();
     }
 
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {
