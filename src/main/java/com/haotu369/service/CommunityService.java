@@ -27,6 +27,8 @@ public interface CommunityService {
 
     public List<Article> listChoiceArticle(int pageNo, int pageSize);
 
+    public int getArticleCount();
+
     public List<Tag> listTag();
 
     public JSONObject updateLike(int id);

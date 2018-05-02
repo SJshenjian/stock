@@ -80,14 +80,22 @@ public class CommunityAction {
 
     // 内容列表
     @RequestMapping("/article")
-    public String listArticle(String pageNo, String pageSize, ModelMap modelMap) {
+    public String article(String pageNo, String pageSize, ModelMap modelMap) {
         pageNo = (pageNo != null ? pageNo : "1");
         pageSize = (pageSize != null ? pageSize : "5");
-        List<Article> article = communityService.listRecentArticle(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         List<Article> choiceArticle = communityService.listChoiceArticle(1, 4);
-        modelMap.put("article", article);
+        int count = communityService.getArticleCount();
+        modelMap.put("count", count);
         modelMap.put("choiceArticle", choiceArticle);
         return "community_article";
+    }
+
+    // 内容分页
+    @RequestMapping("/articlePage")
+    @ResponseBody
+    public Object articlePage(int pageNo, int pageSize, ModelMap modelMap) {
+        List<Article> article = communityService.listRecentArticle(pageNo, pageSize);
+        return JSONObject.toJSON(article);
     }
 
     // 点赞

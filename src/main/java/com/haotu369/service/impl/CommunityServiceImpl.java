@@ -59,6 +59,11 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
+    public int getArticleCount() {
+        return communityMapper.getArticleCount();
+    }
+
+    @Override
     public List<Tag> listTag() {
         return communityMapper.listTag();
     }
