@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>选股社区</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
+
+    <!-- Style Sheet-->
+    <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='pretty-photo-css-css'  href='${request.contextPath}/community/js/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4' type='text/css' media='all' />
+    <link rel='stylesheet' id='main-css-css'  href='${request.contextPath}/community/css/main5152.css?ver=1.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='custom-css-css'  href='${request.contextPath}/community/css/custom5152.html?ver=1.0' type='text/css' media='all' />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="${request.contextPath}/community/js/html5.js"></script>
+    <![endif]-->
+
+    <script src="${request.contextPath}/js/dateformat.js"></script>
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <#include "header.html"/>
+</div>
+
+<div class="search-area-wrapper">
+    <div class="search-area container"  style="height: 60px">
+
+        <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+            <input class="search-term required" type="text" id="s" name="s" placeholder="搜索关键字" title="* Please enter a search term!" />
+            <input class="search-btn" type="submit" value="查询" />
+            <div id="search-error-container"></div>
+        </form>
+    </div>
+</div>
+
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- Start of Page Container -->
+            <div class="page-container">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- start of page content -->
+                        <div class="span8 main-listing">
+
+                            <!-- start of page content -->
+                            <div class="span8 page-content">
+
+                                <article class=" type-post format-standard hentry clearfix">
+                                    <input id="articleId" type="hidden" value="${article.id}"/>
+                                    <h1 class="post-title"><a href="#">${article.name}</a></h1>
+
+                                    <div class="post-meta clearfix">
+                                        <span class="date">${article.date?split(" ")[0]}</span>
+                                        <span class="category"><a href="#">${article.tag[0].name}</a></span>
+                                        <span class="comments"><a href="#">${article.readCount}</a></span>
+                                        <span class="like-count">${article.likeCount}</span>
+                                    </div><!-- end of post meta -->
+
+                                    <div style="margin-right: 30px;">${article.content}</div>
+
+                                </article>
+
+                                <section id="comments">
+
+                                    <h3 id="comments-title">历史评论</h3>
+
+                                    <ol class="commentlist">
+
+                                        <li class="comment even thread-even depth-1" id="li-comment-2">
+                                            <article id="comment-2">
+
+                                                <a href="#">
+                                                    <img alt="" src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
+                                                </a>
+
+                                                <div class="comment-meta">
+
+                                                    <h5 class="author">
+                                                        <cite class="fn">
+                                                            <a href="#" rel="external nofollow" class="url">John Doe</a>
+                                                        </cite>
+                                                        - <a class="comment-reply-link" href="#">Reply</a>
+                                                    </h5>
+
+                                                    <p class="date">
+                                                        <a href="#">
+                                                            <time datetime="2013-02-26T13:18:47+00:00">February 26, 2013 at 1:18 pm</time>
+                                                        </a>
+                                                    </p>
+
+                                                </div><!-- end .comment-meta -->
+
+                                                <div class="comment-body">
+                                                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                                    <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
+                                                </div><!-- end of comment-body -->
+
+                                            </article><!-- end of comment -->
+
+                                            <ul class="children">
+
+                                                <li class="comment byuser comment-author-saqib-sarwar bypostauthor odd alt depth-2" id="li-comment-3">
+                                                    <article id="comment-3">
+
+                                                        <a href="#">
+                                                            <img alt="" src="http://0.gravatar.com/avatar/2df5eab0988aa5ff219476b1d27df755?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
+                                                        </a>
+
+                                                        <div class="comment-meta">
+
+                                                            <h5 class="author">
+                                                                <cite class="fn">saqib sarwar</cite>
+                                                                - <a class="comment-reply-link" href="#">Reply</a>
+                                                            </h5>
+
+                                                            <p class="date">
+                                                                <a href="#">
+                                                                    <time datetime="2013-02-26T13:20:14+00:00">February 26, 2013 at 1:20 pm</time>
+                                                                </a>
+                                                            </p>
+
+                                                        </div><!-- end .comment-meta -->
+
+                                                        <div class="comment-body">
+                                                            <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+                                                        </div><!-- end of comment-body -->
+
+                                                    </article><!-- end of comment -->
+
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="comment even thread-odd thread-alt depth-1" id="li-comment-4">
+                                            <article id="comment-4">
+
+                                                <a href="#">
+                                                    <img alt="" src="http://1.gravatar.com/avatar/50a7625001317a58444a20ece817aeca?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G" class="avatar avatar-60 photo" height="60" width="60">
+                                                </a>
+
+                                                <div class="comment-meta">
+
+                                                    <h5 class="author">
+                                                        <cite class="fn"><a href="#" rel="external nofollow" class="url">John Doe</a></cite>
+                                                        - <a class="comment-reply-link" href="#">Reply</a>
+                                                    </h5>
+
+                                                    <p class="date">
+                                                        <a href="http://knowledgebase.inspirythemes.com/integrating-wordpress-with-your-website/#comment-4">
+                                                            <time datetime="2013-02-26T13:27:04+00:00">February 26, 2013 at 1:27 pm</time>
+                                                        </a>
+                                                    </p>
+
+                                                </div><!-- end .comment-meta -->
+
+                                                <div class="comment-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                                                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+                                                </div><!-- end of comment-body -->
+
+                                            </article><!-- end of comment -->
+                                        </li>
+                                    </ol>
+
+                                    <div id="respond">
+
+                                        <h3>评论</h3>
+
+                                        <div>
+                                            <div>
+                                                <span class="commentError" style="color: red;margin-left: 4px" ></span>
+                                                <textarea class="span7" name="comment" id="comment" rows="10"></textarea>
+                                            </div>
+
+                                            <div>
+                                                <input class="btn submitComment" name="submit" type="button" value="提交评论">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </section><!-- end of comments -->
+
+                            </div>
+                            <!-- end of page content -->
+
+                        </div>
+                        <!-- end of page content -->
+                        <!-- start of sidebar -->
+                        <aside class="span4 page-sidebar">
+
+                            <section class="widget">
+                                <div class="support-widget">
+                                    <h3 class="title">联系我们</h3>
+                                    <p class="intro">需要更多支持？ 如果您没有找到答案，请联系我们获取进一步帮助。</p>
+                                </div>
+                            </section>
+
+                            <section class="widget">
+                                <div class="quick-links-widget">
+                                    <h3 class="title">快速访问</h3>
+                                    <ul id="menu-quick-links" class="menu clearfix">
+                                        <li><a href="${request.contextPath}/community/index">社区首页</a></li>
+                                        <li><a href="${request.contextPath}/community/article">内容列表</a></li>
+                                        <li><a href="${request.contextPath}/community/faq">常见问题</a></li>
+                                        <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+
+                            <section class="widget">
+                                <h3 class="title">精选内容</h3>
+                                <ul class="articles">
+                                    <#list choiceArticle as choiceArticle>
+                                        <li class="article-entry standard">
+                                            <input type="hidden" value="${choiceArticle.id}"/>
+                                            <h4><a href="#">${choiceArticle.name}</a></h4>
+                                            <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                            <span class="like-count" code="0">${choiceArticle.likeCount}</span>
+                                        </li>
+                                    </#list>
+                                </ul>
+                            </section>
+
+                            <section class="widget">
+                                <h3 class="title">最近评论</h3>
+                                <ul id="recentcomments">
+                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">吴女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                                    <li class="recentcomments">朱先生 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">徐先生</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">胡女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                                </ul>
+                            </section>
+
+                        </aside>
+                        <!-- end of sidebar -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Page Container -->
+        </div>
+    </div>
+</div>
+
+<script src="${request.contextPath}/layui/layui.all.js"></script>
+
+<script>
+    $(function() {
+        $('.submitComment').click(function() {
+            var comment = $('#comment').val();
+            var temp = comment.replace(/\s/g, "");
+            temp = temp.replace(/\n/g, "");
+            if (null == comment || temp.length <= 0) {
+                $('.commentError').html('评论内容不能为空');
+                return ;
+            }
+            $('.commentError').html('');
+
+            var params = {
+                articleId: $('#articleId').val(),
+                content: comment
+            };
+
+
+            // 提交评论
+            $.ajax({
+                url: '/community/comment',
+                data: params,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(ret) {
+                    layer.msg('评论成功');
+                    // TODO 重新查询评论内容
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

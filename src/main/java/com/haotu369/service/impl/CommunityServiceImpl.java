@@ -2,10 +2,7 @@ package com.haotu369.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.mapper.CommunityMapper;
-import com.haotu369.model.Article;
-import com.haotu369.model.ContactUs;
-import com.haotu369.model.FAQ;
-import com.haotu369.model.Tag;
+import com.haotu369.model.*;
 import com.haotu369.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +10,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +20,7 @@ import java.util.List;
  * @date : 2018/4/22
  */
 @Service
+@Transactional
 public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
@@ -78,6 +77,20 @@ public class CommunityServiceImpl implements CommunityService {
     public JSONObject removeLike(int id) {
         communityMapper.removeLike(id);
         return message(1, "取消点赞成功");
+    }
+
+    @Override
+    public Article getArticleDetail(int id) {
+        return communityMapper.getArticleDetail(id);
+    }
+
+    @Override
+    public JSONObject addComment(Comment comment, String userId) {
+        if(null == userId) {
+            comment.setUserId(0); // 游客身份 0 表示游客身份
+        };
+        communityMapper.addComment(comment);
+        return message(1, "评论成功");
     }
 
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {

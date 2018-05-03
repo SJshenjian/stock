@@ -4,6 +4,7 @@ import com.haotu369.mapper.NewsMapper;
 import com.haotu369.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @date : 2018/4/21
  */
 @Service
+@Transactional
 public class NewsServiceImpl implements NewsService{
 
     @Autowired

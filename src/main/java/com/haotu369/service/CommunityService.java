@@ -1,10 +1,7 @@
 package com.haotu369.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.haotu369.model.Article;
-import com.haotu369.model.ContactUs;
-import com.haotu369.model.FAQ;
-import com.haotu369.model.Tag;
+import com.haotu369.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -34,4 +31,8 @@ public interface CommunityService {
     public JSONObject updateLike(int id);
 
     public JSONObject removeLike(int id);
+
+    public Article getArticleDetail(int id);
+
+    public JSONObject addComment(Comment comment, String userId);
 }

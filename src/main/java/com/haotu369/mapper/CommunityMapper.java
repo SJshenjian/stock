@@ -1,9 +1,6 @@
 package com.haotu369.mapper;
 
-import com.haotu369.model.Article;
-import com.haotu369.model.ContactUs;
-import com.haotu369.model.FAQ;
-import com.haotu369.model.Tag;
+import com.haotu369.model.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +39,13 @@ public interface CommunityMapper {
 
     @Select("SELECT COUNT(id) FROM article")
     public int getArticleCount();
+
+    @Select("SELECT * FROM article WHERE id = #{id}")
+    @Results({
+            @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
+    })
+    public Article getArticleDetail(int id);
+
+    @Insert("INSERT INTO comment(content, article_id, user_id) VALUES(#{content}, #{articleId}, #{userId})")
+    public void addComment(Comment comment);
 }

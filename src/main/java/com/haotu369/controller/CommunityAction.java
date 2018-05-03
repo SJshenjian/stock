@@ -2,10 +2,7 @@ package com.haotu369.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.haotu369.model.Article;
-import com.haotu369.model.ContactUs;
-import com.haotu369.model.FAQ;
-import com.haotu369.model.Tag;
+import com.haotu369.model.*;
 import com.haotu369.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,9 +77,7 @@ public class CommunityAction {
 
     // 内容列表
     @RequestMapping("/article")
-    public String article(String pageNo, String pageSize, ModelMap modelMap) {
-        pageNo = (pageNo != null ? pageNo : "1");
-        pageSize = (pageSize != null ? pageSize : "5");
+    public String article(ModelMap modelMap) {
         List<Article> choiceArticle = communityService.listChoiceArticle(1, 4);
         int count = communityService.getArticleCount();
         modelMap.put("count", count);
@@ -110,5 +105,24 @@ public class CommunityAction {
     @ResponseBody
     public JSONObject removeLike(int id) {
         return communityService.removeLike(id);
+    }
+
+    // 内容详情
+    @RequestMapping("/articleDetail")
+    public String articleDetail(int id, ModelMap modelMap) {
+        Article article = communityService.getArticleDetail(id);
+        List<Article> choiceArticle = communityService.listChoiceArticle(1, 4);
+        modelMap.put("article", article);
+        modelMap.put("choiceArticle", choiceArticle);
+        return "community_article_detail";
+    }
+
+    // 文章内容评论
+    @RequestMapping("/comment")
+    @ResponseBody
+    public JSONObject addComment(Comment comment) {
+        // TODO 从token中或许用户的id,判断用户是否为游客
+        String userId = null;
+        return communityService.addComment(comment, userId);
     }
 }

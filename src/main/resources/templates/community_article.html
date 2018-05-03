@@ -82,8 +82,8 @@
                                 </div>
                             </section>
 
-                            <section class="span4 articles-list">
-                                <h3>精选内容</h3>
+                            <section class="widget">
+                                <h3 class="title">精选内容</h3>
                                 <ul class="articles">
                                     <#list choiceArticle as choiceArticle>
                                         <li class="article-entry standard">
@@ -190,12 +190,12 @@
                                 '                                <header class="clearfix">' +
                                 '                                    <input type="hidden" value="' + ret[i]['id'] + '"/>' +
                                 '                                    <h3 class="post-title">' +
-                                '                                        <a href="#">' + ret[i]['name'] + '</a>' +
+                                '                                        <a href="/community/articleDetail?id=' + ret[i]['id'] + '">' + ret[i]['name'] + '</a>' +
                                 '                                    </h3>' +
                                 '                                    <div class="post-meta clearfix">' +
                                 '                                        <span class="date">' + date + '</span>' +
                                 '                                        <span class="category"><a href="#">' + tag + '</a></span>' +
-                                '                                        <span class="comments"><a href="#">' + ret[i]['readCount'] + ' 阅读</a></span>' +
+                                '                                        <span class="comments">' + ret[i]['readCount'] + ' 阅读</span>' +
                                 '                                        <span class="like-count" code="0">' + ret[i]['likeCount'] + '</span>' +
                                 '                                    </div><!-- end of post meta -->' +
                                 '                                </header>' +
