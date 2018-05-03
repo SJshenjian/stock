@@ -93,6 +93,17 @@ public class CommunityServiceImpl implements CommunityService {
         return message(1, "评论成功");
     }
 
+    @Override
+    public List<Comment> getComment(int id) {
+        List<Comment> comments = communityMapper.getComment(id);
+        return comments;
+    }
+
+    @Override
+    public List<Comment> listRecentComment(int pageNo, int pageSize) {
+        return communityMapper.listRecentComment(pageNo, pageSize);
+    }
+
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(username);

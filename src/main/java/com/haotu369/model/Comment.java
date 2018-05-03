@@ -14,6 +14,8 @@ public class Comment {
 
     private Integer articleId;
 
+    private String articleName;
+
     private Timestamp date;
 
     private Integer userId;
@@ -42,6 +44,14 @@ public class Comment {
 
     public void setArticleId(Integer articleId) {
         this.articleId = articleId;
+    }
+
+    public String getArticleName() {
+        return articleName;
+    }
+
+    public void setArticleName(String articleName) {
+        this.articleName = articleName;
     }
 
     public Timestamp getDate() {

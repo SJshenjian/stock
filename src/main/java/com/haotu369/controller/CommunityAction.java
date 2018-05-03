@@ -118,11 +118,27 @@ public class CommunityAction {
     }
 
     // 文章内容评论
-    @RequestMapping("/comment")
+    @RequestMapping("/addComment")
     @ResponseBody
     public JSONObject addComment(Comment comment) {
         // TODO 从token中或许用户的id,判断用户是否为游客
         String userId = null;
         return communityService.addComment(comment, userId);
+    }
+
+    // 获取文章评论
+    @RequestMapping("/listComment")
+    @ResponseBody
+    public Object listComment(int id) {
+        List<Comment> comments = communityService.getComment(id);
+        return JSONObject.toJSON(comments);
+    }
+
+    // 获取最新评论
+    @RequestMapping("/listRecentComment")
+    @ResponseBody
+    public Object listRecentComment(int pageNo, int pageSize) {
+        List<Comment> recentComments = communityService.listRecentComment(pageNo, pageSize);
+        return JSONObject.toJSON(recentComments);
     }
 }

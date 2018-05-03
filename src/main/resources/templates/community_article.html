@@ -38,83 +38,76 @@
     </div>
 </div>
 
+<!-- Start of Page Container -->
 <div class="page-container">
     <div class="container">
         <div class="row">
 
-            <!-- Start of Page Container -->
-            <div class="page-container">
-                <div class="container">
-                    <div class="row">
+            <!-- start of page content -->
+            <div class="span8 main-listing">
 
-                        <!-- start of page content -->
-                        <div class="span8 main-listing">
+                <div id="article">
 
-                            <div id="article">
-
-                            </div>
-                            <input type="hidden" id="count" value="${count}"/>
-                            <div id="pagination">
-
-                            </div>
-
-                        </div>
-                        <!-- end of page content -->
-                        <!-- start of sidebar -->
-                        <aside class="span4 page-sidebar">
-
-                            <section class="widget">
-                                <div class="support-widget">
-                                    <h3 class="title">联系我们</h3>
-                                    <p class="intro">需要更多支持？ 如果您没有找到答案，请联系我们获取进一步帮助。</p>
-                                </div>
-                            </section>
-
-                            <section class="widget">
-                                <div class="quick-links-widget">
-                                    <h3 class="title">快速访问</h3>
-                                    <ul id="menu-quick-links" class="menu clearfix">
-                                        <li><a href="${request.contextPath}/community/index">社区首页</a></li>
-                                        <li><a href="${request.contextPath}/community/article">内容列表</a></li>
-                                        <li><a href="${request.contextPath}/community/faq">常见问题</a></li>
-                                        <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
-                                    </ul>
-                                </div>
-                            </section>
-
-                            <section class="widget">
-                                <h3 class="title">精选内容</h3>
-                                <ul class="articles">
-                                    <#list choiceArticle as choiceArticle>
-                                        <li class="article-entry standard">
-                                            <input type="hidden" value="${choiceArticle.id}"/>
-                                            <h4><a href="#">${choiceArticle.name}</a></h4>
-                                            <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
-                                            <span class="like-count" code="0">${choiceArticle.likeCount}</span>
-                                        </li>
-                                    </#list>
-                                </ul>
-                            </section>
-
-                            <section class="widget">
-                                <h3 class="title">最近评论</h3>
-                                <ul id="recentcomments">
-                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">吴女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                                    <li class="recentcomments">朱先生 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">徐先生</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                                    <li class="recentcomments"><a href="#" rel="external nofollow" class="url">胡女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                                </ul>
-                            </section>
-
-                        </aside>
-                        <!-- end of sidebar -->
-                    </div>
                 </div>
+                <input type="hidden" id="count" value="${count}"/>
+                <div id="pagination">
+
+                </div>
+
             </div>
-            <!-- End of Page Container -->
+            <!-- end of page content -->
+            <!-- start of sidebar -->
+            <aside class="span4 page-sidebar">
+
+                <section class="widget">
+                    <div class="support-widget">
+                        <h3 class="title">联系我们</h3>
+                        <p class="intro">需要更多支持？ 如果您没有找到答案，请联系我们获取进一步帮助。</p>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <div class="quick-links-widget">
+                        <h3 class="title">快速访问</h3>
+                        <ul id="menu-quick-links" class="menu clearfix">
+                            <li><a href="${request.contextPath}/community/index">社区首页</a></li>
+                            <li><a href="${request.contextPath}/community/article">内容列表</a></li>
+                            <li><a href="${request.contextPath}/community/faq">常见问题</a></li>
+                            <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">精选内容</h3>
+                    <ul class="articles">
+                        <#list choiceArticle as choiceArticle>
+                            <li class="article-entry standard">
+                                <input type="hidden" value="${choiceArticle.id}"/>
+                                <h4><a href="#">${choiceArticle.name}</a></h4>
+                                <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                <span class="like-count" code="0">${choiceArticle.likeCount}</span>
+                            </li>
+                        </#list>
+                    </ul>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">最近评论</h3>
+                    <ul id="recentcomments">
+                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">吴女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                        <li class="recentcomments">朱先生 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">徐先生</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">胡女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                    </ul>
+                </section>
+
+            </aside>
+            <!-- end of sidebar -->
         </div>
     </div>
 </div>
+<!-- End of Page Container -->
 
 <script src="${request.contextPath}/layui/layui.all.js"></script>
 

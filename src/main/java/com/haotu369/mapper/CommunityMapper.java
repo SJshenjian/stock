@@ -1,5 +1,6 @@
 package com.haotu369.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -46,6 +47,19 @@ public interface CommunityMapper {
     })
     public Article getArticleDetail(int id);
 
-    @Insert("INSERT INTO comment(content, article_id, user_id) VALUES(#{content}, #{articleId}, #{userId})")
+    @Insert("INSERT INTO comment(content, article_id, user_id, article_name) VALUES(#{content}, #{articleId}, #{userId}, #{articleName})")
     public void addComment(Comment comment);
+
+    @Select("SELECT * FROM comment WHERE article_id = #{id}")
+    @Results({
+            @Result(column = "user_id", property = "user", one = @One(select = "com.haotu369.mapper.UserMapper.getUser") )
+    })
+    public List<Comment> getComment(int id);
+
+
+    @Select("SELECT * FROM comment ORDER BY date DESC limit #{pageNo}, #{pageSize}")
+    @Results({
+            @Result(column = "user_id", property = "user", one = @One(select = "com.haotu369.mapper.UserMapper.getUser") )
+    })
+    public List<Comment> listRecentComment(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
 }

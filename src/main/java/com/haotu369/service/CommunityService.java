@@ -35,4 +35,8 @@ public interface CommunityService {
     public Article getArticleDetail(int id);
 
     public JSONObject addComment(Comment comment, String userId);
+
+    public List<Comment> getComment(int id);
+
+    public List<Comment> listRecentComment(int pageNo, int pageSize);
 }
