@@ -49,14 +49,14 @@
                 <div class="span8 page-content">
 
                     <article class=" type-post format-standard hentry clearfix">
-                        <input id="articleId" type="hidden" value="${article.id}"/>
                         <h1 class="post-title"><a href="#" id="articleName">${article.name}</a></h1>
 
                         <div class="post-meta clearfix">
+                            <input id="articleId" type="hidden" value="${article.id}"/>
                             <span class="date">${article.date?split(" ")[0]}</span>
                             <span class="category"><a href="#">${article.tag[0].name}</a></span>
                             <span class="comments"><a href="#">${article.readCount}</a></span>
-                            <span class="like-count">${article.likeCount}</span>
+                            <span class="like-count" code="0">${article.likeCount}</span>
                         </div><!-- end of post meta -->
 
                         <div style="margin-right: 30px;">${article.content}</div>
