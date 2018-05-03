@@ -94,11 +94,8 @@
 
                 <section class="widget">
                     <h3 class="title">最近评论</h3>
-                    <ul id="recentcomments">
-                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">吴女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                        <li class="recentcomments">朱先生 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">徐先生</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
-                        <li class="recentcomments"><a href="#" rel="external nofollow" class="url">胡女士</a> 关于 <a href="#">顶点软件五连涨停的评论</a></li>
+                    <ul class="recentCommentlist">
+
                     </ul>
                 </section>
 
@@ -154,8 +151,6 @@
             });
         };
 
-        like(2);
-
         // 分页
         var laypage = layui.laypage;
         var totalCount = $('#count').val();
@@ -203,6 +198,40 @@
                 });
             }
         });
+
+        // 最近评论
+        var listRecentComments = function() {
+            $.ajax({
+                url: '/community/listRecentComment',
+                data: {'pageNo': '1', 'pageSize': '4'},
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(ret) {
+                    var parentHtml = $('.recentCommentlist');
+                    parentHtml.empty();
+                    var html = '';
+                    if (ret && ret.length > 0) {
+                        for (var i = 0; i < ret.length; i++) {
+                            var articleName = ret[i]['articleName'].length > 15 ? ret[i]['articleName'].substring(0,15) + '...' : ret[i]['articleName'];
+                            html += '<li class="recentcomments">' +
+                                '   <a href="#" rel="external nofollow" class="url">' +
+                                ret[i].user['username'] + '' +
+                                '   </a> 关于 ' +
+                                '   <a href="/community/articleDetail?id=' + ret[i]['articleId'] + '">' +
+                                articleName +
+                                '  </a> 的评论' +
+                                '</li>';
+                        }
+                    } else {
+                        html = '暂无评论'
+                    }
+                    parentHtml.html(html);
+                }
+            });
+        };
+
+        like(2);
+        listRecentComments();
     })
 </script>
 </body>
