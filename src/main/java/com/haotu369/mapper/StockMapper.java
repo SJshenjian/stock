@@ -1,5 +1,6 @@
 package com.haotu369.mapper;
 
+import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,7 @@ public interface StockMapper {
 
     @Select("SELECT * FROM stock_classify WHERE type = #{type}")
     List<StockClassify> listStockClassify(int type);
+
+    @Select("SELECT * FROM stock WHERE c_name = #{classifyName}")
+    public List<Stock> listStock(String classifyName);
 }

@@ -1,6 +1,7 @@
 package com.haotu369.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
@@ -44,5 +45,13 @@ public class StockAction {
     public Object classify(int type) {
         List<StockClassify> stockClassifies = stockService.listStockClassify(type);
         return JSONObject.toJSON(stockClassifies);
+    }
+
+    // 获取股票 根据 所属类别名称
+    @RequestMapping("/stock")
+    @ResponseBody
+    public Object listStock(String classifyName) {
+        List<Stock> stocks = stockService.listStock(classifyName);
+        return JSONObject.toJSON(stocks);
     }
 }

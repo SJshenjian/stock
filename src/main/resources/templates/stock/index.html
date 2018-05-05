@@ -28,6 +28,9 @@
             <div class="stockClassifyList">
 
             </div>
+            <div class="stock"  style="margin-top: 8px;">
+
+            </div>
         </div>
     </div>
 
@@ -55,33 +58,54 @@
             });
         };
 
+        // 股票分类
         var stockClassify = function() {
             $('.stockClassify').each(function() {
                 $(this).unbind('click').click(function () {
+                    $('.stock').hide();
                     var type = $(this).attr('value');
                     $.ajax({
                         url: '/stock/classify',
                         data: {'type': type},
                         success: function(ret) {
-                            debugger;
                             if (ret && ret.length > 0) {
                                 var parentHtml = $('.stockClassifyList');
                                 parentHtml.empty();
                                 var html = '';
                                 if (ret[0]['type'] == '1' || ret[0]['type'] == '2' || ret[0]['type'] == '3') {
                                     html += '<button class="layui-btn layui-btn-primary layui-btn-radius">请选择具体类别</button>'
+                                } else {
+                                    $.ajax({
+                                        url: '/stock/stock',
+                                        data: {'classifyName': ret[0]['type']},
+                                        success: function(ret) {
+                                            var parentHtml = $('.stock');
+                                            parentHtml.empty();
+                                            var html = '';
+                                            if (ret && ret.length > 0) {
+                                                for (var i =0 ; i < ret.length; i++) {
+                                                    html += '<button class="layui-btn layui-btn-primary" style="margin: 3px; border: hidden">' + ret[i]['code'] + '&nbsp;&nbsp;&nbsp;&nbsp;' + ret[i]['name'] + '</button>';
+                                                }
+                                            } else {
+                                                html = '暂无对应分类股票数据';
+                                            }
+                                            parentHtml.html(html);
+                                            $('.stock').show();
+                                        }
+                                    })
+                                    return ;
                                 }
                                 var displayCount = 24;
                                 var len = ret.length > displayCount ? displayCount : ret.length;
 
                                 for (var i = 0; i < len; i++) {
-                                    html += '<button class="layui-btn layui-btn-danger layui-btn-radius" style="margin: 2px">' + ret[i]['name'] + '</button>';
+                                    html += '<button class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius stockConcreteClassify" style="margin: 2px">' + ret[i]['name'] + '</button>';
                                 }
                                 if (ret.length > displayCount) {
                                     for (var i = displayCount; i < ret.length; i++) {
-                                        html += '<button class="layui-btn layui-btn-danger layui-btn-radius moreSelect" style="margin: 2px">' + ret[i]['name'] + '</button>';
+                                        html += '<button class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius moreSelect stockConcreteClassify" style="margin: 2px">' + ret[i]['name'] + '</button>';
                                     }
-                                    html += '<button class="layui-btn layui-btn-danger layui-btn-radius moreClassify" display="no" style="margin: 2px;">' +
+                                    html += '<button class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius moreClassify" display="no" style="margin: 2px;">' +
                                         '<i class="layui-icon" style="font-size: 30px; color: white;">&#xe65b;</i>' +
                                         '</button>';
                                 }
@@ -89,6 +113,7 @@
                             }
 
                             moreClassify();
+                            stockConcreteClassify();
                         }
                     })
                 });
@@ -99,7 +124,7 @@
         var moreClassify = function() {
             $('.moreSelect').hide();
             $('.moreClassify').unbind('click').click(function () {
-                var parent = $(this).parent;
+                var parent = $(this).parent();
                 $('.moreSelect', parent).show();
                 var display = $(this).attr('display');
                 if(display == "no"){
@@ -111,6 +136,32 @@
                     $(this).children().html("&#xe65b;");
                     $(".moreSelect",  parent).hide();
                 }
+            });
+        };
+
+        // 具体股票分类查询
+        var stockConcreteClassify =function() {
+            $('.stockConcreteClassify').unbind('click').click(function() {
+                var classifyName = $(this).html();
+                $.ajax({
+                    url: '/stock/stock',
+                    data: {'classifyName': classifyName},
+                    success: function(ret) {
+                        debugger;
+                        var parentHtml = $('.stock');
+                        parentHtml.empty();
+                        var html = '';
+                        if (ret && ret.length > 0) {
+                            for (var i =0 ; i < ret.length; i++) {
+                                html += '<button class="layui-btn layui-btn-primary" style="margin: 3px; border: hidden">' + ret[i]['code'] + '&nbsp;&nbsp;&nbsp;&nbsp;' + ret[i]['name'] + '</button>';
+                            }
+                        } else {
+                            html = '暂无对应分类股票数据';
+                        }
+                        parentHtml.html(html);
+                        $('.stock').show();
+                    }
+                })
             });
         };
 

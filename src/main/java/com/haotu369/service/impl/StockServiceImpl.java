@@ -1,6 +1,7 @@
 package com.haotu369.service.impl;
 
 import com.haotu369.mapper.StockMapper;
+import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
@@ -28,5 +29,10 @@ public class StockServiceImpl implements StockService {
     @Override
     public List<StockClassify> listStockClassify(int type) {
         return stockMapper.listStockClassify(type);
+    }
+
+    @Override
+    public List<Stock> listStock(String classifyName) {
+        return stockMapper.listStock(classifyName);
     }
 }
