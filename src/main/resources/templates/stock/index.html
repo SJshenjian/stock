@@ -13,7 +13,7 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">股票分类数据</a>
                     <dl class="layui-nav-child stockType">
 
@@ -24,8 +24,11 @@
     </div>
 
     <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <div style="padding: 15px;">
+            <div class="stockClassifyList">
+
+            </div>
+        </div>
     </div>
 
 </div>
@@ -61,9 +64,53 @@
                         data: {'type': type},
                         success: function(ret) {
                             debugger;
+                            if (ret && ret.length > 0) {
+                                var parentHtml = $('.stockClassifyList');
+                                parentHtml.empty();
+                                var html = '';
+                                if (ret[0]['type'] == '1' || ret[0]['type'] == '2' || ret[0]['type'] == '3') {
+                                    html += '<button class="layui-btn layui-btn-primary layui-btn-radius">请选择具体类别</button>'
+                                }
+                                var displayCount = 24;
+                                var len = ret.length > displayCount ? displayCount : ret.length;
+
+                                for (var i = 0; i < len; i++) {
+                                    html += '<button class="layui-btn layui-btn-danger layui-btn-radius" style="margin: 2px">' + ret[i]['name'] + '</button>';
+                                }
+                                if (ret.length > displayCount) {
+                                    for (var i = displayCount; i < ret.length; i++) {
+                                        html += '<button class="layui-btn layui-btn-danger layui-btn-radius moreSelect" style="margin: 2px">' + ret[i]['name'] + '</button>';
+                                    }
+                                    html += '<button class="layui-btn layui-btn-danger layui-btn-radius moreClassify" display="no" style="margin: 2px;">' +
+                                        '<i class="layui-icon" style="font-size: 30px; color: white;">&#xe65b;</i>' +
+                                        '</button>';
+                                }
+                                parentHtml.html(html);
+                            }
+
+                            moreClassify();
                         }
                     })
                 });
+            });
+        };
+
+        // 更多
+        var moreClassify = function() {
+            $('.moreSelect').hide();
+            $('.moreClassify').unbind('click').click(function () {
+                var parent = $(this).parent;
+                $('.moreSelect', parent).show();
+                var display = $(this).attr('display');
+                if(display == "no"){
+                    $(this).attr("display", "yes");
+                    $(this).children().html("&#xe65a;");
+                    $(".moreSelect",  parent).show();
+                }else{
+                    $(this).attr("display", "no");
+                    $(this).children().html("&#xe65b;");
+                    $(".moreSelect",  parent).hide();
+                }
             });
         };
 
