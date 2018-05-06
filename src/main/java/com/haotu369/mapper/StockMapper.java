@@ -3,6 +3,7 @@ package com.haotu369.mapper;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +25,13 @@ public interface StockMapper {
 
     @Select("SELECT * FROM stock WHERE c_name = #{classifyName}")
     public List<Stock> listStock(String classifyName);
+
+    @Select({"SELECT code, name FROM hs300_classify"})
+    public List<Stock> listHs300Stock();
+
+    @Select({"SELECT code, name FROM zz500_classify"})
+    public List<Stock> listZz500Stock();
+
+    @Select({"SELECT code, name FROM sz50_classify"})
+    public List<Stock> listSz50Stock();
 }

@@ -54,4 +54,12 @@ public class StockAction {
         List<Stock> stocks = stockService.listStock(classifyName);
         return JSONObject.toJSON(stocks);
     }
+
+    // 成份股数据请求
+    @RequestMapping("/componentStock")
+    @ResponseBody
+    public Object listComponentStock(String componentName) {
+        List<Stock> result = stockService.listComponentStock(componentName);
+        return JSONObject.toJSON(result);
+    }
 }

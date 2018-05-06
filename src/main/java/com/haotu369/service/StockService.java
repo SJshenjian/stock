@@ -18,4 +18,6 @@ public interface StockService {
     public List<StockClassify> listStockClassify(int type);
 
     public List<Stock> listStock(String classifyName);
+
+    public List<Stock> listComponentStock(String componentName);
 }
