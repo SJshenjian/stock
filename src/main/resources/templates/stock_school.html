@@ -37,7 +37,11 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;"></div>
+        <div style="padding: 15px;">
+            <div class="stockSchoolList">
+
+            </div>
+        </div>
     </div>
 </div>
 <#include "common_js.html"/>
@@ -48,6 +52,7 @@
                 var type = $(this).attr('type').valueOf();
                 // 等于号需转义为%3D
                 window.open('${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/getSchoolContent?type%3D' + type);
+
             });
         });
     })

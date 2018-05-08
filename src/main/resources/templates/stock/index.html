@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>牛股精选</title>
     <#include "../common_css.html" />
+    <style>
+        .layui-fixbar {
+            position: fixed;
+            right: 15px;
+            bottom: 1px;
+            z-index: 9999;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -41,6 +49,12 @@
 
             </div>
         </div>
+    </div>
+
+    <div>
+        <ul class="layui-fixbar customerService">
+            <img src="https://cloud-static.datayes.com/source/kf/sidebar/img/kf.png" width="60" />
+        </ul>
     </div>
 
 </div>
@@ -175,6 +189,7 @@
             });
         };
 
+        // 成份股查询
         $('.componentStock').unbind('click').click(function() {
             $('.stockClassifyList').hide();
             var componentName = $(this).attr('code');
@@ -197,6 +212,24 @@
                     $('.stock').show();
                 }
             });
+        });
+
+
+        // 客服提示
+        $('.customerService').poshytip({
+            content: function() {
+                return '                    <div class="_dy_cs_item">' +
+                    '                        <div class="_dy_cs_online"></div>' +
+                    '                        <img src="https://cloud-static.datayes.com/source/kf/sidebar/img/kf.png" width="26">在线时间' +
+                    '                    </div>' +
+                    '                    <div class="_dy_cs_item">周一至周五</div>' +
+                    '                    <div class="_dy_cs_item">09:00-21:00</div>' +
+                    '                    <div class="_dy_cs_talk _dy_cs_item _dy_cs_callkf">发起会话</div>';
+            },
+            className: 'tip-white',
+            alignTo: 'target',
+            alignX: 'center',
+            alignY: 'bottom'
         });
 
         loadMenu();

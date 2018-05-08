@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
+ * 精选牛股
+ *
  * @author : Jian Shen
  * @version : V1.0
  * @date : 2018/5/4
