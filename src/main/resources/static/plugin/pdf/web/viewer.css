@@ -781,6 +781,7 @@ html[dir='rtl'] #toolbarViewerRight {
 html[dir='ltr'] #toolbarViewerRight,
 html[dir='rtl'] #toolbarViewerLeft {
   float: right;
+  visibility:hidden
 }
 html[dir='ltr'] #toolbarViewerLeft > *,
 html[dir='ltr'] #toolbarViewerMiddle > *,
@@ -795,6 +796,7 @@ html[dir='rtl'] #toolbarViewerRight > *,
 html[dir='rtl'] .findbar * {
   position: relative;
   float: right;
+  visibility:hidden
 }
 
 html[dir='ltr'] .splitToolbarButton {
