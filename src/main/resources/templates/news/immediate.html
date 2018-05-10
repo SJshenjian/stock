@@ -5,15 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>即时新闻</title>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
+    <#include "../common_css.html"/>
     <link rel="stylesheet" href="${request.contextPath}/layui/global.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
     <!-- 引入头部文件 -->
-    <#include "header.html" />
+    <#include "../header.html" />
 
 </div>
 <div class="layui-main">
@@ -54,7 +53,7 @@
         </#if>
     </ul>
 </div>
-<script src="${request.contextPath}/layui/layui.all.js"></script>
+<#include "../common_js.html"/>
 <script>
     $(function() {
 

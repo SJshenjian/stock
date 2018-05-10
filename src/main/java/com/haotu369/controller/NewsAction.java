@@ -17,15 +17,16 @@ import java.util.List;
  * @date : 2018/4/5
  */
 @Controller
+@RequestMapping("/news")
 public class NewsAction {
 
     @Autowired
     private NewsService newsService;
 
-    @RequestMapping("/news/{type}")
+    @RequestMapping("/{type}")
     public String news(@PathVariable("type") String type, ModelMap modelMap) {
         List news = newsService.listNews(type);
         modelMap.put("news", news);
-        return "news_" + type;
+        return "news/" + type;
     }
 }

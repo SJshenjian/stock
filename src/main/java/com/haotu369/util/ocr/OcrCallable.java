@@ -49,7 +49,7 @@ public class OcrCallable implements Callable {
 
             // 执行脚本
             // TODO 路径优化
-            Process process = Runtime.getRuntime().exec("cmd /c start /b E:\\Project\\java\\stock\\src\\main\\resources\\script\\ocr_pdf_window.bat", evp);
+            Process process = Runtime.getRuntime().exec("cmd /c start /b E:\\Project\\java\\stock\\src\\main\\resources\\script\\OcrPdfWindow.bat", evp);
 
             InputStream inputStream = process.getInputStream();
             byte[] bytes = new byte[1024];
