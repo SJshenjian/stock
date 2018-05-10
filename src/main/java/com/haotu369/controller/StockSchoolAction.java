@@ -28,16 +28,17 @@ import java.net.URISyntaxException;
  * @date : 2018/4/6
  */
 @Controller
+@RequestMapping("/school")
 public class StockSchoolAction {
-    private static final Logger LOG = LoggerFactory.getLogger(StockSchoolAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockSchoolAction.class);
 
-    @RequestMapping("/school/{type}")
-    public String stockSchool(@PathVariable("type") String type) {
-        return "stock_school";
+    @RequestMapping("/index")
+    public String index() {
+        return "school/index";
     }
 
     @RequestMapping(value = "/getSchoolContent", method = RequestMethod.GET)
-    public void getSchoolContent(@RequestParam("type") String type, HttpServletRequest request, HttpServletResponse response) {
+    public void getSchoolContent(@RequestParam("type") String type, HttpServletResponse response) {
         FileInputStream inputStream = null;
         try {
             String fileName = "stock_school_" + type + ".pdf";
@@ -50,14 +51,14 @@ public class StockSchoolAction {
                 response.getOutputStream().write(bytes);
             }
         } catch (FileNotFoundException e) {
-            LOG.error("StockSchool --> getSchoolContent : FileNotFoundException {}", e.getMessage());
+            LOGGER.error("StockSchool --> getSchoolContent : FileNotFoundException {}", e.getMessage());
         } catch (IOException e) {
-            LOG.error("StockSchool --> getSchoolContent : IOException {}", e.getMessage());
+            LOGGER.error("StockSchool --> getSchoolContent : IOException {}", e.getMessage());
         } finally {
             try {
                 inputStream.close();
             } catch (IOException e) {
-                LOG.error("StockSchool --> getSchoolContent : IOException {}", e.getMessage());
+                LOGGER.error("StockSchool --> getSchoolContent : IOException {}", e.getMessage());
             }
         }
     }

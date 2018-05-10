@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>选股学堂</title>
 
-    <#include "common_css.html"/>
+    <#include "../common_css.html"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
     <!-- 引入头部文件 -->
-    <#include "header.html" />
+    <#include "../header.html" />
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
@@ -37,18 +37,17 @@
 
     <div class="layui-body stockSchoolList" style="margin: 0;bottom: 0; overflow: hidden">
         <!-- 内容主体区域 -->
-        <embed width="100%" height="100%"  src="${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/getSchoolContent?type%3D1">
+        <embed width="100%" height="100%"  src="${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/school/getSchoolContent?type%3D1">
     </div>
 </div>
-<#include "common_js.html"/>
+<#include "../common_js.html"/>
 <script>
     $(function () {
         $('a').each(function() {
             $(this).click(function() {
-                debugger;
                 var type = $(this).attr('type').valueOf();
                 // 等于号需转义为%3D
-                $('.stockSchoolList').html('<embed width="100%" height="100%"  src="${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/getSchoolContent?type%3D' + type + '">');
+                $('.stockSchoolList').html('<embed width="100%" height="100%"  src="${request.contextPath}/plugin/pdf/web/viewer.html?file=${request.contextPath}/school/getSchoolContent?type%3D' + type + '">');
             });
         });
     })
