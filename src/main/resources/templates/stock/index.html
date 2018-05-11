@@ -84,6 +84,7 @@
                         parentHtml.html(html);
                     }
                     stockClassify();
+                    $('.stockClassify').eq(0).click(); // 点击行业
                 }
             });
         };
@@ -171,7 +172,7 @@
         };
 
         // 具体股票分类查询
-        var stockConcreteClassify =function() {
+        var stockConcreteClassify = function() {
             $('.stockConcreteClassify').unbind('click').click(function() {
 
                 var classifyName = $(this).html();
