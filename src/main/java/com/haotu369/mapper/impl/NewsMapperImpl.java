@@ -27,14 +27,14 @@ public class NewsMapperImpl implements NewsMapper {
     @Override
     public List<SinaNews> listSinaNews() {
         Query query = new Query();
-        query = query.with(new Sort(Sort.Direction.DESC, "releaseTime")).limit(6);
+        query = query.with(new Sort(Sort.Direction.DESC, "id")).limit(6);
         return mongoTemplate.find(query, SinaNews.class);
     }
 
     @Override
     public List<ImmediateNews> listImmediateNews() {
         Query query = new Query();
-        query = query.with(new Sort(Sort.Direction.DESC, "releaseTime")).limit(6);
+        query = query.with(new Sort(Sort.Direction.DESC, "id")).limit(6);
         return mongoTemplate.find(query, ImmediateNews.class);
     }
 }
