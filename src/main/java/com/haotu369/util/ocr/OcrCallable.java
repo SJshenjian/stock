@@ -1,6 +1,6 @@
 package com.haotu369.util.ocr;
 
-import com.haotu369.util.ContextPathUtil;
+import com.haotu369.base.ContextPath;
 import org.python.jline.internal.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class OcrCallable implements Callable {
         if (tesseractWindowPath != null) { // windows环境条件
             long start = System.currentTimeMillis();
 
-            String path = ContextPathUtil.getContextPath("script/OcrPdfWindow.bat");
+            String path = ContextPath.getContextPath("script/OcrPdfWindow.bat");
             String command = "cmd /c " + path;// 不能用 /b 否则回显内容无法读取
 
             String[] evp = new String[3];
