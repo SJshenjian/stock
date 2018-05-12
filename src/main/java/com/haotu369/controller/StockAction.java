@@ -1,10 +1,13 @@
 package com.haotu369.controller;
 
+import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
+import com.haotu369.service.message.common.MessagePacket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -63,5 +66,13 @@ public class StockAction {
     public Object listComponentStock(String componentName) {
         List<Stock> result = stockService.listComponentStock(componentName);
         return JSONObject.toJSON(result);
+    }
+
+    // 在线客服
+    @RequestMapping("/message")
+    @ResponseBody
+    public JSONObject message(String message) {
+        JSONObject result = stockService.messageClient2Client(message);
+        return result;
     }
 }

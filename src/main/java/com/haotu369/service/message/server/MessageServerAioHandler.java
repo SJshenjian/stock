@@ -1,6 +1,10 @@
 package com.haotu369.service.message.server;
 
+import com.alibaba.fastjson.JSONObject;
 import com.haotu369.service.message.common.MessagePacket;
+import com.haotu369.util.turing.TuringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tio.core.Aio;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
@@ -18,6 +22,7 @@ import java.nio.ByteBuffer;
  * @date : 2018/5/11
  */
 public class MessageServerAioHandler implements ServerAioHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageServerAioHandler.class);
 
     /**
      * 消息解码：把接收到的ByteBuffer,解码成应用可以识别的业务消息包
@@ -110,12 +115,15 @@ public class MessageServerAioHandler implements ServerAioHandler {
         if (body != null) {
             // 接收到的消息
             String receivedContent = new String(body, MessagePacket.CHARSET);
-            System.out.println("服务端收到消息：" + receivedContent);
+            LOGGER.info("服务端收到消息：{}", receivedContent);
 
             // 发送消息
             MessagePacket responseMessagePacket = new MessagePacket();
-            String sendContent = "服务端发送消息：" + "收到了您的消息";
-            responseMessagePacket.setBody(sendContent.getBytes());
+
+            String responseContent = TuringUtil.chat("客服", receivedContent);
+            LOGGER.info("服务端发送消息：" + responseContent.toString());
+
+            responseMessagePacket.setBody(responseContent.getBytes());
 
             Aio.send(channelContext, responseMessagePacket);
         }

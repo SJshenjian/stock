@@ -1,5 +1,7 @@
 package com.haotu369.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
@@ -20,4 +22,6 @@ public interface StockService {
     public List<Stock> listStock(String classifyName);
 
     public List<Stock> listComponentStock(String componentName);
+
+    public JSONObject messageClient2Client(String message);
 }

@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <div>
         <ul class="layui-fixbar customerService">
             <img src="https://cloud-static.datayes.com/source/kf/sidebar/img/kf.png" width="60" />
@@ -64,6 +63,7 @@
     <div class="customerServiceList">
 
     </div>
+    <textarea ></textarea>
 </div>
 <#include "../common_js.html" />
 <script>
@@ -243,7 +243,6 @@
         // 会话模式
         var openConversation = function(){
             $('.openConversation').click(function() {
-                debugger;
                 var parentHtml = $('.customerServiceList');
                 parentHtml.empty();
                 var html = '<div class="layui-layer layui-layer-page layui-box layui-layim-chat"' +
@@ -255,48 +254,21 @@
                     '                        <div class="layui-unselect layim-chat-title">' +
                     '                            <div class="layim-chat-other"><img class="layim-friend1008612"' +
                     '                                                               src="/customerService/img/touxiang.jpg"><span' +
-                    '                                    class="layim-chat-username" layim-event="">十一</span>' +
+                    '                                    class="layim-chat-username" layim-event="">小仙</span>' +
                     '                                <p class="layim-chat-status"><span style="color:#FF5722;">在线</span></p></div>' +
                     '                        </div>' +
-                    '                        <div class="layim-chat-main">' +
-                    '                            <ul>' +
-                    '                                <li class="layim-chat-mine">' +
-                    '                                    <div class="layim-chat-user"><img' +
-                    '                                            src="/customerService/img/tourist.jpg"><cite><i>2018-05-08' +
-                    '                                        21:59:49</i>游客</cite></div>' +
-                    '                                    <div class="layim-chat-text">看看看看</div>' +
-                    '                                </li>' +
-                    '                                <li>' +
-                    '                                    <div class="layim-chat-user"><img' +
-                    '                                            src="/customerService/img/touxiang.jpg"><cite>十一<i>2018-05-08' +
-                    '                                        21:59:50</i></cite></div>' +
-                    '                                    <div class="layim-chat-text">啦啦啦' +
-                    '                                    </div>' +
-                    '                                </li>' +
-                    '                                <li class="layim-chat-mine">' +
-                    '                                    <div class="layim-chat-user"><img' +
-                    '                                            src="/customerService/img/tourist.jpg"><cite><i>2018-05-08' +
-                    '                                        21:59:49</i>游客</cite></div>' +
-                    '                                    <div class="layim-chat-text">看看看看</div>' +
-                    '                                </li>' +
-                    '                                <li>' +
-                    '                                    <div class="layim-chat-user"><img' +
-                    '                                            src="/customerService/img/touxiang.jpg"><cite>十一<i>2018-05-08' +
-                    '                                        21:59:50</i></cite></div>' +
-                    '                                    <div class="layim-chat-text">啦啦啦' +
-                    '                                    </div>' +
-                    '                                </li>' +
-                    '                            </ul>' +
+                    '                        <div class="layim-chat-main messageContainer">' +
+
                     '                        </div>' +
                     '                        <div class="layim-chat-footer">' +
-                    '                            <div class="layui-unselect layim-chat-tool">' +
+              /*      '                            <div class="layui-unselect layim-chat-tool">' +
                     '                                <span class="layui-icon layim-tool-face" title="选择表情" layim-event="face"></span><span' +
                     '                                    class="layui-icon layim-tool-image" title="上传图片" layim-event="image"></span>' +
-                    '                            </div>' +
-                    '                            <div class="layim-chat-textarea"><textarea></textarea></div>' +
+                    '                            </div>' +*/
+                    '                            <div class="layim-chat-textarea"><textarea class="message"></textarea></div>' +
                     '                            <div class="layim-chat-bottom">' +
                     '                                <div class="layim-chat-send"><span class="layim-send-close" layim-event="closeThisChat">关闭</span><span' +
-                    '                                        class="layim-send-btn" layim-event="send">发送</span>' +
+                    '                                        class="layim-send-btn sendMessage">发送</span>' +
                     '                                </div>' +
                     '                            </div>' +
                     '                        </div>' +
@@ -308,78 +280,48 @@
                     '                    class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a></span><span' +
                     '                class="layui-layer-resize"></span></div>';
                 parentHtml.html(html);
+                sendMessage();
             });
         };
 
-        $('.openConversation').click(function() {
-            debugger;
-            var parentHtml = $('.customerServiceList');
-            parentHtml.empty();
-            var html = '<div class="layui-layer layui-layer-page layui-box layui-layim-chat"' +
-                '             style="z-index: 19891017; width: 600px; top: 77px; left: 467px; min-width: 500px; min-height: 420px;">' +
-                '            <div class="layui-layer-title" style="cursor: move;">​</div>' +
-                '            <div id="layui-layim-chat" class="layui-layer-content" style="height: 402px;">' +
-                '                <div class="layim-chat-box">' +
-                '                    <div class="layim-chat layim-chat-friend layui-show">' +
-                '                        <div class="layui-unselect layim-chat-title">' +
-                '                            <div class="layim-chat-other"><img class="layim-friend1008612"' +
-                '                                                               src="/customerService/img/touxiang.jpg"><span' +
-                '                                    class="layim-chat-username" layim-event="">十一</span>' +
-                '                                <p class="layim-chat-status"><span style="color:#FF5722;">在线</span></p></div>' +
-                '                        </div>' +
-                '                        <div class="layim-chat-main">' +
-                '                            <ul>' +
-                '                                <li class="layim-chat-mine">' +
-                '                                    <div class="layim-chat-user"><img' +
-                '                                            src="/customerService/img/tourist.jpg"><cite><i>2018-05-08' +
-                '                                        21:59:49</i>游客</cite></div>' +
-                '                                    <div class="layim-chat-text">看看看看</div>' +
-                '                                </li>' +
-                '                                <li>' +
-                '                                    <div class="layim-chat-user"><img' +
-                '                                            src="/customerService/img/touxiang.jpg"><cite>十一<i>2018-05-08' +
-                '                                        21:59:50</i></cite></div>' +
-                '                                    <div class="layim-chat-text">啦啦啦' +
-                '                                    </div>' +
-                '                                </li>' +
-                '                                <li class="layim-chat-mine">' +
-                '                                    <div class="layim-chat-user"><img' +
-                '                                            src="/customerService/img/tourist.jpg"><cite><i>2018-05-08' +
-                '                                        21:59:49</i>游客</cite></div>' +
-                '                                    <div class="layim-chat-text">看看看看</div>' +
-                '                                </li>' +
-                '                                <li>' +
-                '                                    <div class="layim-chat-user"><img' +
-                '                                            src="/customerService/img/touxiang.jpg"><cite>十一<i>2018-05-08' +
-                '                                        21:59:50</i></cite></div>' +
-                '                                    <div class="layim-chat-text">啦啦啦' +
-                '                                    </div>' +
-                '                                </li>' +
-                '                            </ul>' +
-                '                        </div>' +
-                '                        <div class="layim-chat-footer">' +
-                '                            <div class="layui-unselect layim-chat-tool">' +
-                '                                <span class="layui-icon layim-tool-face" title="选择表情" layim-event="face"></span><span' +
-                '                                    class="layui-icon layim-tool-image" title="上传图片" layim-event="image"></span>' +
-                '                            </div>' +
-                '                            <div class="layim-chat-textarea"><textarea></textarea></div>' +
-                '                            <div class="layim-chat-bottom">' +
-                '                                <div class="layim-chat-send"><span class="layim-send-close" layim-event="closeThisChat">关闭</span><span' +
-                '                                        class="layim-send-btn" layim-event="send">发送</span>' +
-                '                                </div>' +
-                '                            </div>' +
-                '                        </div>' +
-                '                    </div>' +
-                '                </div>' +
-                '            </div>' +
-                '            <span class="layui-layer-setwin"><a class="layui-layer-min" href="javascript:;"><cite></cite></a><a' +
-                '                    class="layui-layer-ico layui-layer-max" href="javascript:;"></a><a' +
-                '                    class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a></span><span' +
-                '                class="layui-layer-resize"></span></div>';
-            parentHtml.html(html);
-        });
+        // 消息发送
+        var sendMessage = function () {
+            $('.sendMessage').unbind('click').click(function() {
+                var message = $('.message').val();
+                $.ajax({
+                    url: '/stock/message',
+                    data: {'message': message},
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function(ret) {
+                        if (ret != null && ret.O_CODE > 0) {
+                            var result = ret['O_RESULT'];
+                            var content = result['results'][0]['values'].text;
+                            var messageContainer = $('.messageContainer');
+                            var html =  '<ul>' +
+                                '                        <li class="layim-chat-mine">' +
+                                '                                    <div class="layim-chat-user"><img' +
+                                '                                            src="/customerService/img/tourist.jpg"></div>' +
+                                '                                    <div class="layim-chat-text">' + message + '' +
+                                '                                    </div>' +
+                                '                                </li>' +
+                                '                                <li>' +
+                                '                                    <div class="layim-chat-user"><img' +
+                                '                                            src="/customerService/img/touxiang.jpg"></div>' +
+                                '                                    <div class="layim-chat-text">' + content + '</div>' +
+                                '                                </li>' +
+                                '      </ul>';
+                            messageContainer.append(html);
+                            messageContainer.scrollTop(messageContainer[0].scrollHeight); // 滚动条自动滚动到底部
+                        }
+                    }
+                })
+            });
+        };
 
         loadMenu();
+
+        openConversation();
     })
 </script>
 </body>

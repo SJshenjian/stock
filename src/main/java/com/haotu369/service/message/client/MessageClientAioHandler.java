@@ -1,6 +1,9 @@
 package com.haotu369.service.message.client;
 
 import com.haotu369.service.message.common.MessagePacket;
+import com.haotu369.service.message.server.MessageServerAioHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tio.client.intf.ClientAioHandler;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
@@ -15,7 +18,11 @@ import java.nio.ByteBuffer;
  * @date : 2018/5/11
  */
 public class MessageClientAioHandler implements ClientAioHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageClientAioHandler.class);
+
     private static MessagePacket messagePacket = new MessagePacket();
+
+    public static volatile String responseMessage = null;
 
     /**
      * 消息解码：把接收到的ByteBuffer,解码成应用可以识别的业务消息包
@@ -89,8 +96,8 @@ public class MessageClientAioHandler implements ClientAioHandler {
         MessagePacket messagePacket = (MessagePacket) packet;
         byte[] body = messagePacket.getBody();
         if (body != null) {
-            String content = new String(body, MessagePacket.CHARSET);
-            System.out.println("客户端收到消息: " + content);
+            responseMessage = new String(body, MessagePacket.CHARSET);
+            LOGGER.info("客户端收到消息: {} ", responseMessage);
         }
     }
 
@@ -101,4 +108,5 @@ public class MessageClientAioHandler implements ClientAioHandler {
     public MessagePacket heartbeatPacket() {
         return messagePacket;
     }
+
 }

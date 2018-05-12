@@ -2,6 +2,9 @@ package com.haotu369.service.message.client;
 
 import com.haotu369.service.message.common.Constant;
 import com.haotu369.service.message.common.MessagePacket;
+import com.haotu369.service.message.server.MessageServerAioHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tio.client.AioClient;
 import org.tio.client.ClientChannelContext;
 import org.tio.client.ClientGroupContext;
@@ -19,6 +22,7 @@ import java.io.UnsupportedEncodingException;
  * @date : 2018/5/11
  */
 public class MessageClient {
+    private static String responseMessage = null;
 
     public static Node serverNode = new Node(Constant.SERVER, Constant.PORT);
 
@@ -46,12 +50,25 @@ public class MessageClient {
         clientGroupContext.setHeartbeatTimeout(Constant.TIMEOUT);
         aioClient = new AioClient(clientGroupContext);
         clientChannelContext = aioClient.connect(serverNode);
-        send();
+        //send();
+    }
+
+    /**
+     * 获取服务端响应信息
+     *
+     * @return
+     */
+    public static String getServerResponseMessage() {
+        return MessageClientAioHandler.responseMessage;
+    }
+
+    public static void setServerResponseMessageNull() {
+        MessageClientAioHandler.responseMessage = null;
     }
 
     private static void send() throws UnsupportedEncodingException {
         MessagePacket messagePacket = new MessagePacket();
-        messagePacket.setBody("美女客服你好".getBytes(MessagePacket.CHARSET));
+        messagePacket.setBody("客户端开始连接t-io,收到请回复".getBytes(MessagePacket.CHARSET));
         Aio.send(clientChannelContext, messagePacket);
     }
 }
