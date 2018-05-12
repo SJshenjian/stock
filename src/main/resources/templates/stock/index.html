@@ -38,7 +38,6 @@
                         <dd><a href="#" class="componentStock" code="zz500">中证500</a></dd>
                     </dl>
                 </li>
-                <li><button class="layui-btn site-demo-layim openConversation" data-type="chat">自定义会话</button></li>
             </ul>
 
         </div>
@@ -63,11 +62,20 @@
     <div class="customerServiceList">
 
     </div>
-    <textarea ></textarea>
+    <div class="poshytip" hidden>
+        <div class="_dy_cs_item">
+            <div class="_dy_cs_online"></div>
+            <img src="https://cloud-static.datayes.com/source/kf/sidebar/img/kf.png" width="26">在线时间
+        </div>
+        <div class="_dy_cs_item">周一至周五</div>
+        <div class="_dy_cs_item">09:00-21:00</div>
+        <div class="_dy_cs_talk _dy_cs_item _dy_cs_callkf openConversation">发起会话</div>
+    </div>
 </div>
 <#include "../common_js.html" />
 <script>
     $(function () {
+        var poshytip =  $('.poshytip');
 
         // 加载菜单
         var loadMenu = function() {
@@ -222,67 +230,64 @@
             });
         });
 
-
         // 客服提示
         $('.customerService').poshytip({
             content: function() {
-                return '                    <div class="_dy_cs_item">' +
+                var tips = '                    <div class="_dy_cs_item">' +
                     '                        <div class="_dy_cs_online"></div>' +
                     '                        <img src="https://cloud-static.datayes.com/source/kf/sidebar/img/kf.png" width="26">在线时间' +
                     '                    </div>' +
                     '                    <div class="_dy_cs_item">周一至周五</div>' +
                     '                    <div class="_dy_cs_item">09:00-21:00</div>' +
                     '                    <div class="_dy_cs_talk _dy_cs_item _dy_cs_callkf openConversation">发起会话</div>';
+                $(document).ready(function () {
+                    $('.openConversation').click(function() {
+                        $('.customerServiceList').attr('hidden', false);
+                        var parentHtml = $('.customerServiceList');
+                        parentHtml.empty();
+                        var html = '<div class="layui-layer layui-layer-page layui-box layui-layim-chat"' +
+                            '             style="z-index: 19891017; width: 600px; top: 77px; left: 467px; min-width: 500px; min-height: 420px;">' +
+                            '            <div class="layui-layer-title" style="cursor: move;">​</div>' +
+                            '            <div id="layui-layim-chat" class="layui-layer-content" style="height: 402px;">' +
+                            '                <div class="layim-chat-box">' +
+                            '                    <div class="layim-chat layim-chat-friend layui-show">' +
+                            '                        <div class="layui-unselect layim-chat-title">' +
+                            '                            <div class="layim-chat-other"><img class="layim-friend1008612"' +
+                            '                                                               src="/customerService/img/touxiang.jpg"><span' +
+                            '                                    class="layim-chat-username" layim-event="">小仙</span>' +
+                            '                                <p class="layim-chat-status"><span style="color:#FF5722;">在线</span></p></div>' +
+                            '                        </div>' +
+                            '                        <div class="layim-chat-main messageContainer">' +
+
+                            '                        </div>' +
+                            '                        <div class="layim-chat-footer">' +
+                            /*      '                            <div class="layui-unselect layim-chat-tool">' +
+                                  '                                <span class="layui-icon layim-tool-face" title="选择表情" layim-event="face"></span><span' +
+                                  '                                    class="layui-icon layim-tool-image" title="上传图片" layim-event="image"></span>' +
+                                  '                            </div>' +*/
+                            '                            <div class="layim-chat-textarea"><textarea class="message"></textarea></div>' +
+                            '                            <div class="layim-chat-bottom">' +
+                            '                                <div class="layim-chat-send"><span class="layim-send-close">关闭</span><span' +
+                            '                                        class="layim-send-btn sendMessage">发送</span>' +
+                            '                                </div>' +
+                            '                            </div>' +
+                            '                        </div>' +
+                            '                    </div>' +
+                            '                </div>' +
+                            '            </div>' +
+                            '</div>';
+                        parentHtml.html(html);
+                        sendMessage();
+                        close();
+                    });
+                });
+                return tips;
             },
             className: 'tip-white',
             alignTo: 'target',
             alignX: 'center',
             alignY: 'bottom'
         });
-
-        // 会话模式
-        var openConversation = function(){
-            $('.openConversation').click(function() {
-                var parentHtml = $('.customerServiceList');
-                parentHtml.empty();
-                var html = '<div class="layui-layer layui-layer-page layui-box layui-layim-chat"' +
-                    '             style="z-index: 19891017; width: 600px; top: 77px; left: 467px; min-width: 500px; min-height: 420px;">' +
-                    '            <div class="layui-layer-title" style="cursor: move;">​</div>' +
-                    '            <div id="layui-layim-chat" class="layui-layer-content" style="height: 402px;">' +
-                    '                <div class="layim-chat-box">' +
-                    '                    <div class="layim-chat layim-chat-friend layui-show">' +
-                    '                        <div class="layui-unselect layim-chat-title">' +
-                    '                            <div class="layim-chat-other"><img class="layim-friend1008612"' +
-                    '                                                               src="/customerService/img/touxiang.jpg"><span' +
-                    '                                    class="layim-chat-username" layim-event="">小仙</span>' +
-                    '                                <p class="layim-chat-status"><span style="color:#FF5722;">在线</span></p></div>' +
-                    '                        </div>' +
-                    '                        <div class="layim-chat-main messageContainer">' +
-
-                    '                        </div>' +
-                    '                        <div class="layim-chat-footer">' +
-              /*      '                            <div class="layui-unselect layim-chat-tool">' +
-                    '                                <span class="layui-icon layim-tool-face" title="选择表情" layim-event="face"></span><span' +
-                    '                                    class="layui-icon layim-tool-image" title="上传图片" layim-event="image"></span>' +
-                    '                            </div>' +*/
-                    '                            <div class="layim-chat-textarea"><textarea class="message"></textarea></div>' +
-                    '                            <div class="layim-chat-bottom">' +
-                    '                                <div class="layim-chat-send"><span class="layim-send-close" layim-event="closeThisChat">关闭</span><span' +
-                    '                                        class="layim-send-btn sendMessage">发送</span>' +
-                    '                                </div>' +
-                    '                            </div>' +
-                    '                        </div>' +
-                    '                    </div>' +
-                    '                </div>' +
-                    '            </div>' +
-                    '            <span class="layui-layer-setwin"><a class="layui-layer-min" href="javascript:;"><cite></cite></a><a' +
-                    '                    class="layui-layer-ico layui-layer-max" href="javascript:;"></a><a' +
-                    '                    class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;"></a></span><span' +
-                    '                class="layui-layer-resize"></span></div>';
-                parentHtml.html(html);
-                sendMessage();
-            });
-        };
 
         // 消息发送
         var sendMessage = function () {
@@ -319,9 +324,14 @@
             });
         };
 
-        loadMenu();
+        // 会话关闭
+        var close = function() {
+            $('.layim-send-close').unbind('click').click(function() {
+                $('.customerServiceList').attr('hidden', true);
+            });
+        };
 
-        openConversation();
+        loadMenu();
     })
 </script>
 </body>
