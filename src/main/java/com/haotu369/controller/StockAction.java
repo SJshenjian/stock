@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -73,6 +74,19 @@ public class StockAction {
     @ResponseBody
     public JSONObject message(String message) {
         JSONObject result = stockService.messageClient2Client(message);
+        return result;
+    }
+
+    @RequestMapping("/history")
+    public String history() {
+        return PATH + "history";
+    }
+
+    // 股票历史数据获取
+    @RequestMapping("/getStockHistory")
+    @ResponseBody
+    public JSONObject getStockHistory(String code) throws IOException {
+        JSONObject result = stockService.getStockHistory(code);
         return result;
     }
 }

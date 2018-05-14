@@ -32,6 +32,7 @@
 		<jython.version>2.7.0</jython.version>
 		<org.t-io.version>2.4.0.v20180508-RELEASE</org.t-io.version>
 		<httpclient.version>4.5.3</httpclient.version>
+		<json-lib.version>2.4</json-lib.version>
 	</properties>
 
 	<dependencies>
@@ -107,6 +108,13 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${json-lib.version}</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 
 		<!-- httpClient -->

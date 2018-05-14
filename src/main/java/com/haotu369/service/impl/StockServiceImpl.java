@@ -1,7 +1,7 @@
 package com.haotu369.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.haotu369.base.ContextPath;
 import com.haotu369.mapper.StockMapper;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
@@ -9,19 +9,13 @@ import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
 import com.haotu369.service.message.client.MessageClient;
 import com.haotu369.service.message.common.MessagePacket;
-import com.haotu369.service.message.server.MessageServer;
-import org.python.core.PyFunction;
-import org.python.core.PyObject;
-import org.python.core.PyString;
-import org.python.util.PythonInterpreter;
+import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.tio.client.AioClient;
+import org.springframework.util.StringUtils;;
 import org.tio.core.Aio;
-import org.tio.server.ServerChannelContext;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -100,6 +94,31 @@ public class StockServiceImpl implements StockService {
         }
         return message(-1, "服务器响应失败", null);
 
+    }
+
+    @Override
+    public JSONObject getStockHistory(String code) throws IOException {
+        String path = ContextPath.getContextPath("script/StockHistory.py");
+        String command = "python " + path + " " + code;
+        Process process = Runtime.getRuntime().exec(command);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        StringBuilder sb = new StringBuilder();
+        String content = null;
+        while ((content = reader.readLine()) != null) {
+            sb.append(content);
+        }
+
+        JSONObject result = JSONObject.parseObject(sb.toString());
+        LOGGER.debug("获取股票 {}, 历史数据为 {}", code, result);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("O_CODE", 1);
+        jsonObject.put("O_NOTE", "成功");
+        jsonObject.put("O_RESULT", result);
+
+        return jsonObject;
     }
 
     private JSONObject message(int code, String note, JSONObject result) {

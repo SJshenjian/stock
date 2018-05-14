@@ -6,6 +6,7 @@ import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface StockService {
     public List<Stock> listComponentStock(String componentName);
 
     public JSONObject messageClient2Client(String message);
+
+    public JSONObject getStockHistory(String code) throws IOException;
 }

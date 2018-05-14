@@ -1,7 +1,9 @@
 package com.haotu369.base;
 
+import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 
 /**
  * @author : Jian Shen
@@ -22,6 +24,7 @@ public class ContextPath {
         if (null == path) {
             LOGGER.error("文件 " + resource + "路径获取失败");
         }
+
         if (path.startsWith("/")) {
             path = path.replaceFirst("/", "");
         }

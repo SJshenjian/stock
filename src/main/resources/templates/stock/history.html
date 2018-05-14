@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>历史行情</title>
+    <#include "../common_css.html" />
+</head>
+<body>
+<div class="layui-tab layui-tab-brief">
+    <label class="layui-form-label">股票代码:</label>
+    <div class="layui-input-inline">
+        <input id="stockCode" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入股票代码" class="layui-input">
+    </div>
+</div>
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <label class="layui-form-label">参数指标:</label>
+        <ul class="layui-tab-title historyType" style="border-bottom-style: none">
+            <li code="open">开盘价</li>
+            <li code="high">最高价</li>
+            <li code="close">收盘价</li>
+            <li code="low">最低价</li>
+            <li code="volume">成交量</li>
+            <li code="p_change">涨跌幅</li>
+            <li code="turnover">换手率</li>
+        </ul>
+        <div id="echarts" style="width: 100%;height:600px;"></div>
+    </div>
+<#include "../common_js.html" />
+<script>
+    $(function () {
+        // 股票历史行情
+        var getStockHistory = function (code,historyType) {
+            $.ajax({
+                url: '/stock/getStockHistory',
+                data: {code: code},
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(ret) {
+                    if (ret && ret.O_CODE > 0) {
+                        var result = ret.O_RESULT;
+                        if (result != null) {
+                            $('#echarts').html();
+                            // 基于准备好的dom，初始化echarts实例
+                            var myChart = echarts.init(document.getElementById('echarts'));
+                            var xData = result['index'].reverse();
+                            var index = $.inArray(historyType, result['columns']);
+                            var data = result['data'];
+                            var seriesData = [];
+                            for (var i = data.length - 1; i >= 0; i--) {
+                                seriesData.push(data[i][index]);
+                            }
+                            // 指定图表的配置项和数据
+                            var option = {
+                                tooltip : {
+                                    trigger: 'item'
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    data: xData
+                                },
+                                yAxis: {
+                                    type: 'value'
+                                },
+                                dataZoom: [
+                                    {
+                                        type: 'slider',
+                                        show: true,
+                                        start: 80,
+                                        end: 100,
+                                    },{
+                                        type: 'inside',
+                                        show: true,
+                                        start: 80,
+                                        end: 100,
+                                    }
+                                ],
+                                series: [{
+                                    data: seriesData,
+                                    type: 'line',
+                                    smooth: true
+                                }]
+                            };
+                            // 使用刚指定的配置项和数据显示图表
+                            myChart.setOption(option);
+                        } else {
+                            layer.msg('暂无该类股票的相关信息');
+                        }
+                    }
+                }
+            });
+        };
+
+        $('.historyType li').each(function () {
+            $(this).unbind('click').click(function() {
+                var stockCode = $('#stockCode').val();
+                if (null == stockCode || stockCode.trim().length <= 0) {
+                    layer.msg("请输入股票编码");
+                    return ;
+                }
+                var historyType = $(this).attr('code');
+                getStockHistory(stockCode, historyType)
+            });
+        });
+    })
+</script>
+</body>
+</html>
