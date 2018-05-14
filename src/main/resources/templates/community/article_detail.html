@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>选股社区</title>
-    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
 
+    <#include "../common_css.html"/>
     <!-- Style Sheet-->
     <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
     <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-    <#include "header.html"/>
+    <#include "../header.html"/>
 </div>
 
 <div class="search-area-wrapper">
@@ -142,7 +142,7 @@
     </div>
 </div>
 <!-- End of Page Container -->
-<#include "common_js.html" />
+<#include "../common_js.html" />
 <script>
     $(function() {
         var articleId = $('#articleId').val();

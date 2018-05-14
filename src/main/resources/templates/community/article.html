@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>选股社区</title>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">
 
+    <#include "../common_css.html" />
     <!-- Style Sheet-->
     <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
     <link rel='stylesheet' id='responsive-css-css'  href='${request.contextPath}/community/css/responsive5152.css?ver=1.0' type='text/css' media='all' />
@@ -24,7 +23,7 @@
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-    <#include "header.html"/>
+    <#include "../header.html"/>
 </div>
 
 <div class="search-area-wrapper">
@@ -106,8 +105,7 @@
 </div>
 <!-- End of Page Container -->
 
-<script src="${request.contextPath}/layui/layui.all.js"></script>
-
+<#include "../common_js.html"/>
 <script>
     $(function() {
         // 点赞

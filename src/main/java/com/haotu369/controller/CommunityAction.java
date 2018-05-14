@@ -27,6 +27,7 @@ import java.util.Properties;
 @Controller
 @RequestMapping("/community")
 public class CommunityAction {
+    private static final String PATH = "community/";
 
     @Autowired
     private CommunityService communityService;
@@ -44,7 +45,7 @@ public class CommunityAction {
         modelMap.put("choiceArticle", choiceArticle);
         modelMap.put("recentArticle", recentArticle);
         modelMap.put("tag", tag);
-        return "community_index";
+        return PATH + "index";
     }
 
     // 联系我们
@@ -52,7 +53,7 @@ public class CommunityAction {
     public String contact(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         List<Article> recentArticle = communityService.listRecentArticle(1, 4);
         modelMap.put("recentArticle", recentArticle);
-        return "community_contact";
+        return PATH + "contact";
     }
 
     // 保存联系我们消息内容
@@ -72,7 +73,7 @@ public class CommunityAction {
         modelMap.put("recentArticle", recentArticle);
         modelMap.put("tag", tag);
         modelMap.put("faq", faq);
-        return "community_faq";
+        return PATH + "faq";
     }
 
     // 内容列表
@@ -82,7 +83,7 @@ public class CommunityAction {
         int count = communityService.getArticleCount();
         modelMap.put("count", count);
         modelMap.put("choiceArticle", choiceArticle);
-        return "community_article";
+        return PATH + "article";
     }
 
     // 内容分页
@@ -114,7 +115,7 @@ public class CommunityAction {
         List<Article> choiceArticle = communityService.listChoiceArticle(1, 4);
         modelMap.put("article", article);
         modelMap.put("choiceArticle", choiceArticle);
-        return "community_article_detail";
+        return PATH + "article_detail";
     }
 
     // 文章内容评论

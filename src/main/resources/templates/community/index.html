@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>选股社区</title>
-   <!-- <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${request.contextPath}/layui/css/layui.css">-->
-    <#include "common_css.html" />
+    <#include "../common_css.html" />
 
     <!-- Style Sheet-->
     <link rel='stylesheet' id='bootstrap-css-css'  href='${request.contextPath}/community/css/bootstrap5152.css?ver=1.0' type='text/css' media='all' />
@@ -36,7 +34,7 @@
 <body>
 <div class="layui-layout layui-layout-admin">
 
-    <#include "header.html" />
+    <#include "../header.html" />
 </div>
 
 <div class="search-area-wrapper">
@@ -45,6 +43,7 @@
         <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
             <input class="search-term required" type="text" id="s" name="s" placeholder="搜索关键字" title="* Please enter a search term!" />
             <input class="search-btn" type="submit" value="查询" />
+            <input class="search-btn" type="submit" value="发贴" />
             <div id="search-error-container"></div>
         </form>
     </div>
@@ -130,7 +129,7 @@
 </div>
 
 <!--<script src="${request.contextPath}/layui/layui.all.js"></script>-->
-<#include "common_js.html" />
+<#include "../common_js.html" />
 <script>
     $(function() {
         // 点赞
