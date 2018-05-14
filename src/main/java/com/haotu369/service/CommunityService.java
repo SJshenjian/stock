@@ -20,6 +20,8 @@ public interface CommunityService {
 
     public List<FAQ> listFaq();
 
+    public JSONObject saveArticle(Article article, String tagId);
+
     public List<Article> listRecentArticle(int pageNo, int pageSize);
 
     public List<Article> listChoiceArticle(int pageNo, int pageSize);

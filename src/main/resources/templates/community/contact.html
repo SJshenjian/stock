@@ -33,6 +33,7 @@
         <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
             <input class="search-term required" type="text" id="s" name="s" placeholder="搜索关键字" title="* Please enter a search term!" />
             <input class="search-btn" type="submit" value="查询" />
+            <input class="search-btn addArticle" type="submit" value="发贴" />
             <div id="search-error-container"></div>
         </form>
     </div>
@@ -139,6 +140,7 @@
     </div>
 </div>
 <#include "../common_js.html"/>
+<script src="${request.contextPath}/community/community.js"></script>
 <script>
   $(function () {
       var name, email, subject, content;

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>发表内容</title>
+    <#include "../common_css.html" />
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-form">
+        <div class="layui-form-item" style="margin-top: 20px">
+            <label class="layui-form-label">主题</label>
+            <div class="layui-input-block">
+                <input type="text" id="name" class="layui-input" style="width: 97%; margin: 22px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <!-- editormd start -->
+            <div class="editormd" id="test-editormd">
+                <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" id="editormd"></textarea>
+                <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+                <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+                <textarea class="editormd-html-textarea" name="editorhtml" id="editorhtml"></textarea>
+            </div>
+            <!-- editormd end -->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <div style="width: 97%; margin-left: 19px">
+                    <select id="tag" class="layui-input articleTag">
+                        <#list tag as tag>
+                            <option value="${tag.id}">${tag.name}</option>
+                        </#list>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn submit">立即发布</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<#include "../common_js.html" />
+<script>
+    $(function() {
+        // 渲染editormd
+        editormd("test-editormd", {
+            width: "90%",
+            height: 500,
+            //markdown : md,
+            codeFold: true,
+            syncScrolling: "single",
+            //你的lib目录的路径
+            path: "${request.contextPath}/plugin/editor.md/lib/",
+            imageUpload: false,//关闭图片上传功能
+            /*  theme: "dark",//工具栏主题
+             previewTheme: "dark",//预览主题
+             editorTheme: "pastel-on-dark",//编辑主题 */
+            emoji: false,
+            taskList: true,
+            tocm: true,         // Using [TOCM]
+            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart: true,             // 开启流程图支持，默认关闭
+            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+            //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
+            saveHTMLToTextarea: true
+        });
+
+        // 文章发布
+        $('.submit').click(function () {
+            var name = $('#name').val();
+            var content = $('#editorhtml').val(); // val 与 html的区别： val 不对字符转义， html对字符转义
+            var tag = $('#tag').val();
+            $.ajax({
+                url: "/community/saveArticle",
+                data: {"name": name, "content": content, "tagId": tag},
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(ret) {
+                    if (ret != null && ret['O_CODE'] > 0) {
+                        layer.msg(ret['O_NOTE']);
+                    }
+                }
+            })
+
+        });
+    })
+</script>
+</body>
+</html>

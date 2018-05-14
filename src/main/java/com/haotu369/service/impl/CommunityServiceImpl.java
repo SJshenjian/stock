@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +46,12 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<FAQ> listFaq() {
         return communityMapper.listFaq();
+    }
+
+    @Override
+    public JSONObject saveArticle(Article article, String tagId) {
+        communityMapper.saveArticle(article.getName(), article.getContent(), tagId);
+        return message(1, "文章发表成功");
     }
 
     @Override

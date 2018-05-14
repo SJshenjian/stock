@@ -20,6 +20,10 @@ public interface CommunityMapper {
 
     @Select("SELECT * FROM faq")
     public List<FAQ> listFaq();
+
+    @Insert("INSERT INTO article(name, content, tag) VALUES(#{name}, #{content}, #{tagId})")
+    public void saveArticle(@Param("name") String name,@Param("content") String content, @Param("tagId") String tagId);
+
     @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "listArticle")
     @Results({
             @Result(column = "tag", property = "tag", one = @One(select = "getTag"))

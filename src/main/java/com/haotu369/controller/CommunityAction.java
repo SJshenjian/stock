@@ -142,4 +142,19 @@ public class CommunityAction {
         List<Comment> recentComments = communityService.listRecentComment(pageNo, pageSize);
         return JSONObject.toJSON(recentComments);
     }
+
+    // 发表文章页面
+    @RequestMapping("/addArticle")
+    public String addArticle(ModelMap modelMap) {
+        List<Tag> tag = communityService.listTag();
+        modelMap.put("tag", tag);
+        return PATH + "article_add";
+    }
+
+    // 保存文章
+    @RequestMapping("/saveArticle")
+    @ResponseBody
+    public JSONObject saveArticle(Article article, String tagId) {
+        return communityService.saveArticle(article, tagId);
+    }
 }
