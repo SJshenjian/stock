@@ -48,7 +48,7 @@ public interface CommunityMapper {
     @Select("UPDATE article SET like_count = like_count + 1 WHERE id = #{id};")
     public void updateLike(int id);
 
-    @Select("SELECT COUNT(id) FROM article WHERE tag = #{tagId}")
+    @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "countArticle" )
     public int getArticleCount(String tagId);
 
     @Select("SELECT * FROM article WHERE id = #{id}")

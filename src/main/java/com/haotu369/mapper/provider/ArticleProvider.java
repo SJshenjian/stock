@@ -1,5 +1,6 @@
 package com.haotu369.mapper.provider;
 
+import com.alibaba.druid.util.StringUtils;
 import com.haotu369.model.Article;
 
 import java.util.List;
@@ -30,6 +31,17 @@ public class ArticleProvider {
         int begin = (pageNo - 1) * pageSize;
         String sql = "SELECT * FROM article WHERE tag = " + tagId + " limit " + begin + ", " + pageSize;
         return sql;
+    }
+
+    public String countArticle(String tagId) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT COUNT(id) FROM article");
+
+        if (!StringUtils.isEmpty(tagId)) {
+            builder.append(" WHERE tag = ").append(tagId);
+        }
+
+        return builder.toString();
     }
 
 }
