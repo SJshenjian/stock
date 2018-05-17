@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.haotu369.mapper.CommunityMapper;
 import com.haotu369.model.*;
 import com.haotu369.service.CommunityService;
+import org.ansj.domain.Result;
+import org.ansj.splitWord.analysis.ToAnalysis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -114,6 +116,14 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<Comment> listRecentComment(int pageNo, int pageSize) {
         return communityMapper.listRecentComment(pageNo, pageSize);
+    }
+
+    @Override
+    public List<Article> search(String content) {
+        String withoutWhitespace = content.replaceAll(" ", "");
+        Result result = ToAnalysis.parse(withoutWhitespace);
+        String[] params = result.toStringWithOutNature().split(",");
+        return communityMapper.search(params);
     }
 
     private void sendSimpleEmail(String to, ContactUs contactUs, String host, String username, String password) {

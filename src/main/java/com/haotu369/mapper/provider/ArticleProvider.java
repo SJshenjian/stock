@@ -2,6 +2,7 @@ package com.haotu369.mapper.provider;
 
 import com.alibaba.druid.util.StringUtils;
 import com.haotu369.model.Article;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -41,6 +42,20 @@ public class ArticleProvider {
             builder.append(" WHERE tag = ").append(tagId);
         }
 
+        return builder.toString();
+    }
+
+    public String search(@Param("params") String[] params) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < params.length; i++) {
+            builder.append("SELECT * FROM article WHERE POSITION( '")
+                    .append(params[i])
+                    .append("' IN name)");
+            if (i != params.length -1) {
+                builder.append(" UNION ");
+            }
+        }
         return builder.toString();
     }
 

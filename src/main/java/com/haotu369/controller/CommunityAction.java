@@ -167,4 +167,14 @@ public class CommunityAction {
     public JSONObject saveArticle(Article article, String tagId) {
         return communityService.saveArticle(article, tagId);
     }
+
+    // 高级查询
+    @RequestMapping("/search")
+    public String search(String content,ModelMap modelMap) {
+        List<Article> articles = communityService.search(content);
+        List<Article> choiceArticle = communityService.listChoiceArticle(1, 4);
+        modelMap.put("choiceArticle", choiceArticle);
+        modelMap.put("articles", articles);
+        return PATH + "search_result";
+    }
 }

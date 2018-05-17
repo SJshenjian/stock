@@ -43,4 +43,6 @@ public interface CommunityService {
     public List<Comment> getComment(int id);
 
     public List<Comment> listRecentComment(int pageNo, int pageSize);
+
+    public List<Article> search(String content);
 }

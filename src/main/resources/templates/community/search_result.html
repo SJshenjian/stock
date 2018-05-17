@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>选股社区</title>
+
+    <#include "../common_css.html" />
+    <!-- Style Sheet-->
+    <link rel=stylesheet id=bootstrap-css-css  href=${request.contextPath}/community/css/bootstrap5152.css?ver=1.0 type=text/css media=all />
+    <link rel=stylesheet id=responsive-css-css  href=${request.contextPath}/community/css/responsive5152.css?ver=1.0 type=text/css media=all />
+    <link rel=stylesheet id=pretty-photo-css-css  href=${request.contextPath}/community/js/prettyphoto/prettyPhotoaeb9.css?ver=3.1.4 type=text/css media=all />
+    <link rel=stylesheet id=main-css-css  href=${request.contextPath}/community/css/main5152.css?ver=1.0 type=text/css media=all />
+    <link rel=stylesheet id=custom-css-css  href=${request.contextPath}/community/css/custom5152.html?ver=1.0 type=text/css media=all />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="${request.contextPath}/community/js/html5.js"></script>
+    <![endif]-->
+
+    <script src="${request.contextPath}/js/dateformat.js"></script>
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <#include "../header.html"/>
+</div>
+
+<div class="search-area-wrapper">
+    <div class="search-area container"  style="height: 60px">
+        <#include "article_top.html"/>
+    </div>
+</div>
+
+<!-- Start of Page Container -->
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- start of page content -->
+            <div class="span8 main-listing">
+                <#if articles?? && articles?size &gt; 0>
+                    <#list articles as article>
+                        <article class=" type-post  format-standard hentry clearfix">
+                            <header class="clearfix">
+                                <h3 class="post-title">
+                                    <a href="/community/articleDetail?id=${article.id}">${article.name}</a>
+                                </h3>
+                                <div class="post-meta clearfix">
+                                    <input type="hidden" value="${article.id}"/>
+                                    <span class="date">${article.date}</span>
+                                    <span class="category"><a href="#">${article.tag[0].name}</a></span>
+                                    <span class="comments">${article.readCount}  阅读</span>
+                                    <span class="like-count" code="0">${article.likeCount}</span>
+                                </div><!-- end of post meta -->
+                            </header>
+                            <p>
+                                <#if article.content?length &gt; 80>
+                                    ${article.content[0..80]}...
+                                </#if>
+                                <#if article.content?length &lt; 81>
+                                    ${article.content}
+                                </#if>
+                            </p>
+                        </article>
+                    </#list>
+                    <#else>
+                        暂无数据
+                </#if>
+            </div>
+            <!-- end of page content -->
+            <!-- start of sidebar -->
+            <aside class="span4 page-sidebar">
+
+                <section class="widget">
+                    <div class="support-widget">
+                        <h3 class="title">联系我们</h3>
+                        <p class="intro">需要更多支持？ 如果您没有找到答案，请联系我们获取进一步帮助。</p>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <div class="quick-links-widget">
+                        <h3 class="title">快速访问</h3>
+                        <ul id="menu-quick-links" class="menu clearfix">
+                            <li><a href="${request.contextPath}/community/index">社区首页</a></li>
+                            <li><a href="${request.contextPath}/community/article">内容列表</a></li>
+                            <li><a href="${request.contextPath}/community/faq">常见问题</a></li>
+                            <li><a href="${request.contextPath}/community/contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="widget">
+                    <h3 class="title">精选内容</h3>
+                    <ul class="articles">
+                        <#list choiceArticle as choiceArticle>
+                            <li class="article-entry standard">
+                                <input type="hidden" value="${choiceArticle.id}"/>
+                                <h4><a href="#">${choiceArticle.name}</a></h4>
+                                <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                <span class="like-count" code="0">${choiceArticle.likeCount}</span>
+                            </li>
+                        </#list>
+                    </ul>
+                </section>
+
+            </aside>
+            <!-- end of sidebar -->
+        </div>
+    </div>
+</div>
+<!-- End of Page Container -->
+
+<#include "../common_js.html"/>
+<script src="${request.contextPath}/community/community.js"></script>
+<script>
+    $(function() {
+        // 点赞
+        $('.like-count').each(function () {
+                $(this).unbind("click").click(function () {
+                    debugger;
+                    var id = $(this).siblings().eq(0).val();
+                    var code = $(this).attr('code');
+                    var likeCount = $(this).html();
+                    if (code == 0) { // 点赞
+                        $.ajax({
+                            url: "/community/updateLike",
+                            data: {'id': id},
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function (ret) {
+                            }
+                        });
+                        $(this).html(parseInt(likeCount) + 1);
+                        $(this).attr('code', "1");
+                        $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px -22px;");
+                    } else { // 取消点赞
+                        $.ajax({
+                            url: "/community/removeLike",
+                            data: {'id': id},
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function (ret) {
+                            }
+                        });
+                        $(this).html(parseInt(likeCount) - 1);
+                        $(this).attr('code', "0");
+                        $(this).attr('style', "background: url(${request.contextPath}/community/images/like.png) no-repeat 6px 8px;");
+                    }
+                });
+            });
+    })
+</script>
+</body>
+</html>

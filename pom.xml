@@ -33,6 +33,7 @@
 		<org.t-io.version>2.4.0.v20180508-RELEASE</org.t-io.version>
 		<httpclient.version>4.5.3</httpclient.version>
 		<json-lib.version>2.4</json-lib.version>
+		<ansj_seg.version>5.1.1</ansj_seg.version>
 	</properties>
 
 	<dependencies>
@@ -129,6 +130,13 @@
 			<groupId>net.sourceforge.tess4j</groupId>
 			<artifactId>tess4j</artifactId>
 			<version>${tess4j.version}</version>
+		</dependency>
+
+		<!-- 中文分词 -->
+		<dependency>
+			<groupId>org.ansj</groupId>
+			<artifactId>ansj_seg</artifactId>
+			<version>${ansj_seg.version}</version>
 		</dependency>
 
 		<!-- 调用python脚本依赖 -->

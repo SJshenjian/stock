@@ -72,4 +72,10 @@ public interface CommunityMapper {
             @Result(column = "user_id", property = "user", one = @One(select = "com.haotu369.mapper.UserMapper.getUser") )
     })
     public List<Comment> listRecentComment(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
+
+    @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "search")
+    @Results({
+            @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
+    })
+    public List<Article> search(@Param("params") String[] params);
 }
