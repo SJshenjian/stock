@@ -30,6 +30,12 @@ public interface CommunityMapper {
     })
     public List<Article> listArticle(String type, int pageNo, int pageSize);
 
+    @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "listArticleByTag")
+    @Results({
+            @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
+    })
+    public List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
+
     @Select("SELECT * FROM tag")
     public List<Tag> listTag();
 
@@ -42,8 +48,8 @@ public interface CommunityMapper {
     @Select("UPDATE article SET like_count = like_count + 1 WHERE id = #{id};")
     public void updateLike(int id);
 
-    @Select("SELECT COUNT(id) FROM article")
-    public int getArticleCount();
+    @Select("SELECT COUNT(id) FROM article WHERE tag = #{tagId}")
+    public int getArticleCount(String tagId);
 
     @Select("SELECT * FROM article WHERE id = #{id}")
     @Results({

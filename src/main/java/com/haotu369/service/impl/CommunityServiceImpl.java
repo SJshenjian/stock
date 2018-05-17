@@ -65,9 +65,14 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public int getArticleCount() {
-        return communityMapper.getArticleCount();
+    public List<Article> listArticleByTag(int tagId, int pageNo, int pageSize) {
+        return communityMapper.listArticleByTag(tagId, pageNo, pageSize);
     }
+
+    @Override
+    public int getArticleCount(String tagId) {
+        return communityMapper.getArticleCount(tagId);
+}
 
     @Override
     public List<Tag> listTag() {

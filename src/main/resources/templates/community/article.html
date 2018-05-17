@@ -46,6 +46,7 @@
             <!-- start of page content -->
             <div class="span8 main-listing">
 
+                <input type="hidden" id="tagId" value="${tagId}"/>
                 <div id="article">
 
                 </div>
@@ -160,40 +161,58 @@
             limit: 5, // 页的大小
             skip : true, //是否开启跳页
             jump: function (obj, first) {
+                var tagId = $('#tagId').val();
+                var params = {
+                    tagId: tagId,
+                    pageNo: obj.curr,
+                    pageSize: obj.limit
+                };
+                var url;
+
+                if ("" == tagId) {
+                    url = '/community/listArticle';
+                } else {
+                    url = '/community/listArticleByTag';
+                }
                 $.ajax({
-                    url: '/community/articlePage',
-                    data: {pageNo: obj.curr, pageSize: obj.limit},
+                    url: url,
+                    data: params,
                     type: 'POST',
                     dataType: 'JSON',
                     success: function(ret) {
                         var parentHtml = $('#article');
                         parentHtml.empty();
                         var html = '';
-                        for (var i = 0; i < ret.length; i++) {
-                            var date = DateFormat.format(new Date(ret[i]['date']), 'yyyy-MM-dd');
-                            var tag = ret[i].tag['0']['name'];
-                            var content = ret[i]['content'].length > 80 ? ret[i]['content'].substring(0, 80) + '...' : ret[i]['content'];
+                        if (ret && ret.length > 0) {
+                            for (var i = 0; i < ret.length; i++) {
+                                var date = DateFormat.format(new Date(ret[i]['date']), 'yyyy-MM-dd');
+                                var tag = ret[i].tag['0']['name'];
+                                var content = ret[i]['content'].length > 80 ? ret[i]['content'].substring(0, 80) + '...' : ret[i]['content'];
 
-                            html += '<article class=" type-post  format-standard hentry clearfix">' +
-                                '                                <header class="clearfix">' +
-                                '                                    <input type="hidden" value="' + ret[i]['id'] + '"/>' +
-                                '                                    <h3 class="post-title">' +
-                                '                                        <a href="/community/articleDetail?id=' + ret[i]['id'] + '">' + ret[i]['name'] + '</a>' +
-                                '                                    </h3>' +
-                                '                                    <div class="post-meta clearfix">' +
-                                '                                        <span class="date">' + date + '</span>' +
-                                '                                        <span class="category"><a href="#">' + tag + '</a></span>' +
-                                '                                        <span class="comments">' + ret[i]['readCount'] + ' 阅读</span>' +
-                                '                                        <span class="like-count" code="0">' + ret[i]['likeCount'] + '</span>' +
-                                '                                    </div><!-- end of post meta -->' +
-                                '                                </header>' +
-                                '                                <p>' +
-                                content +
-                                '                                </p>' +
-                                '                            </article>';
+                                html += '<article class=" type-post  format-standard hentry clearfix">' +
+                                    '                                <header class="clearfix">' +
+                                    '                                    <input type="hidden" value="' + ret[i]['id'] + '"/>' +
+                                    '                                    <h3 class="post-title">' +
+                                    '                                        <a href="/community/articleDetail?id=' + ret[i]['id'] + '">' + ret[i]['name'] + '</a>' +
+                                    '                                    </h3>' +
+                                    '                                    <div class="post-meta clearfix">' +
+                                    '                                        <span class="date">' + date + '</span>' +
+                                    '                                        <span class="category"><a href="#">' + tag + '</a></span>' +
+                                    '                                        <span class="comments">' + ret[i]['readCount'] + ' 阅读</span>' +
+                                    '                                        <span class="like-count" code="0">' + ret[i]['likeCount'] + '</span>' +
+                                    '                                    </div><!-- end of post meta -->' +
+                                    '                                </header>' +
+                                    '                                <p>' +
+                                    content +
+                                    '                                </p>' +
+                                    '                            </article>';
+                            }
+                            like(1);
+                        } else {
+                            html = '暂无该类别文章';
                         }
+
                         parentHtml.html(html);
-                        like(1);
                     }
                 });
             }

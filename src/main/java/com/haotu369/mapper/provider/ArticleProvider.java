@@ -13,16 +13,23 @@ public class ArticleProvider {
 
     public String listArticle(String type, int pageNo, int pageSize) {
         int begin = (pageNo - 1) * pageSize;
-        StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM article ");
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT * FROM article ");
         if ("choice".equalsIgnoreCase(type)) {
-            sb.append("ORDER BY like_count DESC ");
+            builder.append("ORDER BY like_count DESC ");
         } else if("recent".equalsIgnoreCase(type)) {
-            sb.append("ORDER BY date DESC ");
+            builder.append("ORDER BY date DESC ");
         } else {
-            sb.append("ORDER BY date DESC ");
+            builder.append("ORDER BY date DESC ");
         }
-        sb.append(" limit " + begin + ", " + pageSize);
-        return sb.toString();
+        builder.append(" limit " + begin + ", " + pageSize);
+        return builder.toString();
     }
+
+    public String listArticleByTag(int tagId, int pageNo, int pageSize) {
+        int begin = (pageNo - 1) * pageSize;
+        String sql = "SELECT * FROM article WHERE tag = " + tagId + " limit " + begin + ", " + pageSize;
+        return sql;
+    }
+
 }

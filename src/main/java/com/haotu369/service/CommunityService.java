@@ -26,7 +26,9 @@ public interface CommunityService {
 
     public List<Article> listChoiceArticle(int pageNo, int pageSize);
 
-    public int getArticleCount();
+    public List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
+
+    public int getArticleCount(String tagId);
 
     public List<Tag> listTag();
 

@@ -64,7 +64,7 @@
                             <#list choiceArticle as choiceArticle>
                                 <li class="article-entry standard">
                                     <input class="id" type="hidden" value="${choiceArticle.id}"/>
-                                    <h4><a href="#">${choiceArticle.name}</a></h4>
+                                    <h4><a href="/community/articleDetail?id=${choiceArticle.id}">${choiceArticle.name}</a></h4>
                                     <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
                                     <span class="like-count" code="0">${choiceArticle.likeCount}</span>
                                 </li>
@@ -79,7 +79,7 @@
                             <#list recentArticle as recentArticle>
                                 <li class="article-entry standard">
                                     <input class="id" type="hidden" value="${recentArticle.id}"/>
-                                    <h4><a href="#">${recentArticle.name}</a></h4>
+                                    <h4><a href="/community/articleDetail?id=${recentArticle.id}">${recentArticle.name}</a></h4>
                                     <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="#">${recentArticle.tag[0].name}</a></span>
                                     <span class="like-count" code="0">${recentArticle.likeCount}</span>
                                 </li>
@@ -117,7 +117,7 @@
                     <h3 class="title">分类</h3>
                     <div class="tagcloud">
                         <#list tag as tag>
-                            <a href="#" class="btn btn-mini">${tag.name}</a>
+                            <a href="/community/article?tagId=${tag.id}" class="btn btn-mini">${tag.name}</a>
                         </#list>
                     </div>
                 </section>
