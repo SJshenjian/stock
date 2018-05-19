@@ -13,4 +13,6 @@ public interface UserService {
     JSONObject checkUsername(String username);
 
     JSONObject addUser(User user);
+
+    JSONObject checkLogin(User user);
 }

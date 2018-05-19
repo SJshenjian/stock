@@ -7,56 +7,73 @@
 		<link rel="stylesheet" href="${request.contextPath}/index/css/reset.css" />
 		<link rel="stylesheet" href="${request.contextPath}/index/css/common.css" />
 		<link rel="stylesheet" href="${request.contextPath}/index/css/font-awesome.min.css" />
-	</head>
-	<body>
-		<div class="wrap login_wrap">
-			<div class="content">
-				<div class="logo"></div>
-				<div class="login_box">	
-					
-					<div class="login_form">
-						<div class="login_title">
-							登录
-						</div>
-						<form action="#" method="post">
-							
-							<div class="form_text_ipt">
-								<input name="username" type="text" placeholder="手机号/邮箱">
-							</div>
-							<div class="ececk_warning"><span>手机号/邮箱不能为空</span></div>
-							<div class="form_text_ipt">
-								<input name="password" type="password" placeholder="密码">
-							</div>
-							<div class="ececk_warning"><span>密码不能为空</span></div>
-							<div class="form_check_ipt">
-								<div class="left check_left">
-									<label><input name="" type="checkbox"> 下次自动登录</label>
-								</div>
-								<div class="right check_right">
-									<a href="#">忘记密码</a>
-								</div>
-							</div>
-							<div class="form_btn">
-								<button type="button" onclick="javascript:window.location.href='#'">登录</button>
-							</div>
-							<div class="form_reg_btn">
-								<span>还没有帐号？</span><a href="${request.contextPath}/register">马上注册</a>
-							</div>
-						</form>
-						<div class="other_login">
-							<div class="left other_left">
-								<span>其它登录方式</span>
-							</div>
-							<div class="right other_right">
-								<a href="#"><i class="fa fa-qq fa-2x"></i></a>
-								<a href="#"><i class="fa fa-weixin fa-2x"></i></a>
-								<a href="#"><i class="fa fa-weibo fa-2x"></i></a>
-							</div>
-						</div>
+</head>
+<body>
+	<div class="wrap login_wrap">
+		<div class="content">
+			<div class="logo"></div>
+			<div class="login_box">
+
+				<div class="login_form">
+					<div class="login_title">
+						登录
 					</div>
+					<form action="/checkLogin" method="post" id="login-form">
+
+						<div class="form_text_ipt">
+							<input id="username" name="username" type="text" placeholder="用户名" class="check">
+							<span class="usernameError" style="color: red;margin-left: 4px" ></span>
+						</div>
+						<div class="form_text_ipt">
+							<input id="password" name="password" type="password" placeholder="密码" class="check">
+							<span class="passwordError" style="color: red;margin-left: 4px" >
+								<#if error??>${error}</#if>
+							</span>
+						</div>
+						<!--<div class="form_check_ipt">
+							<div class="right check_right">
+								<a href="#">忘记密码</a>
+							</div>
+						</div>-->
+						<div class="form_btn" >
+							<button type="submit" style="margin-top: 10px" disabled id="login">登录</button>
+						</div>
+						<div class="form_reg_btn" style="height: 40px">
+							<span>还没有帐号？</span><a href="${request.contextPath}/register">马上注册</a>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-</div>
-	</body>
+	</div>
+<#include "common_js.html"/>
+<script>
+	$(function () {
+		var name, email, subject, content;
+
+		// 参数判断
+		$('#login-form .check').each(function() {
+			$(this).blur(function () {
+				var name = $(this).attr('id');
+				check(name);
+			});
+		});
+
+		var check = function (name) {
+			var value = $('#' + name).val();
+			var temp = value.replace(/\n/g, ""); // 剔除所有换行
+			temp = temp.replace(/\s/g, ""); // 踢出所有空格
+			if (value == null || temp.length <= 0) {
+				$('.' + name + 'Error').html($('#' + name).attr('placeholder') + '不能为空');
+				$('#login').attr('disabled', true);
+			} else{
+				$('.' + name + 'Error').html('');
+				if ($('#usernameError').text() == '' && $('#passwordError').text() == '') {
+					$('#login').attr('disabled', false);
+				}
+			}
+		};
+	})
+</script>
+</body>
 </html>

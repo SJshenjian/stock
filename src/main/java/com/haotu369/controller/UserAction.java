@@ -5,6 +5,7 @@ import com.haotu369.model.User;
 import com.haotu369.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class UserAction {
     // 首页
     @RequestMapping("/index")
     public String index() {
-        return "index";
+        return "stock/index";
     }
 
     // 添加用户
@@ -45,6 +46,18 @@ public class UserAction {
     public String login() {
         return "login";
     }
+
+    // 登录判断
+    @RequestMapping("/checkLogin")
+    public String checkLogin(User user, ModelMap modelMap) {
+        JSONObject result = userService.checkLogin(user);
+        if ((int)result.get("O_CODE") == 1) {
+            return "redirect:/index";
+        }
+        modelMap.put("error", result.get("O_NOTE"));
+        return "login";
+    }
+
 
     // 检查用户名是否存在
     @RequestMapping("/checkUsername")

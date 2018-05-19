@@ -24,6 +24,12 @@ public class EncryptionUtil {
     private static final String SALT = "5fbd161e52367473bebcee98d473d425";
     private static final String ALGORITHM = "MD5";
 
+    /**
+     * 加密明文
+     *
+     * @param raw
+     * @return
+     */
     public static String encryption(String raw) {
 
         try {
@@ -38,6 +44,17 @@ public class EncryptionUtil {
             LOGGER.error("无效的编码方式 {}", e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * 判断明文与数据库存储的密文是否一致
+     *
+     * @param raw
+     * @param cipher
+     * @return
+     */
+    public static boolean equals(String raw, String cipher) {
+        return encryption(raw).equals(cipher);
     }
     
     private static String byteArrayToHex(byte[] bytes) {

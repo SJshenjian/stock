@@ -1,0 +1,44 @@
+spring:
+  # JavaMailSender邮件发送方的配置
+  mail:
+    host: smtp.163.com
+    username: ht369kj@163.com
+    password: ht369kj
+
+  # Redis相关配置
+  redis:
+    host: 47.94.242.38
+    port: 6379
+    password: 852100
+    database: 0
+
+  # Mysql数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/stock
+    username: root
+    password: 852100
+    driver-class-name: com.mysql.jdbc.Driver
+
+  # MongoDB数据源
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/stock
+
+  # Freemarker相关配置
+  freemarker:
+    allow-request-override: false
+    cache: true
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    request-context-attribute: request # 上下文路径
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .html
+    template-loader-path: classpath:/templates/
+
+# mybatis 可以将数据库的NN_NN格式字段，在java结果集对象中自动转换成驼峰命名参数
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+

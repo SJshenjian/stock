@@ -189,6 +189,7 @@
               type: 'POST',
               dataType: 'JSON',
               success: function(ret) {
+                  debugger;
                   if (ret && ret.O_CODE > 0) {
                       layer.msg(ret.O_NOTE);
                   } else {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author : Jian Shen
@@ -27,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JSONObject checkUsername(String username) {
-        int count = userMapper.getUserByName(username);
-        if (count >= 1) {
+        List<User> users = userMapper.getUserByName(username);
+        if (users.size() >= 1) {
             return messageResult.message(-1, "用户名已存在");
         }
         return messageResult.message(1, "验证用户名成功");
@@ -42,5 +43,21 @@ public class UserServiceImpl implements UserService {
 
         userMapper.addUser(user);
         return messageResult.message(1, "注册成功");
+    }
+
+    @Override
+    public JSONObject checkLogin(User user) {
+        List<User> users = userMapper.getUserByName(user.getUsername());
+        if (users.size() <= 0) {
+            return messageResult.message(-1, "用户名不正确");
+        }
+
+        boolean result = EncryptionUtil.equals(user.getPassword(), users.get(0).getPassword());
+        if (!result) {
+            return messageResult.message(-1, "密码不正确");
+        }
+
+        //TODO 写入 redis
+        return messageResult.message(1, "登录成功");
     }
 }
