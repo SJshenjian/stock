@@ -14,17 +14,17 @@ import java.util.List;
  * @version : V1.0
  * @date : 2018/5/4
  */
-public interface StockService {
+ public interface StockService {
 
-    public List<StockType> listStockType();
+     List<StockType> listStockType();
 
-    public List<StockClassify> listStockClassify(int type);
+     List<StockClassify> listStockClassify(int type);
 
-    public List<Stock> listStock(String classifyName);
+     List<Stock> listStock(String classifyName);
 
-    public List<Stock> listComponentStock(String componentName);
+     List<Stock> listComponentStock(String componentName);
 
-    public JSONObject messageClient2Client(String message);
+     JSONObject messageClient2Client(String message);
 
-    public JSONObject getStockHistory(String code) throws IOException;
+     JSONObject getStockHistory(String code) throws IOException;
 }

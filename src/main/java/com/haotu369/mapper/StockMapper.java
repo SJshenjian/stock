@@ -18,20 +18,20 @@ import java.util.List;
 public interface StockMapper {
 
     @Select("SELECT * FROM stock_type")
-    public List<StockType> listStockType();
+    List<StockType> listStockType();
 
     @Select("SELECT * FROM stock_classify WHERE type = #{type}")
     List<StockClassify> listStockClassify(int type);
 
     @Select("SELECT * FROM stock WHERE c_name = #{classifyName}")
-    public List<Stock> listStock(String classifyName);
+    List<Stock> listStock(String classifyName);
 
     @Select({"SELECT code, name FROM hs300_classify"})
-    public List<Stock> listHs300Stock();
+    List<Stock> listHs300Stock();
 
     @Select({"SELECT code, name FROM zz500_classify"})
-    public List<Stock> listZz500Stock();
+    List<Stock> listZz500Stock();
 
     @Select({"SELECT code, name FROM sz50_classify"})
-    public List<Stock> listSz50Stock();
+    List<Stock> listSz50Stock();
 }

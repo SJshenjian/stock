@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface NewsService {
 
-    public List listNews(String type);
+    List listNews(String type);
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface NewsMapper {
 
-    public List<SinaNews> listSinaNews();
+    List<SinaNews> listSinaNews();
 
-    public List<ImmediateNews> listImmediateNews();
+    List<ImmediateNews> listImmediateNews();
 }

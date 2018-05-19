@@ -1,6 +1,7 @@
 package com.haotu369.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.haotu369.base.MessageResult;
 import com.haotu369.mapper.CommunityMapper;
 import com.haotu369.model.*;
 import com.haotu369.service.CommunityService;
@@ -29,6 +30,9 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
 
+    @Autowired
+    private MessageResult messageResult;
+
     @Value("${spring.mail.host}")
     private String host;
 
@@ -42,7 +46,7 @@ public class CommunityServiceImpl implements CommunityService {
     public JSONObject saveContactUs(ContactUs contactUs) {
         communityMapper.saveContactUs(contactUs);
         sendSimpleEmail("haotu369@sina.com", contactUs, host, username, password);
-        return message(1, "已收到您的消息，敬请等待工作人员回复");
+        return messageResult.message(1, "已收到您的消息，敬请等待工作人员回复");
     }
 
     @Override
@@ -53,7 +57,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public JSONObject saveArticle(Article article, String tagId) {
         communityMapper.saveArticle(article.getName(), article.getContent(), tagId);
-        return message(1, "文章发表成功");
+        return messageResult.message(1, "文章发表成功");
     }
 
     @Override
@@ -84,13 +88,13 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public JSONObject updateLike(int id) {
         communityMapper.updateLike(id);
-        return message(1, "点赞成功");
+        return messageResult.message(1, "点赞成功");
     }
 
     @Override
     public JSONObject removeLike(int id) {
         communityMapper.removeLike(id);
-        return message(1, "取消点赞成功");
+        return messageResult.message(1, "取消点赞成功");
     }
 
     @Override
@@ -104,7 +108,7 @@ public class CommunityServiceImpl implements CommunityService {
             comment.setUserId(0); // 游客身份 0 表示游客身份
         };
         communityMapper.addComment(comment);
-        return message(1, "评论成功");
+        return messageResult.message(1, "评论成功");
     }
 
     @Override
@@ -138,12 +142,5 @@ public class CommunityServiceImpl implements CommunityService {
         javaMailSender.setUsername(username);
         javaMailSender.setPassword(password);
         javaMailSender.send(simpleMailMessage);
-    }
-
-    private JSONObject message(int code, String note) {
-        JSONObject result = new JSONObject();
-        result.put("O_CODE", code);
-        result.put("O_NOTE", note);
-        return result;
     }
 }

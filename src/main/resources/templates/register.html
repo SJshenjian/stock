@@ -19,45 +19,106 @@
                 <div class="login_title">
                     注册
                 </div>
-                <form action="#" method="post">
+                <form id="register-form">
 
                     <div class="form_text_ipt">
-                        <input name="username" type="text" placeholder="手机号/邮箱">
+                        <input id="username" class="check" type="text" placeholder="用户名">
+                        <span class="usernameError" style="color: red;margin-left: 4px" ></span>
                     </div>
-                    <div class="ececk_warning"><span>手机号/邮箱不能为空</span></div>
+                    <div class="ececk_warning"><span></span></div>
                     <div class="form_text_ipt">
-                        <input name="password" type="password" placeholder="密码">
+                        <input id="password" class="check"  type="password" placeholder="密码">
+                        <span class="passwordError" style="color: red;margin-left: 4px" ></span>
                     </div>
-                    <div class="ececk_warning"><span>密码不能为空</span></div>
                     <div class="form_text_ipt">
-                        <input name="repassword" type="password" placeholder="重复密码">
+                        <input id="repassword" class="check" type="password" placeholder="重复密码">
+                        <span class="repasswordError" style="color: red;margin-left: 4px" ></span>
                     </div>
-                    <div class="ececk_warning"><span>密码不能为空</span></div>
-                    <div class="form_text_ipt">
-                        <input name="code" type="text" placeholder="验证码">
-                    </div>
-                    <div class="ececk_warning"><span>验证码不能为空</span></div>
-
                     <div class="form_btn">
-                        <button type="button" onclick="javascript:window.location.href='#'">注册</button>
+                        <button type="button" id="register" disabled  style="margin-top: 10px">注册</button>
                     </div>
-                    <div class="form_reg_btn">
-                        <span>已有帐号？</span><a href="login.html">马上登录</a>
+                    <div class="form_reg_btn" style="height: 40px">
+                        <span>已有帐号？</span><a href="${request.contextPath}/login">马上登录</a>
                     </div>
                 </form>
-                <div class="other_login">
-                    <div class="left other_left">
-                        <span>其它登录方式</span>
-                    </div>
-                    <div class="right other_right">
-                        <a href="#"><i class="fa fa-qq fa-2x"></i></a>
-                        <a href="#"><i class="fa fa-weixin fa-2x"></i></a>
-                        <a href="#"><i class="fa fa-weibo fa-2x"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+<#include "common_js.html"/>
+<script>
+    $(function () {
+        var name, email, subject, content;
+
+        // 参数判断
+        $('#register-form .check').each(function() {
+            $(this).blur(function () {
+                var name = $(this).attr('id');
+                check(name);
+            });
+        });
+
+        var check = function (name) {
+            var value = $('#' + name).val();
+            var temp = value.replace(/\n/g, ""); // 剔除所有换行
+            temp = temp.replace(/\s/g, ""); // 踢出所有空格
+            if (value == null || temp.length <= 0) {
+                $('.' + name + 'Error').html($('#' + name).attr('placeholder') + '不能为空');
+                $('#register').attr('disabled', true);
+
+            } else if('username' == name){
+                var username = $('#username').val();
+                $.ajax({
+                    url: "/checkUsername",
+                    data: {'username': username},
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function(ret) {
+                        if (ret && ret['O_CODE'] < 0) {
+                            $('.usernameError').html('用户名已存在');
+                        } else {
+                            $('.usernameError').html('')
+                        }
+                    }
+                })
+            } else if('password' == name && $('#password').val().length < 6 ) {
+                $('.' + name + 'Error').html('密码长度不能低于6位');
+                $('#register').attr('disabled', true);
+            } else if('repassword' == name && $('#repassword').val() != $('#password').val()){
+                $('.' + name + 'Error').html('两次密码不一致');
+                $('#register').attr('disabled', true);
+            } else{
+                $('.' + name + 'Error').html('');
+                if ($('#usernameError').text() == '' && $('#passwordError').text() == '' && $('#repasswordError').text() == '') {
+                    $('#register').attr('disabled', false);
+                }
+            }
+        };
+
+        $('#register').click(function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var params = {
+              'username': username,
+              'password': password
+            };
+            $.ajax({
+                url: '/addUser',
+                data: params,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (ret) {
+                    if (ret && ret['O_CODE'] > 0) {
+                        $('#username').val('');
+                        $('#password').val('');
+                        $('#repassword').val('');
+                        $('#register').attr('disabled', true);
+                        layer.msg(ret['O_NOTE']);
+                    }
+                }
+            })
+        });
+    })
+</script>
 </body>
 </html>

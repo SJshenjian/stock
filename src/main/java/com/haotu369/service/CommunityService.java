@@ -14,35 +14,35 @@ import java.util.List;
  * @version : V1.0
  * @date : 2018/4/22
  */
-public interface CommunityService {
+ public interface CommunityService {
 
-    public JSONObject saveContactUs(ContactUs contactUs);
+     JSONObject saveContactUs(ContactUs contactUs);
 
-    public List<FAQ> listFaq();
+     List<FAQ> listFaq();
 
-    public JSONObject saveArticle(Article article, String tagId);
+     JSONObject saveArticle(Article article, String tagId);
 
-    public List<Article> listRecentArticle(int pageNo, int pageSize);
+     List<Article> listRecentArticle(int pageNo, int pageSize);
 
-    public List<Article> listChoiceArticle(int pageNo, int pageSize);
+     List<Article> listChoiceArticle(int pageNo, int pageSize);
 
-    public List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
+     List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
 
-    public int getArticleCount(String tagId);
+     int getArticleCount(String tagId);
 
-    public List<Tag> listTag();
+     List<Tag> listTag();
 
-    public JSONObject updateLike(int id);
+     JSONObject updateLike(int id);
 
-    public JSONObject removeLike(int id);
+     JSONObject removeLike(int id);
 
-    public Article getArticleDetail(int id);
+     Article getArticleDetail(int id);
 
-    public JSONObject addComment(Comment comment, String userId);
+     JSONObject addComment(Comment comment, String userId);
 
-    public List<Comment> getComment(int id);
+     List<Comment> getComment(int id);
 
-    public List<Comment> listRecentComment(int pageNo, int pageSize);
+     List<Comment> listRecentComment(int pageNo, int pageSize);
 
-    public List<Article> search(String content);
+     List<Article> search(String content);
 }

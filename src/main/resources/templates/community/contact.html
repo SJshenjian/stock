@@ -150,7 +150,7 @@
       var check = function (name) {
           var value = $('#' + name).val();
           var temp = value.replace(/\n/g, ""); // 剔除所有换行
-          temp = temp.replace(/\s/g, ""); // 提出所有空格
+          temp = temp.replace(/\s/g, ""); // 踢出所有空格
           if (value == null || temp.length <= 0) {
               $('.' + name + 'Error').html($('#' + name).attr('title'));
               $('.' + name + 'Right').html('');
@@ -192,7 +192,7 @@
                   if (ret && ret.O_CODE > 0) {
                       layer.msg(ret.O_NOTE);
                   } else {
-                      layper.msg('系统繁忙，请稍后重试');
+                      layer.msg('系统繁忙，请稍后重试');
                   }
               }
           });

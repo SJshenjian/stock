@@ -16,66 +16,66 @@ import java.util.List;
 public interface CommunityMapper {
 
     @Insert("INSERT INTO contact_us(id, name, email, subject, content) values(#{id}, #{name}, #{email}, #{subject}, #{content})")
-    public void saveContactUs(ContactUs contactUs);
+    void saveContactUs(ContactUs contactUs);
 
     @Select("SELECT * FROM faq")
-    public List<FAQ> listFaq();
+    List<FAQ> listFaq();
 
     @Insert("INSERT INTO article(name, content, tag) VALUES(#{name}, #{content}, #{tagId})")
-    public void saveArticle(@Param("name") String name,@Param("content") String content, @Param("tagId") String tagId);
+    void saveArticle(@Param("name") String name,@Param("content") String content, @Param("tagId") String tagId);
 
     @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "listArticle")
     @Results({
             @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
     })
-    public List<Article> listArticle(String type, int pageNo, int pageSize);
+    List<Article> listArticle(String type, int pageNo, int pageSize);
 
     @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "listArticleByTag")
     @Results({
             @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
     })
-    public List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
+    List<Article> listArticleByTag(int tagId, int pageNo, int pageSize);
 
     @Select("SELECT * FROM tag")
-    public List<Tag> listTag();
+    List<Tag> listTag();
 
     @Select("SELECT * FROM tag WHERE id = #{id}")
-    public Tag getTag(int id);
+    Tag getTag(int id);
 
     @Select("UPDATE article SET like_count = like_count - 1 WHERE id = #{id};")
-    public void removeLike(int id);
+    void removeLike(int id);
 
     @Select("UPDATE article SET like_count = like_count + 1 WHERE id = #{id};")
-    public void updateLike(int id);
+    void updateLike(int id);
 
     @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "countArticle" )
-    public int getArticleCount(String tagId);
+    int getArticleCount(String tagId);
 
     @Select("SELECT * FROM article WHERE id = #{id}")
     @Results({
             @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
     })
-    public Article getArticleDetail(int id);
+    Article getArticleDetail(int id);
 
     @Insert("INSERT INTO comment(content, article_id, user_id, article_name) VALUES(#{content}, #{articleId}, #{userId}, #{articleName})")
-    public void addComment(Comment comment);
+    void addComment(Comment comment);
 
     @Select("SELECT * FROM comment WHERE article_id = #{id}")
     @Results({
             @Result(column = "user_id", property = "user", one = @One(select = "com.haotu369.mapper.UserMapper.getUser") )
     })
-    public List<Comment> getComment(int id);
+    List<Comment> getComment(int id);
 
 
     @Select("SELECT * FROM comment ORDER BY date DESC limit #{pageNo}, #{pageSize}")
     @Results({
             @Result(column = "user_id", property = "user", one = @One(select = "com.haotu369.mapper.UserMapper.getUser") )
     })
-    public List<Comment> listRecentComment(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
+    List<Comment> listRecentComment(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
 
     @SelectProvider(type = com.haotu369.mapper.provider.ArticleProvider.class, method = "search")
     @Results({
             @Result(column = "tag", property = "tag", one = @One(select = "getTag"))
     })
-    public List<Article> search(@Param("params") String[] params);
+    List<Article> search(@Param("params") String[] params);
 }
