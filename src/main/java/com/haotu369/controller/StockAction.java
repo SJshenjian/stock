@@ -1,19 +1,17 @@
 package com.haotu369.controller;
 
-import com.alibaba.druid.util.StringUtils;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.haotu369.base.annotation.AuthOperation;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
 import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
-import com.haotu369.service.message.common.MessagePacket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -83,6 +81,7 @@ public class StockAction {
     }
 
     // 股票历史数据获取
+    @AuthOperation
     @RequestMapping("/getStockHistory")
     @ResponseBody
     public JSONObject getStockHistory(String code) throws IOException {

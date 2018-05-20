@@ -128,7 +128,7 @@
                                         html += '<button class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius moreSelect stockConcreteClassify" style="margin: 2px">' + ret[i]['name'] + '</button>';
                                     }
                                     html += '<button class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius moreClassify" display="no" style="margin: 2px;">' +
-                                        '<i class="layui-icon" style="font-size: 30px; color: white;">&#xe65b;</i>' +
+                                        '<i class="layui-icon" style="font-size: 30px; color: white;"> >> </i>' +
                                         '</button>';
                                 }
                                 parentHtml.html(html);
@@ -151,11 +151,11 @@
                 var display = $(this).attr('display');
                 if(display == "no"){
                     $(this).attr("display", "yes");
-                    $(this).children().html("&#xe65a;");
+                    $(this).children().html("<<");
                     $(".moreSelect",  parent).show();
                 }else{
                     $(this).attr("display", "no");
-                    $(this).children().html("&#xe65b;");
+                    $(this).children().html(">>");
                     $(".moreSelect",  parent).hide();
                 }
             });

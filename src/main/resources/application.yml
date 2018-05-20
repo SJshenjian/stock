@@ -37,8 +37,7 @@ spring:
     suffix: .html
     template-loader-path: classpath:/templates/
 
-# mybatis 可以将数据库的NN_NN格式字段，在java结果集对象中自动转换成驼峰命名参数
+# Mybatis 可以将数据库的NN_NN格式字段，在java结果集对象中自动转换成驼峰命名参数
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-

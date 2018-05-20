@@ -15,15 +15,17 @@
         <li class="layui-nav-item"><a href="${request.contextPath}/community/index">选股社区</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right">
-        <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>
-        <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>
-
-        <li class="layui-nav-item">
-            <a href="javascript:;">
-                <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                贤心
-            </a>
-        </li>
-        <li class="layui-nav-item"><a href="">退了</a></li>
+        <#if user?? >
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="${request.contextPath}/img/user/${user.img}" class="layui-nav-img">
+                    ${user.username}
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="${request.contextPath}/logout">退了</a></li>
+            <#else>
+                <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>
+                <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>
+        </#if>
     </ul>
 </div>

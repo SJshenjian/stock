@@ -37,6 +37,7 @@
                 type: 'POST',
                 dataType: 'JSON',
                 success: function(ret) {
+                    debugger;
                     if (ret && ret.O_CODE > 0) {
                         var result = ret.O_RESULT;
                         if (result != null) {
@@ -86,8 +87,10 @@
                         } else {
                             layer.msg('暂无该类股票的相关信息');
                         }
+                    } else {
+                        layer.msg(ret['O_NOTE']);
                     }
-                }
+                },
             });
         };
 

@@ -5,12 +5,19 @@ import com.haotu369.base.MessageResult;
 import com.haotu369.mapper.UserMapper;
 import com.haotu369.model.User;
 import com.haotu369.service.UserService;
+import com.haotu369.util.CookieUtil;
 import com.haotu369.util.EncryptionUtil;
+import com.haotu369.util.RequestUtil;
+import com.haotu369.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : Jian Shen
@@ -25,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private MessageResult messageResult;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public JSONObject checkUsername(String username) {
@@ -46,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject checkLogin(User user) {
+    public JSONObject checkLogin(User user, HttpServletResponse response) {
         List<User> users = userMapper.getUserByName(user.getUsername());
         if (users.size() <= 0) {
             return messageResult.message(-1, "用户名不正确");
@@ -57,7 +67,31 @@ public class UserServiceImpl implements UserService {
             return messageResult.message(-1, "密码不正确");
         }
 
-        //TODO 写入 redis
+        String uuid = UUID.randomUUID().toString();
+        String token = TokenUtil.builderToken(uuid);
+        String userToken = TokenUtil.builderToken(JSONObject.toJSON(user).toString()); // 对用户信息处理后存储
+        int expiry = 1800;
+
+        redisTemplate.opsForValue().set(token, userToken, expiry, TimeUnit.SECONDS);
+
+        CookieUtil.saveCookie(response,"auth-token", token, 24 * 60 * 60);
+
         return messageResult.message(1, "登录成功");
+    }
+
+    @Override
+    public List<User> getUserByName(String username) {
+        return userMapper.getUserByName(username);
+    }
+
+    @Override
+    public JSONObject logout() {
+        Cookie cookie = CookieUtil.getCookieByName(RequestUtil.getRequest(), "auth-token");
+        if (cookie != null) {
+            String token = cookie.getValue();
+            redisTemplate.opsForValue().set(token, "", 0, TimeUnit.SECONDS);
+        }
+
+        return messageResult.message(1, "退出成功");
     }
 }
