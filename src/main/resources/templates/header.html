@@ -14,18 +14,58 @@
         <li class="layui-nav-item"><a href="${request.contextPath}/stock/index">精选牛股</a></li>
         <li class="layui-nav-item"><a href="${request.contextPath}/community/index">选股社区</a></li>
     </ul>
-    <ul class="layui-nav layui-layout-right">
-        <#if user?? >
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="${request.contextPath}/img/user/${user.img}" class="layui-nav-img">
-                    ${user.username}
-                </a>
-            </li>
-            <li class="layui-nav-item"><a href="${request.contextPath}/logout">退了</a></li>
-            <#else>
-                <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>
-                <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>
-        </#if>
+    <ul class="layui-nav layui-layout-right rightMenu">
+
     </ul>
 </div>
+<script src="${request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script src="${request.contextPath}/js/jquery.cookie.js"></script>
+<script>
+    $(function () {
+        // 右上角行为监测
+        var rightBehavior = function() {
+            var rightMenu =$('.rightMenu');
+            rightMenu.empty();
+
+            var userInfo = $.cookie('userInfo');
+            var html = '';
+
+            if (userInfo != null) {
+                debugger;
+                var jsonInfo = JSON.parse(userInfo);
+                var username = jsonInfo['username'];
+                var img = jsonInfo['img'];
+
+                html = ' <li class="layui-nav-item">' +
+                    '        <a href="javascript:;">' +
+                    '          <img src="${request.contextPath}/img/user/' + img +'" class="layui-nav-img">' +
+                    '          ' + username + '' +
+                    '        </a>' +
+                    '      </li>' +
+                    '      <li class="layui-nav-item"><a href="" class="logout">退了</a></li>';
+            } else {
+                html = ' <li class="layui-nav-item"><a href="${request.contextPath}/login">登录</a></li>' +
+                    '        <li class="layui-nav-item"><a href="${request.contextPath}/register">注册</a></li>'
+            }
+            rightMenu.html(html);
+            $(document).ready(function() {
+                $('.logout').unbind('click').click(function() {
+                    debugger;
+                    $.ajax({
+                        url: '/logout',
+                        data: '',
+                        type: 'GET',
+                        dataType: 'JSON',
+                        async: false,
+                        success: function (ret) {
+                            debugger;
+                        }
+                    })
+                });
+            });
+        };
+
+        
+        rightBehavior();
+    })
+</script>

@@ -62,4 +62,17 @@ public class CookieUtil {
         }
         return cookieMap;
     }
+
+    /**
+     * 删除所有Cookie
+     */
+    public static void removeAllCookies() {
+        Cookie[] cookies =  RequestUtil.getRequest().getCookies();
+        HttpServletResponse response = RequestUtil.getResponse();
+
+        for (Cookie cookie: cookies) {
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+    }
 }

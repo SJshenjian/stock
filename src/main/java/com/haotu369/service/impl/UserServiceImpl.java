@@ -1,5 +1,6 @@
 package com.haotu369.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.base.MessageResult;
 import com.haotu369.mapper.UserMapper;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -61,20 +64,31 @@ public class UserServiceImpl implements UserService {
         if (users.size() <= 0) {
             return messageResult.message(-1, "用户名不正确");
         }
-
-        boolean result = EncryptionUtil.equals(user.getPassword(), users.get(0).getPassword());
+        User cipherUser = users.get(0);
+        boolean result = EncryptionUtil.equals(user.getPassword(), cipherUser.getPassword());
         if (!result) {
             return messageResult.message(-1, "密码不正确");
         }
 
         String uuid = UUID.randomUUID().toString();
         String token = TokenUtil.builderToken(uuid);
-        String userToken = TokenUtil.builderToken(JSONObject.toJSON(user).toString()); // 对用户信息处理后存储
+        String userToken = TokenUtil.builderToken(JSONObject.toJSON(cipherUser).toString()); // 对用户信息处理后存储
         int expiry = 1800;
 
         redisTemplate.opsForValue().set(token, userToken, expiry, TimeUnit.SECONDS);
 
         CookieUtil.saveCookie(response,"auth-token", token, 24 * 60 * 60);
+
+        JSONObject cookieUser = new JSONObject();
+        cookieUser.put("username", cipherUser.getUsername());
+        cookieUser.put("img", cipherUser.getImg());
+
+        try {
+            // URLEncoder.encode 防止Cookie存储Json异常
+            CookieUtil.saveCookie(response, "userInfo", URLEncoder.encode(cookieUser.toJSONString(), "utf-8"), 24 * 60 * 60);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         return messageResult.message(1, "登录成功");
     }
@@ -89,7 +103,8 @@ public class UserServiceImpl implements UserService {
         Cookie cookie = CookieUtil.getCookieByName(RequestUtil.getRequest(), "auth-token");
         if (cookie != null) {
             String token = cookie.getValue();
-            redisTemplate.opsForValue().set(token, "", 0, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(token, "", 2, TimeUnit.SECONDS);
+            CookieUtil.removeAllCookies();
         }
 
         return messageResult.message(1, "退出成功");
