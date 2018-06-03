@@ -55,9 +55,11 @@
     </div>
 </div>
 <#include "../common_js.html" />
+<script src="${request.contextPath}/js/jquery.cookie.js"></script>
 <script>
     $(function () {
         var poshytip =  $('.poshytip');
+        var userInfo = $.cookie('userInfo');
 
         // 加载菜单
         var loadMenu = function() {
@@ -284,10 +286,16 @@
                             var result = ret['O_RESULT'];
                             var content = result['results'][0]['values'].text;
                             var messageContainer = $('.messageContainer');
+                            var userImage = 'tourist.png';
+                            if (userInfo != null) {
+                                var jsonInfo = JSON.parse(userInfo);
+                                userImage = jsonInfo['img'];
+                            }
+
                             var html =  '<ul>' +
                                 '                        <li class="layim-chat-mine">' +
                                 '                                    <div class="layim-chat-user"><img' +
-                                '                                            src="/customerService/img/tourist.jpg"></div>' +
+                                '                                            src="/img/user/'+ userImage + '"></div>' +
                                 '                                    <div class="layim-chat-text">' + message + '' +
                                 '                                    </div>' +
                                 '                                </li>' +

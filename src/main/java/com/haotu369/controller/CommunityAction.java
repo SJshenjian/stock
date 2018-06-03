@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.*;
 import com.haotu369.service.CommunityService;
+import com.haotu369.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,9 @@ public class CommunityAction {
 
     @Autowired
     private CommunityService communityService;
+
+    @Autowired
+    private UserService userService;
 
     // 社区首页
     @RequestMapping("/index")
@@ -133,7 +137,7 @@ public class CommunityAction {
     @ResponseBody
     public JSONObject addComment(Comment comment) {
         // TODO 从token中或许用户的id,判断用户是否为游客
-        String userId = null;
+        Integer userId = userService.getUserIdFromCookie() ;
         return communityService.addComment(comment, userId);
     }
 

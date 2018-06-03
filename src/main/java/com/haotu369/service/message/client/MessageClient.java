@@ -22,8 +22,6 @@ import java.io.UnsupportedEncodingException;
  * @date : 2018/5/11
  */
 public class MessageClient {
-    private static String responseMessage = null;
-
     public static Node serverNode = new Node(Constant.SERVER, Constant.PORT);
 
     // handle, 包括编码、解码、消息处理

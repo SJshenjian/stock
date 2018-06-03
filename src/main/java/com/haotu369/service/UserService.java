@@ -22,4 +22,6 @@ public interface UserService {
     List<User> getUserByName(String username);
 
     JSONObject logout();
+
+    Integer getUserIdFromCookie();
 }

@@ -103,10 +103,8 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public JSONObject addComment(Comment comment, String userId) {
-        if(null == userId) {
-            comment.setUserId(0); // 游客身份 0 表示游客身份
-        };
+    public JSONObject addComment(Comment comment, Integer userId) {
+        comment.setUserId(userId);
         communityMapper.addComment(comment);
         return messageResult.message(1, "评论成功");
     }

@@ -38,7 +38,7 @@ import java.util.List;
 
      Article getArticleDetail(int id);
 
-     JSONObject addComment(Comment comment, String userId);
+     JSONObject addComment(Comment comment, Integer userId);
 
      List<Comment> getComment(int id);
 

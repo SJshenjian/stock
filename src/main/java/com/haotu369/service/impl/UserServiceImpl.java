@@ -10,6 +10,7 @@ import com.haotu369.util.CookieUtil;
 import com.haotu369.util.EncryptionUtil;
 import com.haotu369.util.RequestUtil;
 import com.haotu369.util.TokenUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -100,13 +101,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JSONObject logout() {
-        Cookie cookie = CookieUtil.getCookieByName(RequestUtil.getRequest(), "auth-token");
-        if (cookie != null) {
-            String token = cookie.getValue();
-            redisTemplate.opsForValue().set(token, "", 2, TimeUnit.SECONDS);
-            CookieUtil.removeAllCookies();
-        }
+        String token = getTokenFromCookie();
+
+        redisTemplate.opsForValue().set(token, "", 2, TimeUnit.SECONDS);
+        CookieUtil.removeAllCookies();
 
         return messageResult.message(1, "退出成功");
+    }
+
+    @Override
+    public Integer getUserIdFromCookie() {
+        String token = getTokenFromCookie();
+        if (token != null) {
+            String userToken = (String) redisTemplate.opsForValue().get(token);
+            Integer userId = (Integer) TokenUtil.parseToken(userToken).get("id");
+            return userId;
+        }
+        return 0; // 表示游客
+    }
+
+    private String getTokenFromCookie() {
+        Cookie cookie = CookieUtil.getCookieByName(RequestUtil.getRequest(), "auth-token");
+        String token = null;
+        if (cookie != null) {
+            token = cookie.getValue();
+        }
+        return token;
     }
 }
