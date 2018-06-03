@@ -59,11 +59,7 @@ public class MessageClient {
      * @return
      */
     public static String getServerResponseMessage() {
-        return MessageClientAioHandler.responseMessage;
-    }
-
-    public static void setServerResponseMessageNull() {
-        MessageClientAioHandler.responseMessage = null;
+        return MessageClientAioHandler.getResponseMessage();
     }
 
     private static void send() throws UnsupportedEncodingException {

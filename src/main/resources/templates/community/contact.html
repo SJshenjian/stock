@@ -121,8 +121,8 @@
                         <#list recentArticle as recentArticle>
                             <li class="article-entry standard">
                                 <input type="hidden" value="${recentArticle.id}"/>
-                                <h4><a href="#">${recentArticle.name}</a></h4>
-                                <span class="article-meta">${recentArticle.date?split(" ")[0]}<a href="#">${recentArticle.tag[0].name}</a></span>
+                                <h4><a href="/community/articleDetail?id=${recentArticle.id}">${recentArticle.name}</a></h4>
+                                <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="/community/article?tagId=${recentArticle.tag[0].id}">${recentArticle.tag[0].name}</a></span>
                                 <span class="like-count" code="0">${recentArticle.likeCount}</span>
                             </li>
                         </#list>
@@ -189,7 +189,6 @@
               type: 'POST',
               dataType: 'JSON',
               success: function(ret) {
-                  debugger;
                   if (ret && ret.O_CODE > 0) {
                       layer.msg(ret.O_NOTE);
                   } else {

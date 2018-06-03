@@ -4,7 +4,6 @@ $('.addArticle').unbind('click').click(function() {
 });
 
 $('#searchContent').blur(function () {
-    debugger;
     var searchContent = $('#searchContent').val();
     searchContent = searchContent.replace("/\s/g", "");
     if (searchContent == null || searchContent.length <= 0) {

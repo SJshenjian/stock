@@ -59,7 +59,7 @@
                                 <li class="article-entry standard">
                                     <input class="id" type="hidden" value="${choiceArticle.id}"/>
                                     <h4><a href="/community/articleDetail?id=${choiceArticle.id}">${choiceArticle.name}</a></h4>
-                                    <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                    <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="/community/article?tagId=${choiceArticle.tag[0].id}" >${choiceArticle.tag[0].name}</a></span>
                                     <span class="like-count" code="0">${choiceArticle.likeCount}</span>
                                 </li>
                             </#list>
@@ -74,7 +74,7 @@
                                 <li class="article-entry standard">
                                     <input class="id" type="hidden" value="${recentArticle.id}"/>
                                     <h4><a href="/community/articleDetail?id=${recentArticle.id}">${recentArticle.name}</a></h4>
-                                    <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="#">${recentArticle.tag[0].name}</a></span>
+                                    <span class="article-meta">${recentArticle.date?split(" ")[0]}&nbsp;<a href="/community/article?tagId=${recentArticle.tag[0].id}">${recentArticle.tag[0].name}</a></span>
                                     <span class="like-count" code="0">${recentArticle.likeCount}</span>
                                 </li>
                             </#list>

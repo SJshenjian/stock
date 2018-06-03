@@ -119,7 +119,6 @@
         // 点赞
         $('.like-count').each(function () {
                 $(this).unbind("click").click(function () {
-                    debugger;
                     var id = $(this).siblings().eq(0).val();
                     var code = $(this).attr('code');
                     var likeCount = $(this).html();

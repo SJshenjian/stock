@@ -11,6 +11,8 @@ import org.tio.core.exception.AioDecodeException;
 import org.tio.core.intf.Packet;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * @author : Jian Shen
@@ -19,10 +21,8 @@ import java.nio.ByteBuffer;
  */
 public class MessageClientAioHandler implements ClientAioHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageClientAioHandler.class);
-
     private static MessagePacket messagePacket = new MessagePacket();
-
-    public static volatile String responseMessage = null;
+    private static final BlockingQueue<String> queue = new ArrayBlockingQueue<>(20);
 
     /**
      * 消息解码：把接收到的ByteBuffer,解码成应用可以识别的业务消息包
@@ -96,7 +96,8 @@ public class MessageClientAioHandler implements ClientAioHandler {
         MessagePacket messagePacket = (MessagePacket) packet;
         byte[] body = messagePacket.getBody();
         if (body != null) {
-            responseMessage = new String(body, MessagePacket.CHARSET);
+            String responseMessage = new String(body, MessagePacket.CHARSET);
+            queue.put(responseMessage);
             LOGGER.info("客户端收到消息: {} ", responseMessage);
         }
     }
@@ -109,4 +110,13 @@ public class MessageClientAioHandler implements ClientAioHandler {
         return messagePacket;
     }
 
+
+    public static String getResponseMessage(){
+        try {
+            return queue.take();
+        } catch (InterruptedException e) {
+            LOGGER.error("获取返回消息异常：{}", e.getMessage());
+        }
+        return "对不起，客服忙";
+    }
 }

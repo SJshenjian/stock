@@ -79,13 +79,8 @@ public class StockServiceImpl implements StockService {
             clientMessagePacket.setBody(message.getBytes(MessagePacket.CHARSET));
             Aio.send(MessageClient.clientChannelContext, clientMessagePacket);
 
-            while (MessageClient.getServerResponseMessage() == null) {
-
-            }
-
             JSONObject result = JSONObject.parseObject(MessageClient.getServerResponseMessage());
 
-            MessageClient.setServerResponseMessageNull();
             if (result != null) {
                 return message(1, "成功", result);
             }

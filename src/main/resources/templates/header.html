@@ -31,7 +31,6 @@
             var html = '';
 
             if (userInfo != null) {
-                debugger;
                 var jsonInfo = JSON.parse(userInfo);
                 var username = jsonInfo['username'];
                 var img = jsonInfo['img'];
@@ -50,7 +49,6 @@
             rightMenu.html(html);
             $(document).ready(function() {
                 $('.logout').unbind('click').click(function() {
-                    debugger;
                     $.ajax({
                         url: '/logout',
                         data: '',
@@ -58,7 +56,6 @@
                         dataType: 'JSON',
                         async: false,
                         success: function (ret) {
-                            debugger;
                         }
                     })
                 });

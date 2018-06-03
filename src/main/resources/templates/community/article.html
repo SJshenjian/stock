@@ -79,8 +79,8 @@
                         <#list choiceArticle as choiceArticle>
                             <li class="article-entry standard">
                                 <input type="hidden" value="${choiceArticle.id}"/>
-                                <h4><a href="#">${choiceArticle.name}</a></h4>
-                                <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="#" >${choiceArticle.tag[0].name}</a></span>
+                                <h4><a href="/community/articleDetail?id=${choiceArticle.id}">${choiceArticle.name}</a></h4>
+                                <span class="article-meta">${choiceArticle.date?split(" ")[0]}&nbsp;<a href="/community/article?tagId=${choiceArticle.tag[0].id}" >${choiceArticle.tag[0].name}</a></span>
                                 <span class="like-count" code="0">${choiceArticle.likeCount}</span>
                             </li>
                         </#list>
@@ -110,7 +110,7 @@
             $('.like-count').each(function () {
                 $(this).unbind("click").click(function () {
                     var id;
-                    if (1 == type) {
+                    if ('1' == type) {
                         id = $(this).parent().siblings().eq(0).val();
                     } else {
                         id = $(this).siblings().eq(0).val();
@@ -120,7 +120,7 @@
                     if (code == 0) { // 点赞
                         $.ajax({
                             url: "/community/updateLike",
-                            data: {id: id},
+                            data: {'id': id},
                             type: 'GET',
                             dataType: 'JSON',
                             success: function (ret) {
@@ -132,7 +132,7 @@
                     } else { // 取消点赞
                         $.ajax({
                             url: "/community/removeLike",
-                            data: {id: id},
+                            data: {'id': id},
                             type: 'GET',
                             dataType: 'JSON',
                             success: function (ret) {
@@ -191,7 +191,7 @@
                                     '                                    </h3>' +
                                     '                                    <div class="post-meta clearfix">' +
                                     '                                        <span class="date">' + date + '</span>' +
-                                    '                                        <span class="category"><a href="#">' + tag + '</a></span>' +
+                                    '                                        <span class="category"><a>' + tag + '</a></span>' +
                                     '                                        <span class="comments">' + ret[i]['readCount'] + ' 阅读</span>' +
                                     '                                        <span class="like-count" code="0">' + ret[i]['likeCount'] + '</span>' +
                                     '                                    </div><!-- end of post meta -->' +
@@ -201,7 +201,9 @@
                                     '                                </p>' +
                                     '                            </article>';
                             }
-                            like(1);
+                            $(document).ready(function () {
+                                like(1);
+                            });
                         } else {
                             html = '暂无该类别文章';
                         }
