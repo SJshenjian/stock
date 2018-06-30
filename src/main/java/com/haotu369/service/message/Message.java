@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Message {
 
     public Message() throws Exception {
-        start();
+        //start();
     }
 
     public static void start() throws Exception {
