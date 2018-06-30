@@ -162,7 +162,7 @@
               $('#contactUs').attr('disabled', true);
           } else{
               $('.' + name + 'Error').html('');
-              $('.' + name + 'Right').html('&#xe618;');
+              $('.' + name + 'Right').html('');//TODO 正确提示
               if ($('.nameRight').text() != '' && $('.emailRight').text() != '' && $('.contentRight').text() != '') {
                   $('#contactUs').attr('disabled', false);
               }
