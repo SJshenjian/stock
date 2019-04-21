@@ -3,20 +3,20 @@ spring:
   mail:
     host: smtp.163.com
     username: ht369kj@163.com
-    password: ht369kj
+    password: ******
 
   # Redis相关配置
   redis:
-    host: 47.94.242.38
+    host: 127.0.0.1
     port: 6379
-    password: 852100
+    password:
     database: 0
 
   # Mysql数据源
   datasource:
-    url: jdbc:mysql://localhost:3306/stock
-    username: root
-    password: 852100
+    url: jdbc:mysql://47.52.107.13:3306/stock
+    username: ******
+    password: ******
     driver-class-name: com.mysql.jdbc.Driver
 
   # MongoDB数据源
