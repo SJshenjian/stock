@@ -27,6 +27,12 @@ public class UserAction {
     private UserService userService;
 
     // 首页
+    @RequestMapping("")
+    public String init() {
+        return "stock/index";
+    }
+
+    // 首页
     @RequestMapping("/index")
     public String index() {
         return "stock/index";

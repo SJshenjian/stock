@@ -16,9 +16,9 @@ import java.util.concurrent.*;
  * @version : V1.0
  * @date : 2018/6/30
  */
-@Component
+/*@Component
 @EnableAsync
-@EnableScheduling
+@EnableScheduling*/
 public class ScheduledTask implements Task{
     private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledTask.class);
 
