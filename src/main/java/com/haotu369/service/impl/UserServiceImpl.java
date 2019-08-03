@@ -1,8 +1,7 @@
 package com.haotu369.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.haotu369.base.MessageResult;
+import com.haotu369.base.Result;
 import com.haotu369.mapper.UserMapper;
 import com.haotu369.model.User;
 import com.haotu369.service.UserService;
@@ -10,10 +9,10 @@ import com.haotu369.util.CookieUtil;
 import com.haotu369.util.EncryptionUtil;
 import com.haotu369.util.RequestUtil;
 import com.haotu369.util.TokenUtil;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -29,14 +28,12 @@ import java.util.concurrent.TimeUnit;
  * @date : 2018/5/19
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
-    @Autowired
-    private MessageResult messageResult;
-
+    
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -44,9 +41,9 @@ public class UserServiceImpl implements UserService {
     public JSONObject checkUsername(String username) {
         List<User> users = userMapper.getUserByName(username);
         if (users.size() >= 1) {
-            return messageResult.message(-1, "用户名已存在");
+            return Result.message(-1, "用户名已存在");
         }
-        return messageResult.message(1, "验证用户名成功");
+        return Result.message(1, "验证用户名成功");
     }
 
     @Override
@@ -56,19 +53,19 @@ public class UserServiceImpl implements UserService {
         user.setPassword(cipher);
 
         userMapper.addUser(user);
-        return messageResult.message(1, "注册成功");
+        return Result.message(1, "注册成功");
     }
 
     @Override
     public JSONObject checkLogin(User user, HttpServletResponse response) {
         List<User> users = userMapper.getUserByName(user.getUsername());
         if (users.size() <= 0) {
-            return messageResult.message(-1, "用户名不正确");
+            return Result.message(-1, "用户名不正确");
         }
         User cipherUser = users.get(0);
         boolean result = EncryptionUtil.equals(user.getPassword(), cipherUser.getPassword());
         if (!result) {
-            return messageResult.message(-1, "密码不正确");
+            return Result.message(-1, "密码不正确");
         }
 
         String uuid = UUID.randomUUID().toString();
@@ -91,7 +88,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        return messageResult.message(1, "登录成功");
+        return Result.message(1, "登录成功");
     }
 
     @Override
@@ -106,7 +103,7 @@ public class UserServiceImpl implements UserService {
         redisTemplate.opsForValue().set(token, "", 2, TimeUnit.SECONDS);
         CookieUtil.removeAllCookies();
 
-        return messageResult.message(1, "退出成功");
+        return Result.message(1, "退出成功");
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.haotu369.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.base.ContextPath;
+import com.haotu369.base.Result;
 import com.haotu369.mapper.StockMapper;
 import com.haotu369.model.stock.Stock;
 import com.haotu369.model.stock.StockClassify;
@@ -9,11 +10,11 @@ import com.haotu369.model.stock.StockType;
 import com.haotu369.service.StockService;
 import com.haotu369.service.message.client.MessageClient;
 import com.haotu369.service.message.common.MessagePacket;
-import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;;
 import org.tio.core.Aio;
 
@@ -29,6 +30,7 @@ import java.util.List;
  * @date : 2018/5/4
  */
 @Service
+@Transactional
 public class StockServiceImpl implements StockService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceImpl.class);
 
@@ -70,7 +72,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public JSONObject messageClient2Client(String message) {
         if (StringUtils.isEmpty(message)) {
-            return message(-1, "消息不能为空", null);
+            return Result.jsonResult(-1, "消息不能为空", null);
         }
 
         try {
@@ -82,12 +84,12 @@ public class StockServiceImpl implements StockService {
             JSONObject result = JSONObject.parseObject(MessageClient.getServerResponseMessage());
 
             if (result != null) {
-                return message(1, "成功", result);
+                return Result.jsonResult(1, "成功", result);
             }
         } catch (UnsupportedEncodingException e) {
            LOGGER.error("消息编码异常：{}", e.getMessage());
         }
-        return message(-1, "服务器响应失败", null);
+        return Result.jsonResult(-1, "服务器响应失败", null);
 
     }
 
@@ -113,14 +115,6 @@ public class StockServiceImpl implements StockService {
         jsonObject.put("O_NOTE", "成功");
         jsonObject.put("O_RESULT", result);
 
-        return jsonObject;
-    }
-
-    private JSONObject message(int code, String note, JSONObject result) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("O_CODE", code);
-        jsonObject.put("O_NOTE", note);
-        jsonObject.put("O_RESULT", result);
         return jsonObject;
     }
 }

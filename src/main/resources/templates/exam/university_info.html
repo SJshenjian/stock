@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>学校招考信息</title>
+    <#include "../common_css.html" />
+</head>
+<body>
+<table id="university"></table>
+<#include "../common_js.html" />
+<script>
+    $(function () {
+        // 招生院校信息
+        var getUniversityInfo = function () {
+            layui.use('table', function(){
+                var table = layui.table;
+
+                table.render({
+                    elem: '#university'
+                    ,url:'/exam/getUniversity'
+                    ,toolbar: true
+                    ,cols: [[
+                        {field:'university', title:'学校', width:150, sort: true}
+                        ,{field:'college', title:'学院', width:150,sort: true}
+                        ,{field:'year', title:'年份', width:100, sort: true}
+                        ,{field:'direction', title:'研究方向', sort: true}
+                        ,{field:'examContent', title:'考试内容', sort: true}
+                        ,{field:'examDetail', title:'考试详情', sort: true}
+                        ,{field:'planStudentNumber', title:'拟招人数', sort: true}
+                    ]]
+                   ,response: {
+                        statusCode: 1 //重新规定成功的状态码为 200，table 组件默认为 0
+                    }
+                    ,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
+                        return {
+                            "code": res.O_CODE, //解析接口状态
+                            "msg": res.O_NOTE, //解析提示文本
+                            "count": res.O_COUNT, //解析数据长度
+                            "data": res.O_RESULT //解析数据列表
+                        };
+                    }
+                });
+            });
+        };
+
+        var init = function() {
+            getUniversityInfo();
+        };
+
+        init();
+    })
+</script>
+</body>
+</html>

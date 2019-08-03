@@ -3,13 +3,11 @@ package com.haotu369.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.haotu369.model.User;
 import com.haotu369.service.UserService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletResponse;
 

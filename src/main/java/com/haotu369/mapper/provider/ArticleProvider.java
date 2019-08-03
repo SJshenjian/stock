@@ -11,7 +11,8 @@ import java.util.List;
  * @version : V1.0
  * @date : 2018/5/2
  */
-public class ArticleProvider {
+public class
+ArticleProvider {
 
     public String listArticle(String type, int pageNo, int pageSize) {
         int begin = (pageNo - 1) * pageSize;
