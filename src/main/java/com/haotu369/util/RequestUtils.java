@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version : V1.0
  * @date : 2018/5/20
  */
-public class RequestUtil {
+public class RequestUtils {
 
     /**
      * 获取上下文Request

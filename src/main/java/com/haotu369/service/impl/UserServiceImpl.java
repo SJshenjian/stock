@@ -5,10 +5,10 @@ import com.haotu369.base.Result;
 import com.haotu369.mapper.UserMapper;
 import com.haotu369.model.User;
 import com.haotu369.service.UserService;
-import com.haotu369.util.CookieUtil;
-import com.haotu369.util.EncryptionUtil;
-import com.haotu369.util.RequestUtil;
-import com.haotu369.util.TokenUtil;
+import com.haotu369.util.CookieUtils;
+import com.haotu369.util.EncryptionUtils;
+import com.haotu369.util.RequestUtils;
+import com.haotu369.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JSONObject addUser(User user) {
         String raw= user.getPassword();
-        String cipher = EncryptionUtil.encryption(raw);
+        String cipher = EncryptionUtils.encryption(raw);
         user.setPassword(cipher);
 
         userMapper.addUser(user);
@@ -63,19 +63,19 @@ public class UserServiceImpl implements UserService {
             return Result.message(-1, "用户名不正确");
         }
         User cipherUser = users.get(0);
-        boolean result = EncryptionUtil.equals(user.getPassword(), cipherUser.getPassword());
+        boolean result = EncryptionUtils.equals(user.getPassword(), cipherUser.getPassword());
         if (!result) {
             return Result.message(-1, "密码不正确");
         }
 
         String uuid = UUID.randomUUID().toString();
-        String token = TokenUtil.builderToken(uuid);
-        String userToken = TokenUtil.builderToken(JSONObject.toJSON(cipherUser).toString()); // 对用户信息处理后存储
+        String token = TokenUtils.buildToken(uuid);
+        String userToken = TokenUtils.buildToken(JSONObject.toJSON(cipherUser).toString()); // 对用户信息处理后存储
         int expiry = 1800;
 
         redisTemplate.opsForValue().set(token, userToken, expiry, TimeUnit.SECONDS);
 
-        CookieUtil.saveCookie(response,"auth-token", token, 24 * 60 * 60);
+        CookieUtils.saveCookie(response,"auth-token", token, 24 * 60 * 60);
 
         JSONObject cookieUser = new JSONObject();
         cookieUser.put("username", cipherUser.getUsername());
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             // URLEncoder.encode 防止Cookie存储Json异常
-            CookieUtil.saveCookie(response, "userInfo", URLEncoder.encode(cookieUser.toJSONString(), "utf-8"), 24 * 60 * 60);
+            CookieUtils.saveCookie(response, "userInfo", URLEncoder.encode(cookieUser.toJSONString(), "utf-8"), 24 * 60 * 60);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
         String token = getTokenFromCookie();
 
         redisTemplate.opsForValue().set(token, "", 2, TimeUnit.SECONDS);
-        CookieUtil.removeAllCookies();
+        CookieUtils.removeAllCookies();
 
         return Result.message(1, "退出成功");
     }
@@ -111,14 +111,14 @@ public class UserServiceImpl implements UserService {
         String token = getTokenFromCookie();
         if (token != null) {
             String userToken = (String) redisTemplate.opsForValue().get(token);
-            Integer userId = (Integer) TokenUtil.parseToken(userToken).get("id");
+            Integer userId = (Integer) TokenUtils.parseToken(userToken).get("id");
             return userId;
         }
         return 0; // 表示游客
     }
 
     private String getTokenFromCookie() {
-        Cookie cookie = CookieUtil.getCookieByName(RequestUtil.getRequest(), "auth-token");
+        Cookie cookie = CookieUtils.getCookieByName(RequestUtils.getRequest(), "auth-token");
         String token = null;
         if (cookie != null) {
             token = cookie.getValue();

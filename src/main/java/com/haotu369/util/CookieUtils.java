@@ -11,7 +11,7 @@ import java.util.Map;
  * @version : V1.0
  * @date : 2018/5/20
  */
-public class CookieUtil {
+public class CookieUtils {
 
     /**
      * 存储Cookie
@@ -67,8 +67,8 @@ public class CookieUtil {
      * 删除所有Cookie
      */
     public static void removeAllCookies() {
-        Cookie[] cookies =  RequestUtil.getRequest().getCookies();
-        HttpServletResponse response = RequestUtil.getResponse();
+        Cookie[] cookies =  RequestUtils.getRequest().getCookies();
+        HttpServletResponse response = RequestUtils.getResponse();
 
         for (Cookie cookie: cookies) {
             cookie.setMaxAge(0);

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,8 +16,8 @@ import java.security.NoSuchAlgorithmException;
  * @version : V1.0
  * @date : 2018/5/19
  */
-public class EncryptionUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EncryptionUtil.class);
+public class EncryptionUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EncryptionUtils.class);
 
     private static final String HEX_DIGITS = "0123456789abcdef";
     private static final String SALT = "5fbd161e52367473bebcee98d473d425";

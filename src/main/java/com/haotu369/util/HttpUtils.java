@@ -6,7 +6,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -20,8 +19,8 @@ import java.io.IOException;
  * @version : V1.0
  * @date : 2018/5/12
  */
-public class HttpUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
+public class HttpUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtils.class);
 
     /**
      * POST请求

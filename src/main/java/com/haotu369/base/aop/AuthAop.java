@@ -3,8 +3,11 @@ package com.haotu369.base.aop;
 import com.alibaba.fastjson.JSON;
 import com.haotu369.base.Result;
 import com.haotu369.base.annotation.AuthOperation;
-import com.haotu369.util.CookieUtil;
-import com.haotu369.util.RequestUtil;
+import com.haotu369.base.config.KafkaConstant;
+import com.haotu369.base.support.KafkaService;
+import com.haotu369.util.CookieUtils;
+import com.haotu369.util.RequestUtils;
+import com.haotu369.util.TokenUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,6 +33,9 @@ public class AuthAop{
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private KafkaService kafkaService;
+
     @Pointcut("@annotation(com.haotu369.base.annotation.AuthOperation)")
     private void authAnnotation() {
 
@@ -37,18 +43,20 @@ public class AuthAop{
 
     @Around("authAnnotation() && @annotation(authOperation)")
     public Object doAround(ProceedingJoinPoint joinPoint, AuthOperation authOperation) throws Throwable {
-        HttpServletRequest request = RequestUtil.getRequest();
-        Cookie cookie = CookieUtil.getCookieByName(request, "auth-token");
+        HttpServletRequest request = RequestUtils.getRequest();
+        Cookie cookie = CookieUtils.getCookieByName(request, "auth-token");
         if (cookie != null) {
-            String token = CookieUtil.getCookieByName(request, "auth-token").getValue();
+            String token = CookieUtils.getCookieByName(request, "auth-token").getValue();
 
-            String validation = (String) redisTemplate.opsForValue().get(token);
+            String userToken = (String) redisTemplate.opsForValue().get(token);
 
-            if (validation != null) { // Token有效
+            if (userToken != null) { // Token有效
+                String data =   TokenUtils.getUsernameFromToken(userToken) + "访问了" + request.getRequestURL().toString();
+                kafkaService.sendMessage(KafkaConstant.topic.USER_CLICK_TOPIC.getTopic(), data);
                 return joinPoint.proceed();
             }
         }
-        HttpServletResponse response = RequestUtil.getResponse();
+        HttpServletResponse response = RequestUtils.getResponse();
         setResponseMessage(response, -1, "请先登录");
         return null;
     }

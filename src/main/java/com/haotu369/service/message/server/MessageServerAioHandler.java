@@ -1,8 +1,7 @@
 package com.haotu369.service.message.server;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haotu369.service.message.common.MessagePacket;
-import com.haotu369.util.turing.TuringUtil;
+import com.haotu369.util.turing.TuringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.core.Aio;
@@ -120,7 +119,7 @@ public class MessageServerAioHandler implements ServerAioHandler {
             // 发送消息
             MessagePacket responseMessagePacket = new MessagePacket();
 
-            String responseContent = TuringUtil.chat("客服", receivedContent);
+            String responseContent = TuringUtils.chat("客服", receivedContent);
             LOGGER.info("服务端发送消息：" + responseContent.toString());
 
             responseMessagePacket.setBody(responseContent.getBytes());

@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
  * @version : V1.0
  * @date : 2018/4/22
  */
-public class EmailUtil {
+public class EmailUtils {
 
     public static void sendSimpleEmail() {
 

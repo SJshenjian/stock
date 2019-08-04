@@ -18,8 +18,8 @@ import java.util.concurrent.*;
  * @version : V1.0
  * @date : 2018/5/10
  */
-public class OcrUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OcrUtil.class);
+public class OcrUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OcrUtils.class);
 
     //配置tesseract安装路径 TODO 配置使用@Value 在配置文件种配置
     private static final String tesseractWindowPath = "D://Program Files (x86)/Tesseract-OCR";

@@ -2,10 +2,7 @@ package com.haotu369.util.turing;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
-import com.haotu369.util.HttpUtil;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.UUID;
+import com.haotu369.util.HttpUtils;
 
 
 /**
@@ -13,7 +10,7 @@ import java.util.UUID;
  * @version : V1.0
  * @date : 2018/5/12
  */
-public class TuringUtil {
+public class TuringUtils {
 
     public static final String turingApi = "http://openapi.tuling123.com/openapi/api/v2";
 
@@ -44,7 +41,7 @@ public class TuringUtil {
                 "    }" +
                 "}";
         JSONObject params = JSONObject.parseObject(paramsString);
-        String responseContent = HttpUtil.doPost(turingApi, params);
+        String responseContent = HttpUtils.doPost(turingApi, params);
 
         return responseContent;
     }
