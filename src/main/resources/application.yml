@@ -25,6 +25,10 @@ spring:
       properties:
         linger.ms: 1
 
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
   # Mysql数据源
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/stock?serverTimezone=Asia/Shanghai&characterEncoding=utf8

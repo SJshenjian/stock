@@ -1,0 +1,12 @@
+# 抹茶交易所交易对信息websocket接口
+max:
+  url: wss://wbs.mxc.co/socket.io/?EIO=3&transport=websocket
+  topic: 42["sub.overview",{}]
+
+# Kafka消费者群组
+kafka:
+  consumer:
+    group:
+      price-data: priceDataGroup # 行情数据组
+    topic:
+      price-data: priceDataTopic # 行情数据主题

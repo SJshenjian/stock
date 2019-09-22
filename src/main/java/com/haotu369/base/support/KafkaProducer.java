@@ -15,14 +15,14 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * @date 2019/8/3
  */
 @Service
-public class KafkaService {
+public class KafkaProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
 
     private final KafkaTemplate<Integer, String> kafkaTemplate;
 
     @Autowired
-    public KafkaService(KafkaTemplate kafkaTemplate) {
+    public KafkaProducer(KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -37,7 +37,7 @@ public class KafkaService {
 
             @Override
             public void onSuccess(SendResult<Integer, String> integerStringSendResult) {
-                LOGGER.info("Kafka send message success, topic = {}, data = {}", topic, data);
+
             }
         });
     }

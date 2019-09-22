@@ -7,32 +7,25 @@ package com.haotu369.base.config;
  */
 public class KafkaConstant {
 
-    public enum group {
-        USER_GROUP("userGroup");
+    public enum Topic {
+        USER_CLICK_TOPIC("userClickTopic", "用户点击主题"),
+        USER_REGISTER_TOPIC("userRegisterTopic", "用户注册主题"),
+        PRICE_DATA_TOPIC("priceDataTopic", "行情数据主题");
 
         private String value;
+        private String desc;
 
-        group (String value) {
+        Topic (String value, String desc) {
             this.value = value;
+            this.desc = desc;
         }
 
-        public String getGroup() {
+        public String getValue() {
             return value;
         }
-    }
 
-    public enum topic {
-        USER_CLICK_TOPIC("userClickTopic"),
-        USER_REGISTER_TOPIC("userRegisterTopic");
-
-        private String value;
-
-        topic(String value) {
-            this.value = value;
-        }
-
-        public String getTopic() {
-            return value;
+        public String getDesc() {
+            return desc;
         }
     }
 }

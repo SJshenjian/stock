@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.haotu369.base.Result;
 import com.haotu369.base.annotation.AuthOperation;
 import com.haotu369.base.config.KafkaConstant;
-import com.haotu369.base.support.KafkaService;
+import com.haotu369.base.support.KafkaProducer;
 import com.haotu369.util.CookieUtils;
 import com.haotu369.util.RequestUtils;
 import com.haotu369.util.TokenUtils;
@@ -34,7 +34,7 @@ public class AuthAop{
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private KafkaService kafkaService;
+    private KafkaProducer kafkaProducer;
 
     @Pointcut("@annotation(com.haotu369.base.annotation.AuthOperation)")
     private void authAnnotation() {
@@ -52,7 +52,7 @@ public class AuthAop{
 
             if (userToken != null) { // Token有效
                 String data =   TokenUtils.getUsernameFromToken(userToken) + "访问了" + request.getRequestURL().toString();
-                kafkaService.sendMessage(KafkaConstant.topic.USER_CLICK_TOPIC.getTopic(), data);
+                kafkaProducer.sendMessage(KafkaConstant.Topic.USER_CLICK_TOPIC.getValue(), data);
                 return joinPoint.proceed();
             }
         }
